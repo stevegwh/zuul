@@ -1,11 +1,12 @@
 package chooseyourownadventure;
 
+import java.util.HashMap;
 import java.util.Scanner;
 //import java.util.Arrays;
 
 public class Game {
-	
-	private String[] commands = {"quit", "look", "go", "help"};
+	private HashMap<String, Item> items = new HashMap<String, Item>();
+	private String[] commands = {"use", "quit", "investigate", "take",  "go", "help", "inventory", "drop", "give"}; //TODO: should be look not investigate
 	private String[] directions = {"north", "south", "west", "east"};
 	private Room room = new Room();
 	private boolean isRunning = true;
@@ -19,28 +20,6 @@ public class Game {
 		return false;
 	}
 
-	public void start() {
-		while(isRunning) {
-			room.printDescription();
-//			System.out.printf(">> ");
-			Output.print(">> ");
-			String data = getInput();
-			handleCommand(data);
-		}
-	}
-	
-	private String getInput() { //TODO: broken atm
-		String data = "";
-		Scanner scanInput = new Scanner(System.in);
-		if(scanInput.hasNextLine()) {
-			data = scanInput.nextLine();
-		} else {
-			data = scanInput.next();
-		}
-		scanInput.close();
-		return data;		
-	}
-
 	private void changeRoom(String direction) {
 		if(existsInArray(direction, directions)) {
 			room.changeRoom(direction);
@@ -48,29 +27,41 @@ public class Game {
 	}
 	
 	private void showHelp() {
-		System.out.printf("Valid commands are: ");
+		Output.printf("Valid commands are: ");
 		for(String command : commands) {
-			System.out.printf(command + ", "); //TODO: if i = length don't put comma
+			Output.printf(command + ", "); //TODO: if i = length don't put comma
 		}
-		System.out.printf("\n");
+		Output.printf("\n");
 	}
 	
 	private void quitGame() {
-		Output.print("Thanks for playing!");
+		Output.println("Thanks for playing!");
 		isRunning = false;
 	}
 	
-	private void look() {
-		Output.print("You looked.");
+	private void investigate(String toInvestigate) {
+		room.investigate(toInvestigate);
 	}
 	
+	private void executeCommand(String command, String command2, String command3) {
+		switch(command) {
+		case "use":
+			break;
+		default:
+			Output.println("Something went wrong");
+		}
+	}
+
 	private void executeCommand(String command, String command2) {
 		switch(command) {
 		case "go":
 			changeRoom(command2);
 			break;
+		case "investigate":
+			investigate(command2);
+			break;
 		default:
-			Output.print("Something went wrong");
+			Output.println("Something went wrong");
 		}
 	}
 	
@@ -82,14 +73,18 @@ public class Game {
 		case "quit":
 			quitGame();
 			break;
-		case "look":
-			look();
+		case "inventory":
+			printItems();
 			break;
 		default:
-			Output.print("Something went wrong");
+			Output.println("Something went wrong");
 		}
 	}
 	
+	private void printItems() {
+		room.printItems();
+	}
+
 	private String[] parseInput(String input) {
 		input = input.toLowerCase();
 		input = input.trim().replaceAll(" +", " ");
@@ -97,16 +92,37 @@ public class Game {
 		return arr;
 	}
 
+	private String getInput() { 
+		String data = "";
+		@SuppressWarnings("resource")
+		Scanner scanInput = new Scanner(System.in);
+		data = scanInput.nextLine();
+		scanInput.reset();
+		return data;		
+	}
+
+	public void start() {
+		while(isRunning) {
+			room.printDescription();
+//			System.out.printf(">> ");
+			Output.printf(">> ");
+			String data = getInput();
+			handleCommand(data);
+		}
+	}
+
 	public void handleCommand(String input) {
 		String[] inputArray = parseInput(input);
 		if(existsInArray(inputArray[0], commands)) {
-			if(inputArray.length > 1) {
+			if(inputArray.length > 4) {
+				executeCommand(inputArray[0], inputArray[1], inputArray[3]);
+			}else if(inputArray.length > 1) {
 				executeCommand(inputArray[0], inputArray[1]);
 			} else {
 				executeCommand(inputArray[0]);
 			}
 		} else {
-			Output.print("Invalid command. Type 'help'.");
+			Output.println("Invalid command. Type 'help'.");
 		}
 	}
 }

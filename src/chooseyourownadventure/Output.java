@@ -1,16 +1,16 @@
 package chooseyourownadventure;
 
 public class Output {
-	public static void print(String toOutput) {
+	public static void println(String toOutput) {
 		System.out.println(toOutput);
 		
 	}
 	
-	public static void print(int toOutput) {
+	public static void println(int toOutput) {
 		System.out.println(toOutput);
 	}
 
-	public static void print(String toOutput, boolean noNewLine) {
+	public static void printf(String toOutput) {
 		System.out.printf(toOutput);
 	}
 }

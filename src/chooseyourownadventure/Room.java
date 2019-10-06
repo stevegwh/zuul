@@ -10,6 +10,7 @@ public class Room {
 	private String description;
 	private JSONArray items;
 	private JSONObject exits;
+	private JSONObject interactableObjects;
 	private void parseRoomJson(Object nextRoom) {
 		JSONParser parser = new JSONParser();
 		Object obj = new Object();
@@ -19,8 +20,9 @@ public class Room {
             JSONObject jsonObject = (JSONObject) obj;
             JSONObject room = (JSONObject) jsonObject.get(nextRoom);
             description = (String) room.get("description");
-            items = (JSONArray) room.get("items");
+            items = (JSONArray) room.get("takeableItems");
             exits = (JSONObject) room.get("exits");
+            interactableObjects = (JSONObject) room.get("interactableObjects");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,19 +34,28 @@ public class Room {
 	}
 
 	public void printDescription() {
-		System.out.println(description);
+		Output.println(description);
+	}
+	
+	public void investigate(String toInvestigate) {
+		if(interactableObjects.get(toInvestigate) != null) {
+			Output.println((String) interactableObjects.get(toInvestigate));
+		} else {
+			Output.println("Can't find \"" + toInvestigate + "\"");
+		}
+		
 	}
 
 	public void printExits() {
-		System.out.println(exits.get("north"));
-		System.out.println(exits.get("east"));
-		System.out.println(exits.get("west"));
-		System.out.println(exits.get("south"));
+		Output.println((String) exits.get("north"));
+		Output.println((String) exits.get("east"));
+		Output.println((String) exits.get("west"));
+		Output.println((String) exits.get("south"));
 	}
 
 	public void printItems() {
 		for(Object item : items) {
-			System.out.println(item);
+			Output.println((String) item);
 		}
 	}
 	Room() {
