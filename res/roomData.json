@@ -1,7 +1,10 @@
 {
     "room1" : {
-        "description" : "You enter room1",
-        "items" : ["watch", "chair"],
+        "description" : "You enter room1. You see a bush.",
+        "takeableItems" : ["watch", "chair"],
+        "interactableObjects" : {
+        	"bush" : "You looked at the bush. Nice."
+        },
         "exits": {
             "north" : "room2",
             "south" : "room3"
@@ -9,18 +12,24 @@
     },
     "room2" : {
         "description" : "You enter room2",
-        "items" : ["watch", "chair"],
+        "takeableItems" : ["watch", "chair"],
+        "interactableObjects" : {
+        	"bush" : ""
+        },
         "exits": {
-            "north" : "room2",
-            "south" : "room3"
+            "north" : "room3",
+            "south" : "room1"
        } 
     },
     "room3" : {
         "description" : "You enter room3",
-        "items" : ["watch", "chair"],
+        "takeableItems" : ["watch", "chair"],
+        "interactableObjects" : {
+        	"bush" : ""
+        },
         "exits": {
             "north" : "room2",
-            "south" : "room3"
+            "south" : "room2"
        } 
     }
 }
