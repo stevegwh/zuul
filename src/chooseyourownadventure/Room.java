@@ -10,15 +10,14 @@ public class Room {
 	private String description;
 	private JSONArray items;
 	private JSONObject exits;
-	private void parseRoomJson(Object currentRoom) {
+	private void parseRoomJson(Object nextRoom) {
 		JSONParser parser = new JSONParser();
 		Object obj = new Object();
         try {
-            obj = parser.parse(new FileReader(
-                    "/home/forest/eclipse-workspace/chooseyourownadventure/src/chooseyourownadventure/roomData.json"));
+            obj = parser.parse(new FileReader("res/roomData.json"));
  
             JSONObject jsonObject = (JSONObject) obj;
-            JSONObject room = (JSONObject) jsonObject.get(currentRoom);
+            JSONObject room = (JSONObject) jsonObject.get(nextRoom);
             description = (String) room.get("description");
             items = (JSONArray) room.get("items");
             exits = (JSONObject) room.get("exits");

@@ -22,7 +22,8 @@ public class Game {
 	public void start() {
 		while(isRunning) {
 			room.printDescription();
-			System.out.printf(">> ");
+//			System.out.printf(">> ");
+			Output.print(">> ");
 			String data = getInput();
 			handleCommand(data);
 		}
@@ -55,12 +56,12 @@ public class Game {
 	}
 	
 	private void quitGame() {
-		System.out.println("Thanks for playing!");
+		Output.print("Thanks for playing!");
 		isRunning = false;
 	}
 	
 	private void look() {
-		System.out.println("You looked.");
+		Output.print("You looked.");
 	}
 	
 	private void executeCommand(String command, String command2) {
@@ -69,7 +70,7 @@ public class Game {
 			changeRoom(command2);
 			break;
 		default:
-			System.out.println("Something went wrong");
+			Output.print("Something went wrong");
 		}
 	}
 	
@@ -85,7 +86,7 @@ public class Game {
 			look();
 			break;
 		default:
-			System.out.println("Something went wrong");
+			Output.print("Something went wrong");
 		}
 	}
 	
@@ -105,7 +106,7 @@ public class Game {
 				executeCommand(inputArray[0]);
 			}
 		} else {
-			System.out.println("Invalid command. Type 'help'.");
+			Output.print("Invalid command. Type 'help'.");
 		}
 	}
 }
