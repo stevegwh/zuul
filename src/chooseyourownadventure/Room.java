@@ -7,33 +7,29 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class Room {
+	private JSONDataHandler jsonDataHandler = new JSONDataHandler();
+	private JSONObject currentRoomJSON;
+	private String currentRoomName;
 	private String description;
 	private String lookDescription;
-	private JSONArray items;
+	private JSONArray takeableItems;
 	private JSONObject exits;
 	private JSONObject interactableObjects;
-	private void parseRoomJson(Object nextRoom) {
-		JSONParser parser = new JSONParser();
-		Object obj = new Object();
-        try {
-            obj = parser.parse(new FileReader("res/roomData.json"));
- 
-            JSONObject jsonObject = (JSONObject) obj;
-            JSONObject room = (JSONObject) jsonObject.get(nextRoom);
-            description = (String) room.get("description");
-            lookDescription = (String) room.get("lookDescription");
-            items = (JSONArray) room.get("takeableItems");
-            exits = (JSONObject) room.get("exits");
-            interactableObjects = (JSONObject) room.get("interactableObjects");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+	private void getNSetRoomData(String nextRoom) {
+		currentRoomJSON = jsonDataHandler.getRoom(nextRoom);
+		currentRoomName = nextRoom;
+		description = (String) currentRoomJSON.get("description");
+		lookDescription = (String) currentRoomJSON.get("lookDescription");
+		takeableItems = (JSONArray) currentRoomJSON.get("takeableItems");
+		exits = (JSONObject) currentRoomJSON.get("exits");
+		interactableObjects = (JSONObject) currentRoomJSON.get("interactableObjects");
 	}
 
 	public void changeRoom(String direction) {
 		Object nextRoom = exits.get(direction);
 		if (nextRoom != null) {
-			parseRoomJson(nextRoom);
+			getNSetRoomData(nextRoom.toString());
 		} else {
 			Output.println("You can't go that way");
 		}
@@ -68,11 +64,34 @@ public class Room {
 	}
 
 	public void printItems() {
-		for(Object item : items) {
+		for(Object item : takeableItems) {
 			Output.println((String) item);
 		}
 	}
-	Room() {
-		parseRoomJson("room1");
+	
+	public Room() {
+		getNSetRoomData("room1");
+	}
+
+//	public Room(Object json) {
+//		roomJSON = (JSONObject) json;
+//		getNSetRoomData("room1");
+//	}
+	
+	private void updateRoom() { 
+		jsonDataHandler.writeRoom(currentRoomName, currentRoomJSON);
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean take(String toTake) { //TODO: remove item you take from roomJSON, add to player inv
+		for(Object item : takeableItems) {
+			if(item.equals(toTake)) {
+				Output.println("You picked up " + toTake);
+				takeableItems.remove(toTake);
+				updateRoom();
+				return true;
+			}
+		}
+		return false;
 	}
 }
