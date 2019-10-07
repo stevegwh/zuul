@@ -8,6 +8,7 @@ import org.json.simple.parser.JSONParser;
 
 public class Room {
 	private String description;
+	private String lookDescription;
 	private JSONArray items;
 	private JSONObject exits;
 	private JSONObject interactableObjects;
@@ -20,6 +21,7 @@ public class Room {
             JSONObject jsonObject = (JSONObject) obj;
             JSONObject room = (JSONObject) jsonObject.get(nextRoom);
             description = (String) room.get("description");
+            lookDescription = (String) room.get("lookDescription");
             items = (JSONArray) room.get("takeableItems");
             exits = (JSONObject) room.get("exits");
             interactableObjects = (JSONObject) room.get("interactableObjects");
@@ -30,11 +32,23 @@ public class Room {
 
 	public void changeRoom(String direction) {
 		Object nextRoom = exits.get(direction);
-		parseRoomJson(nextRoom);
+		if (nextRoom != null) {
+			parseRoomJson(nextRoom);
+		} else {
+			Output.println("You can't go that way");
+		}
 	}
 
 	public void printDescription() {
 		Output.println(description);
+	}
+	
+	public void look() {
+		if (lookDescription != null) {
+			Output.println(lookDescription);
+		} else {
+			Output.println("Nothing interesting to report");
+		}
 	}
 	
 	public void investigate(String toInvestigate) {

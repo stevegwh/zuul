@@ -1,6 +1,7 @@
 {
     "room1" : {
         "description" : "You enter room1. You see a bush.",
+        "lookDescription" : "You feel a great sense of adventure. Room2 is to the north, room3 is to the south.",
         "takeableItems" : ["watch", "chair"],
         "interactableObjects" : {
         	"bush" : "You looked at the bush. Nice."
@@ -23,6 +24,7 @@
     },
     "room3" : {
         "description" : "You enter room3",
+        "lookDescription" : "You feel a great sense of adventure. Room2 is to the north, room3 is to the south.",
         "takeableItems" : ["watch", "chair"],
         "interactableObjects" : {
         	"bush" : ""

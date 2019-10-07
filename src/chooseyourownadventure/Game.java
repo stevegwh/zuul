@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Game {
 	private HashMap<String, Item> items = new HashMap<String, Item>();
-	private String[] commands = {"use", "quit", "investigate", "take",  "go", "help", "inventory", "drop", "give"}; //TODO: should be look not investigate
+	private String[] commands = {"use", "quit", "investigate", "take",  "go", "help", "inventory", "drop", "give", "look"}; //TODO: should be look not investigate
 	private String[] directions = {"north", "south", "west", "east"};
 	private Room room = new Room();
 	private boolean isRunning = true;
@@ -43,6 +43,14 @@ public class Game {
 		room.investigate(toInvestigate);
 	}
 	
+	private void look() {
+		room.look();
+	}
+
+	private void printItems() {
+		room.printItems();
+	}
+
 	private void executeCommand(String command, String command2, String command3) {
 		switch(command) {
 		case "use":
@@ -76,13 +84,12 @@ public class Game {
 		case "inventory":
 			printItems();
 			break;
+		case "look":
+			look();
+			break;
 		default:
 			Output.println("Something went wrong");
 		}
-	}
-	
-	private void printItems() {
-		room.printItems();
 	}
 
 	private String[] parseInput(String input) {
