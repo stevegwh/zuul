@@ -1,10 +1,10 @@
 package chooseyourownadventure;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 //import java.util.Arrays;
 
 public class Game {
+	private InputHandler inputHandler = new InputHandler();
 	private String[] commands = {"use", "quit", "investigate", "take",  "go", "help", "inventory", "drop", "give", "look"}; //TODO: should be look not investigate
 	private String[] directions = {"north", "south", "west", "east"};
 	private ArrayList<String> inventory = new ArrayList<String>();
@@ -114,33 +114,18 @@ public class Game {
 		}
 	}
 
-	private String[] parseInput(String input) {
-		input = input.toLowerCase();
-		input = input.trim().replaceAll(" +", " ");
-		String[] arr = input.split(" ");
-		return arr;
-	}
-
-	private String getInput() { 
-		String data = "";
-		@SuppressWarnings("resource")
-		Scanner scanInput = new Scanner(System.in);
-		data = scanInput.nextLine();
-		scanInput.reset();
-		return data;		
-	}
 
 	public void start() {
 		while(isRunning) {
 			room.printDescription();
 			Output.printf(">> ");
-			String data = getInput();
+			String data = inputHandler.getInput();
 			handleCommand(data);
 		}
 	}
 
 	public void handleCommand(String input) {
-		String[] inputArray = parseInput(input);
+		String[] inputArray = inputHandler.parseInput(input);
 		if(existsInArray(inputArray[0], commands)) {
 			if(inputArray.length > 4) {
 				executeCommand(inputArray[0], inputArray[1], inputArray[3]);

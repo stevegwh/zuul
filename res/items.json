@@ -1,7 +1,0 @@
-{
-	"notebook": {
-		"description" : "nothing",
-		"onTake" :  "You pulled the notebook out of the bush",
-		"itemPairings" : ["chair"]
-	}
-}

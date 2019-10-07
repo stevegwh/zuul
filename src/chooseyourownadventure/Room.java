@@ -69,7 +69,7 @@ public class Room {
 		}
 	}
 	
-	public Room() {
+	Room() {
 		getNSetRoomData("room1");
 	}
 
