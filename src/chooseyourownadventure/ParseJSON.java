@@ -7,7 +7,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class ParseJSON {
-	private static JSONObject data;
 	static JSONParser parser = new JSONParser();
 	static Object obj = new Object();
 
