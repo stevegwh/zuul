@@ -4,16 +4,16 @@ package chooseyourownadventure;
 // These items get acted upon by the TakeableItem class
 // InteractableItems accept USE and INVESTIGATE commands
 public class InteractableItem extends Item{
+	private String name;
 	private String validItem;
-	private String descriptionOnTake;
 	private String descriptionOnInvestigate;
 	
 	// itemToCheck is the name of the item the user wants to use on the object.
 	// checks if this is the correct item and then executes the necessary action
 	// Example: InteractableItem is a door. validItem could be 'key'. executeAction() could be "unlock()"
-	void onUse(String itemToCheck) {
+	void onUse(String itemToCheck, String method) {
 		if(itemToCheck.equals(validItem)) {
-			executeAction();
+			executeAction(method);
 		} else {
 			Output.println("That didn't seem to work.");
 		}
@@ -22,15 +22,23 @@ public class InteractableItem extends Item{
 	void onInvestigate() {
 		Output.println(descriptionOnInvestigate);
 	}
-	
-	void executeAction() {
-		Output.println(descriptionOnTake);
+
+	// Should take the param (e.g. "unlock) and pass it to the necessary method
+	void executeAction(String method) {
+		unlock();
 	}
 	
-	InteractableItem(String validItem) {
+	void unlock() {
+		Output.println("Door unlocked! Maybe...");
+	}
+
+	InteractableItem(String descriptionOnInvestigate) {
+		this.descriptionOnInvestigate = descriptionOnInvestigate;
+	}
+	
+	InteractableItem(String name, String validItem) {
+		this.name = name;
 		this.validItem = validItem;
 	}
 
-	InteractableItem() {
-	}
 }

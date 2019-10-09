@@ -1,17 +1,15 @@
-//responsible for validating and executing commands
+//responsible for validating and executing commands 
 package chooseyourownadventure;
 
 import java.util.ArrayList;
 
+//TODO: Make command class with the commands as subclasses. Put them in a separate package and all as static, import only here
+
 public class CommandHandler { //TODO: Make command class
 	private Room room;
-	private String[] commands = {"use", "quit", "investigate", "take",  "go", "help", "inventory", "drop", "give", "look"}; //TODO: should be look not investigate
+	private String[] commands = {"printItems", "use", "quit", "investigate", "take",  "go", "help", "inventory", "drop", "give", "look"}; //TODO: should be look not investigate
 	private String[] directions = {"north", "south", "west", "east"};
 
-	public enum CommandWord {
-		USE, QUIT, INVESTIGATE, TAKE, GO, HELP, INVENTORY, DROP, GIVE, LOOK 
-	}
-	
 	public enum Direction {
 		NORTH, SOUTH, EAST, WEST
 	}
@@ -32,13 +30,7 @@ public class CommandHandler { //TODO: Make command class
 	}
 	
 	private void take(String toTake) {
-		ArrayList<String> inventory = Game.getInventory();
-		boolean success = room.take(toTake);
-		if (success) {
-			inventory.add(toTake);
-		} else {
-			Output.println("I can't find that");
-		}
+		room.take(toTake);
 	}
 	
 	private void showHelp() {
@@ -53,33 +45,35 @@ public class CommandHandler { //TODO: Make command class
 		}
 	}
 	
-	private void investigate(String toInvestigate) { //TODO: stupid. Put "I can't find that" in room.investigate
-		boolean success = room.investigate(toInvestigate);
-		if (!success) {
-			Output.println("I can't find that");
-		}
+	private void investigate(String toInvestigate) {
+		room.investigate(toInvestigate);
 	}
 	
 	private void look() {
 		room.look();
 	}
+	
+	private void useItem(String itemToUse, String interactableItem) {
+		room.use(itemToUse, interactableItem);
+	}
 
 	private void listInventory() {
-		ArrayList<String> inventory = Game.getInventory();
+		ArrayList<TakeableItem> inventory = Inventory.getInventory();
 		if(inventory.size() == 0) {
 			Output.println("You do not currently have anything in your inventory");
 		} else {
 			Output.println("You are currently carrying: ");
-			for(String item : inventory) {
-				Output.println(item); //TODO: could be capitalized
+			for(TakeableItem item: inventory) {
+				Output.println(item.getName()); //TODO: could be capitalized
 			}
 		}
 //		room.printItems();
 	}
 
-	private void executeCommand(String command, String command2, String command3) {
+	private void executeCommand(String command, String command2, String command3) { // Doesn't check for preposition
 		switch(command) {
 		case "use":
+			useItem(command2, command3);
 			break;
 		default:
 			Output.println("Something went wrong");
@@ -116,15 +110,18 @@ public class CommandHandler { //TODO: Make command class
 		case "look":
 			look();
 			break;
+		case "printItems":
+			room.printItems();
+			break;
 		default:
 			Output.println("Something went wrong");
 		}
 	}
 	public void handleCommand(String input, String[] inputArray) {
 		if(existsInArray(inputArray[0], commands)) {
-			if(inputArray.length > 4) {
+			if(inputArray.length == 4) {
 				executeCommand(inputArray[0], inputArray[1], inputArray[3]); //you should change this
-			}else if(inputArray.length > 1) {
+			}else if(inputArray.length == 2) {
 				executeCommand(inputArray[0], inputArray[1]);
 			} else {
 				executeCommand(inputArray[0]);

@@ -2,6 +2,7 @@ package chooseyourownadventure;
 
 import org.json.simple.JSONObject;
 
+// Important class that holds the JSON data for the entire game
 public class JSONDataHandler {
 	private JSONObject data;
     
@@ -11,6 +12,7 @@ public class JSONDataHandler {
     }
 
     JSONDataHandler() {
-    	data = (JSONObject) ParseJSON.generateData("res/roomData.json"); 
+    	ParseJSON parser = new ParseJSON();
+    	data = (JSONObject) parser.generateData("res/roomData.json"); 
     }
 }
