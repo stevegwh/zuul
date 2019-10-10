@@ -3,7 +3,7 @@ package commands;
 import zuul.Output;
 import zuul.Room;
 
-public class Look extends Command {
+public class Look implements Command {
 	
 	public void execute(String[] args) {
 		String lookDescription = Room.getLookDescription();

@@ -16,7 +16,7 @@ public class Game {
 			Output.printf(">> ");
 			String input = inputHandler.getInput();
 			String[] inputArray = inputHandler.parseInput(input);
-			commandHandler.handleCommand(input, inputArray);
+			commandHandler.handleCommand(inputArray);
 		}
 	}
 

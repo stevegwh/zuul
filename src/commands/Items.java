@@ -6,7 +6,7 @@ import zuul.Inventory;
 import zuul.Output;
 import zuul.TakeableItem;
 
-public class Items extends Command {
+public class Items implements Command {
 
 	public void execute(String[] args) {
 		ArrayList<TakeableItem> inventory = Inventory.getInventory();

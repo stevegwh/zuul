@@ -6,9 +6,9 @@ import org.json.simple.JSONObject;
 public final class JSONDataHandler {
 	private static JSONObject data;
     
-    public static JSONObject getRoom(String roomName) {
-		JSONObject roomData = (JSONObject) data.get(roomName);
-    	return roomData;
+    public static JSONObject getField(String fieldName) {
+		JSONObject fieldData = (JSONObject) data.get(fieldName);
+    	return fieldData;
     }
 
     static {

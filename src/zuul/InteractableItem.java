@@ -11,7 +11,7 @@ public class InteractableItem extends Item{
 	// itemToCheck is the name of the item the user wants to use on the object.
 	// checks if this is the correct item and then executes the necessary action
 	// Example: InteractableItem is a door. validItem could be 'key'. executeAction() could be "unlock()"
-	void onUse(String itemToCheck, String method) {
+	public void onUse(String itemToCheck, String method) {
 		if(itemToCheck.equals(validItem)) {
 			executeAction(method);
 		} else {
@@ -19,7 +19,7 @@ public class InteractableItem extends Item{
 		}
 	}
 	
-	void onInvestigate() {
+	public void onInvestigate() {
 		Output.println(descriptionOnInvestigate);
 	}
 
@@ -32,11 +32,11 @@ public class InteractableItem extends Item{
 		Output.println("Door unlocked! Maybe...");
 	}
 
-	InteractableItem(String descriptionOnInvestigate) {
+	public InteractableItem(String descriptionOnInvestigate) {
 		this.descriptionOnInvestigate = descriptionOnInvestigate;
 	}
 	
-	InteractableItem(String name, String validItem) {
+	public InteractableItem(String name, String validItem) {
 		this.name = name;
 		this.validItem = validItem;
 	}

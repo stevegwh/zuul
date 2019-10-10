@@ -3,7 +3,7 @@ package commands;
 import zuul.Output;
 import zuul.Room;
 
-public class Go extends Command {
+public class Go implements Command {
 
 	public enum Directions {
 		NORTH, SOUTH, EAST, WEST
