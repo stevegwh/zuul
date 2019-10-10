@@ -3,9 +3,10 @@ package zuul;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import jsonDataHandler.JSONDataHandler;
+
 public class Room {
 	private static JSONObject currentRoomJSON;
-	private static JSONDataHandler jsonData;
 	private static String description;
 	private static String lookDescription;
 	private static JSONArray takeableItems;
@@ -13,7 +14,7 @@ public class Room {
 	private static JSONObject exits;
 
 	public static void getNewRoom(String nextRoom) {
-		currentRoomJSON = jsonData.getRoom(nextRoom);
+		currentRoomJSON = JSONDataHandler.getRoom(nextRoom);
 		description = (String) currentRoomJSON.get("description");
 		lookDescription = (String) currentRoomJSON.get("lookDescription");
 		takeableItems = (JSONArray) currentRoomJSON.get("takeableItems");
@@ -36,7 +37,7 @@ public class Room {
 		return null;
 	}
 
-	public void printDescription() {
+	public static void printDescription() {
 		Output.println(description);
 	}
 	
@@ -108,8 +109,7 @@ public class Room {
 	}
 
 	//Instead of GameLoader you could initialise JSONDataHandler here
-	Room(JSONDataHandler jsonDataHandler) {
-		this.jsonData = jsonDataHandler;
+	static {
 		getNewRoom("room1");
 	}
 }

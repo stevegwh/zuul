@@ -2,8 +2,6 @@ package zuul;
 
 public class Game {
 	private InputHandler inputHandler;
-	private GameLoader gameLoader;
-	private Room room;
 	private CommandHandler commandHandler;
 	private static boolean isRunning = true;
 
@@ -14,7 +12,7 @@ public class Game {
 
 	public void start() {
 		while(isRunning) {
-			room.printDescription();
+			Room.printDescription();
 			Output.printf(">> ");
 			String input = inputHandler.getInput();
 			String[] inputArray = inputHandler.parseInput(input);
@@ -24,8 +22,6 @@ public class Game {
 
 	Game() {
 		inputHandler = new InputHandler();
-		gameLoader = new GameLoader();
-		room = gameLoader.getRoom();
 		commandHandler = new CommandHandler();
 	}
 
