@@ -26,6 +26,11 @@ public final class Room {
 		return (String) exits.get(exit);
 	}
 
+	// TODO: Bad practice to return private array like this as it gives full access to a private field.
+	public static JSONObject getAllExits() {
+		return exits;
+	}
+
 	//TODO: Replace with forEach from json-simple
 	public static JSONObject ifExistsInArrayReturnObj(String toCheck, JSONArray arr) {
 		for (Object element : arr) {

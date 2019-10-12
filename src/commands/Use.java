@@ -9,11 +9,23 @@ import zuul.Output;
 import zuul.Room;
 
 public class Use implements Command {
+	
+	// Updates the interactableItem's JSONObject to disable interactivity and give a different description after use
+	private void updateJSON(String interactableItem, JSONObject interactableItemObj) {
+		// Get the array of all InteractableItems in the room
+		JSONArray interactableItemArr = Room.getInteractableItems();
+		// Create a new object to erase the old one
+		JSONObject toPush = new JSONObject();
+		String onInvestigateAfterUse = (String) interactableItemObj.get("onInvestigateAfterUse");
+		toPush.put("name", interactableItem);
+		toPush.put("onInvestigate", onInvestigateAfterUse);
+		// Remove old object and add new one
+		interactableItemArr.remove(interactableItemObj);
+		interactableItemArr.add(toPush);
+	}
+
 	@Override
 	public void execute(String[] args) {
-		// Check if itemToUse is in inventory O
-		// Check if interactableItem exists O
-		// Pass itemToUse into checkIfValidItem method
 		String itemToUse = args[1];
 		String interactableItem = args[3];
 		if (!Inventory.checkIfExists(itemToUse)) {
@@ -21,17 +33,31 @@ public class Use implements Command {
 			return;
 		}
 		JSONArray interactableItems = Room.getInteractableItems();
-		JSONObject obj = Room.ifExistsInArrayReturnObj(interactableItem, interactableItems);
-		// Make sure room has interactableItems and the item the player using exists
-		// TODO: Check if you should check ifExistsInArray... after checking interactableItems is null. Might cause error.
-		if (interactableItems != null && obj != null) {
-			String name = (String) obj.get("name");
-			String validItem = (String) obj.get("validItem");
-			InteractableItem item = new InteractableItem(name, validItem);
-			item.onUse(itemToUse, "unlock");
-			// TODO: Overwrite/Erase the item and just the old onInvestigate with onInvestigateAfteruse
-			return;
+		if (interactableItems != null) {
+			// Get the JSONObject for the interactableItem the user has requested if it exists
+			JSONObject obj = Room.ifExistsInArrayReturnObj(interactableItem, interactableItems);
+			if (obj != null && obj.get("onUse") != null) { // Make sure it exists *and* that it can be acted upon with onUse
+				String name = (String) obj.get("name");
+				String validItem = (String) obj.get("validItem"); //TODO: poor variable name
+				// Get the array that specifies what method to call when InteractableItem is used
+				JSONArray onUse = (JSONArray) obj.get("onUse");
+				//convert JSONArray to String[] to make it more conventional to work with
+				String[] itemMethodArgs = new String[onUse.size()];
+				itemMethodArgs = (String[]) onUse.toArray(itemMethodArgs);
+				// get method name for InteractableItem onUse method
+				InteractableItem item = new InteractableItem(name, validItem);
+				// Attempt to execute onUse() of InteractableItem
+				if (item.onUse(itemToUse, itemMethodArgs)) {
+					// If true overwrite the JSONObject for InteractableItem
+					updateJSON(interactableItem, obj);
+				}
+				return;
+			} else {
+				Output.println("Sorry, you can't do that");
+				return;
+			}
 		}
 		Output.println("Couldn't find " + interactableItem);
 	}
 }
+

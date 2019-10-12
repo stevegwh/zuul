@@ -16,14 +16,13 @@
             {
             	"name" : "door",
 				"validItem" : "key",
-				"onUse" : ["unlock", "north", "room4"],
+				"onUse" : ["Unlock", "north", "room4"],
 				"onInvestigate" : "There is a big oak door in front of you blocking the path to the north.",
 				"onInvestigateAfterUse" : "The big oak door swung open with tremendous force"
 			}
 		],
         "exits": {
-            "north" : "room2",
-            "south" : "room3"
+            "east" : "room2"
        } 
     },
     "room2" : {
@@ -39,14 +38,13 @@
 		],
         "exits": {
             "north" : "room3",
-            "south" : "room1"
+            "west" : "room1"
        } 
     },
     "room3" : {
         "description" : "You enter room3",
         "takeableItems" : ["watch", "chair"],
         "exits": {
-            "north" : "room2",
             "south" : "room2"
        } 
     },
@@ -55,8 +53,6 @@
         "lookDescription" : "You feel a great sense of adventure. Room2 is to the north, room3 is to the south.",
         "takeableItems" : ["watch", "chair"],
         "exits": {
-            "north" : "room2",
-            "south" : "room2"
        } 
     }
 }

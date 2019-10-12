@@ -1,21 +1,26 @@
 package zuul;
 
+import java.lang.reflect.InvocationTargetException;
+
+import itemMethods.ItemMethod;
+
 // Class for any item in the game the player can interact with
 // These items get acted upon by the TakeableItem class
 // InteractableItems accept USE and INVESTIGATE commands
 public class InteractableItem extends Item{
-	private String name;
 	private String validItem;
 	private String descriptionOnInvestigate;
 	
 	// itemToCheck is the name of the item the user wants to use on the object.
-	// checks if this is the correct item and then executes the necessary action
+	// Checks if this is the correct item and then executes the necessary action
 	// Example: InteractableItem is a door. validItem could be 'key'. executeAction() could be "unlock()"
-	public void onUse(String itemToCheck, String method) {
+	public boolean onUse(String itemToCheck, String[] args) {
 		if(itemToCheck.equals(validItem)) {
-			executeAction(method);
+			executeAction(args);
+			return true;
 		} else {
 			Output.println("That didn't seem to work.");
+			return false;
 		}
 	}
 	
@@ -23,21 +28,24 @@ public class InteractableItem extends Item{
 		Output.println(descriptionOnInvestigate);
 	}
 
-	// Should take the param (e.g. "unlock) and pass it to the necessary method
-	void executeAction(String method) {
-		unlock();
-	}
-	
-	void unlock() {
-		Output.println("Door unlocked! Maybe...");
+	void executeAction(String[] args) {
+		String methodName = args[0];
+		Object command = null;
+		try {
+			command = Class.forName("itemMethods." + methodName).getConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		((ItemMethod) command).execute(args);
 	}
 
 	public InteractableItem(String descriptionOnInvestigate) {
 		this.descriptionOnInvestigate = descriptionOnInvestigate;
 	}
 	
+	// TODO: name is not needed, removing it causes a clash with the other constructor you use for investigating
 	public InteractableItem(String name, String validItem) {
-		this.name = name;
 		this.validItem = validItem;
 	}
 

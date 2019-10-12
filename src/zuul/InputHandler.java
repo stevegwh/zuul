@@ -3,11 +3,17 @@ package zuul;
 import java.util.Scanner;
 
 public class InputHandler {
+	private final int MAX_COMMAND_LENGTH = 4;
 	public String[] parseInput(String input) {
-//		input = input.toUpperCase();
 		input = input.trim().replaceAll(" +", " ");
 		String[] arr = input.split(" ");
-		return arr;
+		if(arr.length > MAX_COMMAND_LENGTH) { //Maybe just say it's invalid and return empty array
+			String[] truncatedArr = new String[MAX_COMMAND_LENGTH];
+			System.arraycopy(arr, 0, truncatedArr, 0, MAX_COMMAND_LENGTH);
+			return truncatedArr;
+		} else {
+			return arr;
+		}
 	}
 
 	public String getInput() { 

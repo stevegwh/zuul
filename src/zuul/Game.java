@@ -14,7 +14,7 @@ public class Game {
 		while(isRunning) {
 			Room.printDescription();
 			Output.printf(">> ");
-			String input = inputHandler.getInput();
+			String input = inputHandler.getInput(); //could be simplified to one command
 			String[] inputArray = inputHandler.parseInput(input);
 			commandHandler.handleCommand(inputArray);
 		}
