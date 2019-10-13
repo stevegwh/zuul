@@ -30,6 +30,7 @@ public class InteractableItem extends Item{
 
 	void executeAction(String[] args) {
 		String methodName = args[0];
+		methodName = methodName.substring(0,1).toUpperCase() + methodName.substring(1);
 		Object command = null;
 		try {
 			command = Class.forName("itemMethods." + methodName).getConstructor().newInstance();
