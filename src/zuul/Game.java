@@ -1,5 +1,7 @@
 package zuul;
 
+//import npc.Barry;
+
 public class Game {
 	private InputHandler inputHandler;
 	private CommandHandler commandHandler;
@@ -12,6 +14,9 @@ public class Game {
 
 	public void start() {
 		while(isRunning) {
+//			Barry barry = Barry.getInstance();
+//			barry.beginDialog();
+//			barry.onInvestigate();
 			Room.printDescription();
 			Output.printf(">> ");
 			String input = inputHandler.getInput(); //could be simplified to one command

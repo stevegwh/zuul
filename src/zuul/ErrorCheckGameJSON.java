@@ -1,8 +1,9 @@
 package zuul;
-
+// TODO: make sure weight is a string, not an int
 import java.util.Iterator;
 import java.util.HashMap;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import jsonDataHandler.JSONDataHandler;
@@ -67,6 +68,31 @@ public class ErrorCheckGameJSON extends JSONDataHandler {
 		}
 	}
 	
+	private static boolean checkThatTakeableItemsExist(JSONObject currentRoomObject, String currentRoomName) {
+		JSONArray takeableItems = (JSONArray) currentRoomObject.get("takeableItems");
+		if(takeableItems == null) {
+			Output.println("WARNING: " + currentRoomName + " doesn't have takeableObjects. If this is intentional then ignore this message");
+			return false;
+		}
+		return true;
+	}
+
+	private static void checkTakeableObjectWeight(JSONArray takeableObjects, String currentRoomName) {
+		for(Object ele : takeableObjects) {
+			JSONObject obj = (JSONObject) ele;
+			String name = (String) obj.get("name");
+			if(!obj.containsKey("weight")) {
+				Output.println("WARNING: " + currentRoomName + " takeableObjects " + name + " does not have weight");
+			} else {
+				if(obj.get("weight").toString() != obj.get("weight")) {
+					Output.println("WARNING: " + currentRoomName + " takeableObjects " + name + " weight isn't string. Put value in quotation marks.");
+				}
+			}
+			
+		}
+		
+	}
+	
 	// Makes sure that any exit points to a room that exists
 	// Does this by checking the exit's value with all keys in game
 	private static void validateRoomNames() {
@@ -84,6 +110,10 @@ public class ErrorCheckGameJSON extends JSONDataHandler {
 		    String currentRoomName = (String) iterator.next();
 		    JSONObject currentRoomObject = (JSONObject) data.get(currentRoomName);
 		    checkDuplicateDirections(currentRoomObject, currentRoomName);
+		    if(checkThatTakeableItemsExist(currentRoomObject, currentRoomName)) {
+				checkTakeableObjectWeight((JSONArray) currentRoomObject.get("takeableItems"), currentRoomName);
+		    }
+
 //		    checkExitsCorrespond((JSONObject) currentRoomObject.get("exits"), currentRoomName);
 		}
 	}

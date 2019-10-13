@@ -12,16 +12,15 @@ public class Use implements Command {
 	
 	// Updates the interactableItem's JSONObject to disable interactivity and give a different description after use
 	private void updateJSON(String interactableItem, JSONObject interactableItemObj) {
-		// Get the array of all InteractableItems in the room
-		JSONArray interactableItemArr = Room.getInteractableItems();
 		// Create a new object to erase the old one
 		JSONObject toPush = new JSONObject();
 		String onInvestigateAfterUse = (String) interactableItemObj.get("onInvestigateAfterUse");
 		toPush.put("name", interactableItem);
 		toPush.put("onInvestigate", onInvestigateAfterUse);
 		// Remove old object and add new one
-		interactableItemArr.remove(interactableItemObj);
-		interactableItemArr.add(toPush);
+		Room.removeInteractableItem(interactableItemObj);
+		Room.addInteractableItem(toPush);
+		// TODO: remove item from user's inventory if it is perishable on use or not
 	}
 
 	@Override
@@ -32,10 +31,9 @@ public class Use implements Command {
 			Output.println("You do not have '" + itemToUse + "' in your inventory");
 			return;
 		}
-		JSONArray interactableItems = Room.getInteractableItems();
-		if (interactableItems != null) {
+		if (Room.hasInteractableItems()) {
 			// Get the JSONObject for the interactableItem the user has requested if it exists
-			JSONObject obj = Room.ifExistsInArrayReturnObj(interactableItem, interactableItems);
+			JSONObject obj = Room.ifExistsInArrayReturnObj(interactableItem, "interactableItems");
 			if (obj != null && obj.get("onUse") != null) { // Make sure it exists *and* that it can be acted upon with onUse
 				String name = (String) obj.get("name");
 				String validItem = (String) obj.get("validItem"); //TODO: poor variable name

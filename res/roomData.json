@@ -27,7 +27,6 @@
     },
     "room2" : {
         "description" : "You enter room2",
-        "takeableItems" : ["watch", "chair"],
         "interactableItems" : [
             {
             	"name" : "door",
@@ -43,7 +42,6 @@
     },
     "room3" : {
         "description" : "You enter room3",
-        "takeableItems" : ["watch", "chair"],
         "exits": {
             "south" : "room2"
        } 
@@ -51,8 +49,8 @@
     "room4" : {
         "description" : "You enter room4",
         "lookDescription" : "You feel a great sense of adventure. Room2 is to the north, room3 is to the south.",
-        "takeableItems" : ["watch", "chair"],
         "exits": {
+        	"south" : "room1"
        } 
     }
 }

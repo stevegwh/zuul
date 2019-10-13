@@ -2,8 +2,8 @@ package zuul;
 
 public class Output {
 
-	public static void println(String toOutput) {
-		System.out.println(toOutput);
+	public static void println(Object ele) {
+		System.out.println(ele);
 		
 	}
 	public static void println(int toOutput) {
