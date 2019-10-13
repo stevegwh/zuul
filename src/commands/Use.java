@@ -7,6 +7,7 @@ import zuul.InteractableItem;
 import zuul.Inventory;
 import zuul.Output;
 import zuul.Room;
+import zuul.TakeableItem;
 
 public class Use implements Command {
 	
@@ -17,10 +18,18 @@ public class Use implements Command {
 		String onInvestigateAfterUse = (String) interactableItemObj.get("onInvestigateAfterUse");
 		toPush.put("name", interactableItem);
 		toPush.put("onInvestigate", onInvestigateAfterUse);
-		// Remove old object and add new one
+		// Remove old object data and add new
 		Room.removeInteractableItem(interactableItemObj);
 		Room.addInteractableItem(toPush);
 		// TODO: remove item from user's inventory if it is perishable on use or not
+	}
+	
+	private void updateInventory(String itemName) {
+		TakeableItem item = Inventory.getItem(itemName);
+		if(item.isPerishable()) {
+			Inventory.removeItem(item);
+		}
+		
 	}
 
 	@Override
@@ -48,6 +57,7 @@ public class Use implements Command {
 				if (item.onUse(itemToUse, itemMethodArgs)) {
 					// If true overwrite the JSONObject for InteractableItem
 					updateJSON(interactableItem, obj);
+					updateInventory(itemToUse);
 				}
 				return;
 			} else {

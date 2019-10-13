@@ -7,6 +7,7 @@ import zuul.Output;
 import zuul.Room;
 import zuul.TakeableItem;
 
+// TODO: Could be cleaner
 public class Take implements Command {
 	@Override
 	public void execute(String[] args) {
@@ -16,9 +17,15 @@ public class Take implements Command {
 			if (obj != null) {
 				String name = (String) obj.get("name");
 				int weight = Integer.parseInt((String) obj.get("weight"));
+				boolean perishable = obj.containsKey("perishable");
+				TakeableItem item = null;
 				if (!Inventory.overWeightLimit(weight)) {
 					Output.println("You picked up " + toTake);
-					TakeableItem item = new TakeableItem(name, weight);
+					if(perishable) {
+						item = new TakeableItem(name, weight, true);
+					} else {
+						item = new TakeableItem(name, weight);
+					}
 					Inventory.addItem(item);
 					Inventory.setWeight(weight);
 					Room.removeTakeableItem(obj);

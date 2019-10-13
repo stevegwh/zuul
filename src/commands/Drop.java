@@ -19,6 +19,7 @@ public class Drop implements Command {
 			return;
 		}
 		TakeableItem item = Inventory.getItem(toDrop);
+		Inventory.setWeight(-item.getWeight());
 		Inventory.removeItem(item);
 		Room.addTakeableItem(item);
 		
