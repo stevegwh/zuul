@@ -10,8 +10,8 @@
 				"perishable": true
         	},
         	{
-				"name" : "chair",
-				"weight" : "10"
+				"name" : "gum",
+				"weight" : "3"
         	}
         ],
         "interactableItems" : [
