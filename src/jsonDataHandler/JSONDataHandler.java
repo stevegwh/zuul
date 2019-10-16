@@ -2,16 +2,17 @@ package jsonDataHandler;
 
 import org.json.simple.JSONObject;
 
-// Important class that holds the JSON data for the entire game
+// Important class that holds JSON data
 public class JSONDataHandler {
-	protected static JSONObject data;
+	private JSONObject data;
     
-    public static JSONObject getField(String fieldName) {
+    public JSONObject getField(String fieldName) {
 		JSONObject fieldData = (JSONObject) data.get(fieldName);
     	return fieldData;
     }
 
-    static {
-    	data = (JSONObject) Parser.generateData("res/roomData.json"); 
+    public JSONDataHandler(String path) {
+    	Parser parser = new Parser();
+    	data = (JSONObject) parser.generateData(path); 
     }
 }

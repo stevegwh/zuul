@@ -59,7 +59,7 @@ public class GameController {
 	GameController() {
 		inputHandler = new InputHandler();
 		commandHandler = new CommandHandler();
-		actors.put("Barry", new Barry());
+		actors.put("Barry", Barry.getInstance());
 	}
 
 }

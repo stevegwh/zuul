@@ -2,22 +2,16 @@ package npc;
 
 import zuul.InputHandler;
 import zuul.Output;
-import zuul.RoomController;
-import zuul.TakeableItem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import jsonDataHandler.JSONDataHandler;
 
 public abstract class NPC {
+	private JSONObject json;
 	private String name;
-
-	private HashMap<String, String> dialogOptions = new HashMap<>();
-	private ArrayList<String> dialogResponses = new ArrayList<>();
-	
 	private String currentLocation;
-	private List<String> movementPath = new ArrayList<String>();
-	private String validItem;
 
 	private String getUserChoice() {
 		InputHandler inputHandler = new InputHandler();
@@ -34,7 +28,8 @@ public abstract class NPC {
 		printDialog();
 		String userChoice = getUserChoice();
 		int idx = Integer.parseInt(userChoice) - 1;
-		Output.println(dialogResponses.get(idx));
+		JSONArray dialogResponses = (JSONArray) json.get("dialogResponses");
+		Output.println((String) dialogResponses.get(idx));
 	}
 
 	public void update() {
@@ -42,17 +37,16 @@ public abstract class NPC {
 	}
 	
 	public void printDialog() {
-		for(String key : dialogOptions.keySet()) {
-			Output.println(key + ". " + dialogOptions.get(key));
+		JSONArray dialogOptions = (JSONArray) json.get("dialogOptions");
+		int i = 1;
+		for(Object option : dialogOptions) {
+			option = (String) option;
+			Output.println(Integer.toString(i) + ". " + option);
+			i++;
 		}
 		Output.printSeperator();
 	}
 	
-    protected void setMovementPath(String[] rooms) {
-    	for(String room : rooms) {
-    		movementPath.add(room);
-    	}
-    }
 
 	public void onInvestigate() {
 		Output.println("You see " + name); //TODO: Could add a more in-depth description of people.
@@ -62,34 +56,25 @@ public abstract class NPC {
 		return currentLocation;
 	}
 	
-	public HashMap<String, String> getDialogOptions() {
-		return dialogOptions;
+	public String getValidItem() {
+		return (String) json.get("validItem");
 	}
 
-
-	// TODO: Could use JSON //////////////////////////////////////////////
-	public void setDialogOptions(String[] options) {
-		for(int i = 0, length = options.length; i < length; i++) {
-			dialogOptions.put(Integer.toString(i + 1), options[i]);
-		}
-	}
-
-	public void setDialogResponses(String[] responses) {
-		for(String response: responses) {
-			dialogResponses.add(response);
-		}
-	}
-	///////////////////////////////////////////////////////////////////////
 	public String getName() {
 		return name;
 	}
-	public NPC(String name, String currentLocation, String[] options, String[] responses, String validItem) {
-		this.name = name;
-		this.currentLocation = currentLocation;
-		this.validItem = validItem;
-		setDialogOptions(options);
-		setDialogResponses(responses);
+	
+	private void loadJSON(String name) {
+		JSONDataHandler jsonHandler = new JSONDataHandler("res/npcData.json");
+		json = jsonHandler.getField(name);
 	}
+
+	public NPC(String name, String currentLocation) {
+		this.name = name; // Not necessary for json load
+		loadJSON(name);
+		this.currentLocation = currentLocation;
+	}
+
 
 
 }

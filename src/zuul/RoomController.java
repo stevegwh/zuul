@@ -9,10 +9,11 @@ import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
 
 public final class RoomController {
+	private static JSONDataHandler jsonHandler;
 	private static JSONObject currentRoomJSON;
 
 	public static void getNewRoom(String nextRoom) {
-		currentRoomJSON = JSONDataHandler.getField(nextRoom);
+		currentRoomJSON = jsonHandler.getField(nextRoom);
 	}
 
 	public static String getExit(String exit) {
@@ -77,7 +78,7 @@ public final class RoomController {
 	
 	// Need to fix this and then make the NPC call this at random
 	public static void moveActor(NPC actor, String destination) {
-		JSONObject destinationJSON = JSONDataHandler.getField(destination);
+		JSONObject destinationJSON = jsonHandler.getField(destination);
 		JSONArray destinationActorList = (JSONArray) destinationJSON.get("actorsInRoom");
 //		// If there isn't an array of actors in destination then make one
 //		if(destinationActorList == null) {
@@ -110,6 +111,7 @@ public final class RoomController {
 	}
 
 	static {
+		jsonHandler = new JSONDataHandler("res/roomData.json");
 		getNewRoom("room1");
 	}
 

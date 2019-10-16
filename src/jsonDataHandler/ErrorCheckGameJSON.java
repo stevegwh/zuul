@@ -1,4 +1,4 @@
-package zuul;
+package jsonDataHandler;
 // TODO: make sure weight is a string, not an int
 import java.util.Iterator;
 import java.util.HashMap;
@@ -6,13 +6,14 @@ import java.util.HashMap;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import jsonDataHandler.JSONDataHandler;
+import zuul.Output;
 
 // Class that parses the JSON file and checks for any game specific errors made by the developer/designer
 // Does not catch JSON specific errors (a JSON plugin can do this for you)
 
-public class ErrorCheckGameJSON extends JSONDataHandler {
-	private static boolean existsInArray(String toCheck, String[] arr) {
+public class ErrorCheckGameJSON {
+	JSONObject data;
+	private boolean existsInArray(String toCheck, String[] arr) {
 		for(String ele : arr) {
 			if(ele.contentEquals(toCheck)) {
 				return true;
@@ -22,7 +23,7 @@ public class ErrorCheckGameJSON extends JSONDataHandler {
 	}
 	// Checks to see if all directions are spelt correctly and that there are only four exits
 	// Does not check if there are duplicates of directions (JSON plugins/checkers can catch this)
-	private static void checkDuplicateDirections(JSONObject currentRoom, String roomName) {
+	private void checkDuplicateDirections(JSONObject currentRoom, String roomName) {
 		JSONObject exits = (JSONObject) currentRoom.get("exits");
 		String[] directions = {"north", "south", "east", "west"};
 		if(exits.size() > directions.length) {
@@ -38,7 +39,7 @@ public class ErrorCheckGameJSON extends JSONDataHandler {
 
 	// Checks if the exits align. So if you are in room2 and go North to room3 then room3 should have room2 to the South.
 	// Needs to account for unlock method adding extra exits also
-	private static void checkExitsCorrespond(JSONObject exits, String currentRoomName) {
+	private void checkExitsCorrespond(JSONObject exits, String currentRoomName) {
 		HashMap<String, String> oppositeDirections = new HashMap<String, String>();
 		oppositeDirections.put("north", "south");
 		oppositeDirections.put("south", "north");
@@ -68,7 +69,7 @@ public class ErrorCheckGameJSON extends JSONDataHandler {
 		}
 	}
 	
-	private static boolean checkThatTakeableItemsExist(JSONObject currentRoomObject, String currentRoomName) {
+	private boolean checkThatTakeableItemsExist(JSONObject currentRoomObject, String currentRoomName) {
 		JSONArray takeableItems = (JSONArray) currentRoomObject.get("takeableItems");
 		if(takeableItems == null) {
 			Output.println("WARNING: " + currentRoomName + " doesn't have takeableObjects. If this is intentional then ignore this message");
@@ -77,7 +78,7 @@ public class ErrorCheckGameJSON extends JSONDataHandler {
 		return true;
 	}
 
-	private static void checkTakeableObjectWeight(JSONArray takeableObjects, String currentRoomName) {
+	private void checkTakeableObjectWeight(JSONArray takeableObjects, String currentRoomName) {
 		for(Object ele : takeableObjects) {
 			JSONObject obj = (JSONObject) ele;
 			String name = (String) obj.get("name");
@@ -95,16 +96,16 @@ public class ErrorCheckGameJSON extends JSONDataHandler {
 	
 	// Makes sure that any exit points to a room that exists
 	// Does this by checking the exit's value with all keys in game
-	private static void validateRoomNames() {
+	private void validateRoomNames() {
 		
 	}
 
 	// Makes sure any method specified in the onUse object is a valid class in the itemMethods package
-	private static void validateOnUseMethods() {
+	private void validateOnUseMethods() {
 		
 	}
 
-	private static void checkExits() {
+	private void checkExits() {
 		// Adapted from answer at: https://stackoverflow.com/questions/24371957/iterate-through-jsonobject-from-root-in-json-simple
 		for(Iterator iterator = data.keySet().iterator(); iterator.hasNext();) {
 		    String currentRoomName = (String) iterator.next();
@@ -117,7 +118,11 @@ public class ErrorCheckGameJSON extends JSONDataHandler {
 //		    checkExitsCorrespond((JSONObject) currentRoomObject.get("exits"), currentRoomName);
 		}
 	}
-	public static void startCheck() {
+	public void startCheck() {
 		checkExits();
+	}
+	
+	public ErrorCheckGameJSON() {
+		JSONDataHandler data = new JSONDataHandler("res/roomData.json");
 	}
 }
