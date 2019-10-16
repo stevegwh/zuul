@@ -1,5 +1,7 @@
 package zuul;
 
+import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -7,38 +9,25 @@ import jsonDataHandler.JSONDataHandler;
 
 public final class Room {
 	private static JSONObject currentRoomJSON;
-	private static String description;
-	private static String lookDescription;
-	private static JSONArray takeableItems;
-	private static JSONArray interactableItems;
-	private static JSONObject exits;
 
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = JSONDataHandler.getField(nextRoom);
-		description = (String) currentRoomJSON.get("description");
-		lookDescription = (String) currentRoomJSON.get("lookDescription");
-		takeableItems = (JSONArray) currentRoomJSON.get("takeableItems");
-		interactableItems = (JSONArray) currentRoomJSON.get("interactableItems");
-		exits = (JSONObject) currentRoomJSON.get("exits");
 	}
 
 	public static String getExit(String exit) {
-		return (String) exits.get(exit);
+		return (String) ((JSONObject) currentRoomJSON.get("exits")).get(exit);
 	}
 
 	// TODO: Bad practice to return private array like this as it gives full access to a private field.
 	public static JSONObject getAllExits() {
-		return exits;
+		return (JSONObject) currentRoomJSON.get("exits");
 	}
 
 	//TODO: awful. Replace.
 	public static JSONObject ifExistsInArrayReturnObj(String toCheck, String nameOfArr) {
-		JSONArray arr = null;
-		if(nameOfArr.contentEquals("takeableItems")) {
-			arr = takeableItems;
-		} else if (nameOfArr.contentEquals("interactableItems")) {
-			arr = interactableItems;
-		} else {
+		JSONArray arr = nameOfArr == "takeableItems" ? (JSONArray) currentRoomJSON.get("takeableItems") : 
+										(JSONArray) currentRoomJSON.get("interactableItems");
+		if(arr == null) {
 			System.out.println("Room doesn't have " + nameOfArr + " as an array");
 			return null;
 		}
@@ -52,15 +41,15 @@ public final class Room {
 	}
 
 	public static void printDescription() {
-		Output.println(description);
+		Output.println((String) currentRoomJSON.get("description"));
 	}
 	
 	public static String getLookDescription() {
-		return lookDescription;
+		return (String) currentRoomJSON.get("lookDescription");
 	}
 
 	public static void removeTakeableItem(JSONObject toRemove) {
-		takeableItems.remove(toRemove);
+		((JSONArray) currentRoomJSON.get("takeableItems")).remove(toRemove);
 	}
 
 	// Converts TakeableItem to JSONObject and adds it to takeableItems
@@ -71,26 +60,26 @@ public final class Room {
 		itemJSON.put("weight", weight);
 		// if the JSONObject for this room doesn't have JSONArray takeableObjects then we initialize it here and add it to the json file
 		if(!hasTakeableItems()) { //TODO: Maybe you should always initalize takeableItems/interactableItems instead of doing it here if needed
-			takeableItems = new JSONArray();
+			JSONArray takeableItems = new JSONArray();
 			currentRoomJSON.put("takeableItems", takeableItems);
 		}
-		takeableItems.add(itemJSON);
+		((JSONArray) currentRoomJSON.get("takeableItems")).add(itemJSON);
 	}
 
 	public static void removeInteractableItem(JSONObject toRemove) {
-		interactableItems.remove(toRemove);
+		((JSONArray) currentRoomJSON.get("interactableItems")).remove(toRemove);
 	}
 
 	public static void addInteractableItem(JSONObject toAdd) {
-		interactableItems.add(toAdd);
+		((JSONArray) currentRoomJSON.get("interactableItems")).add(toAdd);
 	}
 
 	public static boolean hasTakeableItems() {
-		return takeableItems != null;
+		return currentRoomJSON.get("takeableItems") != null;
 	}
 
 	public static boolean hasInteractableItems() {
-		return interactableItems != null;
+		return currentRoomJSON.get("interactableItems") != null;
 	}
 
 

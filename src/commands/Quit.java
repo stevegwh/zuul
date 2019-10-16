@@ -1,9 +1,10 @@
 package commands;
 
-public class Quit {
+import zuul.Game;
 
-	public Quit() {
-		// TODO Auto-generated constructor stub
+public class Quit implements Command {
+	@Override
+	public void execute(String[] inputArray) {
+		Game.quit();
 	}
-
 }

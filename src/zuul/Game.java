@@ -7,7 +7,7 @@ public class Game {
 	private CommandHandler commandHandler;
 	private static boolean isRunning = true;
 
-	static void quit() {
+	public static void quit() {
 		Output.println("Thanks for playing!");
 		isRunning = false;
 	}
