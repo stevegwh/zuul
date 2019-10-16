@@ -1,12 +1,12 @@
 package commands;
 
 import zuul.Output;
-import zuul.Room;
+import zuul.RoomController;
 
-public class Look implements Command {
+public class LookCmd implements Command {
 	
 	public void execute(String[] args) {
-		String lookDescription = Room.getLookDescription();
+		String lookDescription = RoomController.getLookDescription();
 		if (lookDescription != null) {
 			Output.println(lookDescription);
 		} else {
@@ -14,7 +14,7 @@ public class Look implements Command {
 		}
 	}
 
-	public Look() {
+	public LookCmd() {
 		super();
 	}
 }

@@ -2,9 +2,9 @@ package commands;
 
 import zuul.Output;
 
-public class Give implements Command{
+public class GiveCmd implements Command{
 
-	public Give() {
+	public GiveCmd() {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -6,10 +6,10 @@ import org.json.simple.JSONObject;
 import zuul.InteractableItem;
 import zuul.Inventory;
 import zuul.Output;
-import zuul.Room;
+import zuul.RoomController;
 import zuul.TakeableItem;
 
-public class Use implements Command {
+public class UseCmd implements Command {
 	
 	// Updates the interactableItem's JSONObject to disable interactivity and give a different description after use
 	private void updateJSON(String interactableItem, JSONObject interactableItemObj) {
@@ -19,8 +19,8 @@ public class Use implements Command {
 		toPush.put("name", interactableItem);
 		toPush.put("onInvestigate", onInvestigateAfterUse);
 		// Remove old object data and add new
-		Room.removeInteractableItem(interactableItemObj);
-		Room.addInteractableItem(toPush);
+		RoomController.removeInteractableItem(interactableItemObj);
+		RoomController.addInteractableItem(toPush);
 		// TODO: remove item from user's inventory if it is perishable on use or not
 	}
 	
@@ -40,9 +40,9 @@ public class Use implements Command {
 			Output.println("You do not have '" + itemToUse + "' in your inventory");
 			return;
 		}
-		if (Room.hasInteractableItems()) {
+		if (RoomController.hasInteractableItems()) {
 			// Get the JSONObject for the interactableItem the user has requested if it exists
-			JSONObject obj = Room.ifExistsInArrayReturnObj(interactableItem, "interactableItems");
+			JSONObject obj = RoomController.ifExistsInArrayReturnObj(interactableItem, "interactableItems");
 			if (obj != null && obj.get("onUse") != null) { // Make sure it exists *and* that it can be acted upon with onUse
 				String name = (String) obj.get("name");
 				String validItem = (String) obj.get("validItem"); //TODO: poor variable name

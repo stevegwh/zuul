@@ -2,6 +2,7 @@
     "room1" : {
         "description" : "You enter room1. You feel a great sense of adventure.",
         "lookDescription" : "The room smells vaguely of doritos",
+        "actorsInRoom" : ["Barry"],
         "takeableItems" :  [
         	{
 				"name" : "key",
@@ -28,6 +29,7 @@
     },
     "room2" : {
         "description" : "You enter room2",
+		"actorsInRoom" : [],
         "interactableItems" : [
             {
             	"name" : "door",

@@ -7,7 +7,7 @@ public class Main {
 		if(DEVELOPER_MODE) {
 			ErrorCheckGameJSON.startCheck();
 		} else {
-			Game game = new Game();
+			GameController game = new GameController();
 			game.start();
 		}
 	}

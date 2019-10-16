@@ -6,8 +6,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import jsonDataHandler.JSONDataHandler;
+import npc.NPC;
 
-public final class Room {
+public final class RoomController {
 	private static JSONObject currentRoomJSON;
 
 	public static void getNewRoom(String nextRoom) {
@@ -73,6 +74,21 @@ public final class Room {
 	public static void addInteractableItem(JSONObject toAdd) {
 		((JSONArray) currentRoomJSON.get("interactableItems")).add(toAdd);
 	}
+	
+	// Need to fix this and then make the NPC call this at random
+	public static void moveActor(NPC actor, String destination) {
+		JSONObject destinationJSON = JSONDataHandler.getField(destination);
+		JSONArray destinationActorList = (JSONArray) destinationJSON.get("actorsInRoom");
+//		// If there isn't an array of actors in destination then make one
+//		if(destinationActorList == null) {
+//			destinationJSON.put("actorsInRoom", new JSONArray());
+//			destinationActorList = (JSONArray) destinationJSON.get("actorsInRoom"); //TODO: Not sure if this is necessary
+//		}
+//		// Add to destination array
+		destinationActorList.add(actor.getName());
+		// TODO: Get actor's previous location's JSONObject
+//		// TODO: Remove actor from array in previous room's JSON
+	}
 
 	public static boolean hasTakeableItems() {
 		return currentRoomJSON.get("takeableItems") != null;
@@ -81,9 +97,21 @@ public final class Room {
 	public static boolean hasInteractableItems() {
 		return currentRoomJSON.get("interactableItems") != null;
 	}
-
+	public static boolean hasActor(String actorName) {
+		// TODO: lots of casting
+		JSONArray actors = (JSONArray) currentRoomJSON.get("actorsInRoom");
+		for(Object actor : actors) {
+			actor = (String) actor;
+			if(actor.equals(actorName)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	static {
 		getNewRoom("room1");
 	}
+
+
 }

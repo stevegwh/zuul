@@ -12,4 +12,7 @@ public class Output {
 	public static void printf(String toOutput) {
 		System.out.printf(toOutput);
 	}
+	public static void printSeperator() {
+		System.out.println("=============");
+	}
 }

@@ -4,14 +4,14 @@ import org.json.simple.JSONObject;
 
 import zuul.InteractableItem;
 import zuul.Output;
-import zuul.Room;
+import zuul.RoomController;
 
-public class Investigate implements Command {
+public class InvestigateCmd implements Command {
 	@Override
 	public void execute(String[] args) {
 		String toInvestigate = args[1];
-		JSONObject obj = Room.ifExistsInArrayReturnObj(toInvestigate, "interactableItems");
-		if (Room.hasInteractableItems() && obj != null) {
+		JSONObject obj = RoomController.ifExistsInArrayReturnObj(toInvestigate, "interactableItems");
+		if (RoomController.hasInteractableItems() && obj != null) {
 			//You don't really need to even create a new object here, you could just print the investigate description
 			//Maybe for clarity this approach is nicer...
 			String descriptionOnInvestigate = (String) obj.get("onInvestigate");
@@ -22,7 +22,7 @@ public class Investigate implements Command {
 		Output.println("Couldn't find that.");
 	}
 
-	public Investigate() {
+	public InvestigateCmd() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

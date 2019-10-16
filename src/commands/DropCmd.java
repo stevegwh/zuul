@@ -2,12 +2,12 @@ package commands;
 
 import zuul.Inventory;
 import zuul.Output;
-import zuul.Room;
+import zuul.RoomController;
 import zuul.TakeableItem;
 
-public class Drop implements Command {
+public class DropCmd implements Command {
 
-	public Drop() {
+	public DropCmd() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,7 +22,7 @@ public class Drop implements Command {
 		Output.println("You dropped " + toDrop);
 		Inventory.setWeight(-item.getWeight());
 		Inventory.removeItem(item);
-		Room.addTakeableItem(item);
+		RoomController.addTakeableItem(item);
 		
 	}
 

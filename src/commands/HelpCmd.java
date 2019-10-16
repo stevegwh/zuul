@@ -2,9 +2,9 @@ package commands;
 
 import zuul.Output;
 
-public class Help implements Command{
+public class HelpCmd implements Command{
 
-	public Help() {
+	public HelpCmd() {
 	}
 
 	public void printCommands() {

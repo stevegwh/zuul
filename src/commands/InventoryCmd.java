@@ -6,7 +6,7 @@ import zuul.Inventory;
 import zuul.Output;
 import zuul.TakeableItem;
 
-public class Items implements Command {
+public class InventoryCmd implements Command {
 
 	public void execute(String[] args) {
 		ArrayList<TakeableItem> inventory = Inventory.getInventory();
@@ -23,7 +23,7 @@ public class Items implements Command {
 		
 	}
 
-	public Items() {
+	public InventoryCmd() {
 		super();
 	}
 }
