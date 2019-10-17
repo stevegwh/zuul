@@ -30,11 +30,7 @@ public class GoCmd implements Command {
 	
 	@SuppressWarnings("unused")
 	private static void removeGoSentence(String toRemove) {
-		for(String sentence : sentences) {
-			if(sentence.equals(toRemove)) {
-				sentences.remove(sentence);
-			}
-		}
+		sentences.removeIf((e) -> e.equals(toRemove));
 	}
 	
 	public void execute(String[] args) {

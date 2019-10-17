@@ -6,6 +6,7 @@ import zuul.InventoryController;
 import zuul.Output;
 import zuul.RoomController;
 import zuul.TakeableItem;
+import zuul.ZuulErrorHandler;
 
 // TODO: Could be cleaner
 public class TakeCmd implements Command {
@@ -36,7 +37,7 @@ public class TakeCmd implements Command {
 			}
 		}
 
-		Output.println("Couldn't find that.");
+		ZuulErrorHandler.cantFind(args[1]);
 	}
 
 	public TakeCmd() {

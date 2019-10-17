@@ -3,8 +3,8 @@ package commands;
 import org.json.simple.JSONObject;
 
 import zuul.InteractableItem;
-import zuul.Output;
 import zuul.RoomController;
+import zuul.ZuulErrorHandler;
 
 public class InvestigateCmd implements Command {
 	@Override
@@ -19,12 +19,6 @@ public class InvestigateCmd implements Command {
 			item.onInvestigate();
 			return;
 		}
-		Output.println("Couldn't find that.");
+		ZuulErrorHandler.cantFind(args[1]);
 	}
-
-	public InvestigateCmd() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 }

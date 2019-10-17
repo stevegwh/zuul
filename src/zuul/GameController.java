@@ -35,9 +35,10 @@ public class GameController {
     }
     
     private void updateActors() {
-		for(String actor : actors.keySet()) {
-			actors.get(actor).update();
-		}
+//		for(String actor : actors.keySet()) {
+//			actors.get(actor).update();
+//		}
+    	actors.get("Barry").move();
     }
     
     public static NPC getActor(String actorName) {
@@ -46,13 +47,13 @@ public class GameController {
 
 	public void start() {
 		while(isRunning) {
+			updateActors();
 			Output.printSeperator();
 			RoomController.printDescription();
 			Output.printf(">> ");
 			String[] inputArray = inputHandler.parseInput(inputHandler.getInput(), MAX_COMMAND_LENGTH);
 			Output.printSeperator();
 			commandHandler.handleCommand(inputArray);
-			updateActors();
 		}
 	}
 

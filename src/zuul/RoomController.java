@@ -69,20 +69,26 @@ public final class RoomController {
 		((JSONArray) currentRoomJSON.get("interactableItems")).add(toAdd);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public static JSONArray getActorsInRoom(String roomName) {
+		JSONArray room = (JSONArray) jsonHandler.getField(roomName).get("actorsInRoom");
+		if(room == null) {
+			jsonHandler.getField(roomName).put("actorsInRoom", new JSONArray());
+			getActorsInRoom(roomName); // TODO: potential infinite loop
+		}
+		return room;
+	}
+	
 	// Need to fix this and then make the NPC call this at random
 	@SuppressWarnings("unchecked")
-	public static void moveActor(NPC actor, String destination) {
-		JSONObject destinationJSON = jsonHandler.getField(destination);
-		JSONArray destinationActorList = (JSONArray) destinationJSON.get("actorsInRoom");
-//		// If there isn't an array of actors in destination then make one
-//		if(destinationActorList == null) {
-//			destinationJSON.put("actorsInRoom", new JSONArray());
-//			destinationActorList = (JSONArray) destinationJSON.get("actorsInRoom"); //TODO: Not sure if this is necessary
-//		}
-//		// Add to destination array
-		destinationActorList.add(actor.getName());
-		// TODO: Get actor's previous location's JSONObject
-//		// TODO: Remove actor from array in previous room's JSON
+	public static void moveActorToRoom(NPC actor, JSONArray destination) {
+		destination.add(actor.getName());
+		// This assumes the NPC is always in the same room as the player. Needs to have its own
+		// currentLocation that you update instead
+		JSONArray currentRoom = (JSONArray) currentRoomJSON.get("actorsInRoom");
+		if(currentRoom != null) {
+			currentRoom.remove(actor.getName());
+		}
 	}
 
 	public static boolean hasTakeableItems() {

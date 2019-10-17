@@ -2,6 +2,7 @@ package npc;
 
 import zuul.InputHandler;
 import zuul.Output;
+import zuul.RoomController;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,7 +12,6 @@ import jsonDataHandler.JSONDataHandler;
 public abstract class NPC {
 	private JSONObject json;
 	private String name;
-	private String currentLocation;
 
 	private String getUserChoice() {
 		InputHandler inputHandler = new InputHandler();
@@ -36,13 +36,15 @@ public abstract class NPC {
 		//RoomController.moveActor(this, "room2"); TODO: Should moveActor be part of this class or RoomLoader?
 	}
 	
+	public void move() {
+		JSONArray room = RoomController.getActorsInRoom("room2");
+		RoomController.moveActorToRoom(this, room);
+	}
+	
 	public void printDialog() {
 		JSONArray dialogOptions = (JSONArray) json.get("dialogOptions");
-		int i = 1;
-		for(Object option : dialogOptions) {
-			option = (String) option;
-			Output.println(Integer.toString(i) + ". " + option);
-			i++;
+		for(int i = 0, len = dialogOptions.size(); i < len ; i++) {
+			Output.println(Integer.toString(i + 1) + ". " + dialogOptions.get(i));
 		}
 		Output.printSeperator();
 	}
@@ -50,10 +52,6 @@ public abstract class NPC {
 
 	public void onInvestigate() {
 		Output.println("You see " + name); //TODO: Could add a more in-depth description of people.
-	}
-
-	public String getCurrentLocation() {
-		return currentLocation;
 	}
 	
 	public String getValidItem() {
@@ -72,7 +70,6 @@ public abstract class NPC {
 	public NPC(String name, String currentLocation) {
 		this.name = name; // Not necessary for json load
 		loadJSON(name);
-		this.currentLocation = currentLocation;
 	}
 
 

@@ -8,10 +8,12 @@ import zuul.InventoryController;
 import zuul.Output;
 import zuul.RoomController;
 import zuul.TakeableItem;
+import zuul.ZuulErrorHandler;
 
 public class UseCmd implements Command {
 	
 	// Updates the interactableItem's JSONObject to disable interactivity and give a different description after use
+	@SuppressWarnings("unchecked")
 	private void updateJSON(String interactableItem, JSONObject interactableItemObj) {
 		// Create a new object to erase the old one
 		JSONObject toPush = new JSONObject();
@@ -21,7 +23,6 @@ public class UseCmd implements Command {
 		// Remove old object data and add new
 		RoomController.removeInteractableItem(interactableItemObj);
 		RoomController.addInteractableItem(toPush);
-		// TODO: remove item from user's inventory if it is perishable on use or not
 	}
 	
 	private void updateInventory(String itemName) {
@@ -63,15 +64,15 @@ public class UseCmd implements Command {
 					}
 					return;
 				} else {
-					Output.println("Sorry, you can't do that");
+					ZuulErrorHandler.invalidCommand();
 					return;
 				}
 			}
 		} else {
-			Output.println("Invalid command");
+			ZuulErrorHandler.invalidCommand();
 			
 		}
-		Output.println("Couldn't find " + interactableItem);
+		ZuulErrorHandler.cantFind(interactableItem);
 	}
 }
 
