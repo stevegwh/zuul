@@ -16,7 +16,8 @@ public class InventoryController {
 	}
 
 	public static ArrayList<TakeableItem> getInventory() { //TODO: use reflection to return clone
-		return inventory;
+		ArrayList<TakeableItem> invClone = (ArrayList<TakeableItem>) inventory.clone();
+		return invClone;
 	}
 
 	public static void addItem(TakeableItem item) {
