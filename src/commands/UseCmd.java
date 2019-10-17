@@ -4,7 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import zuul.InteractableItem;
-import zuul.Inventory;
+import zuul.InventoryController;
 import zuul.Output;
 import zuul.RoomController;
 import zuul.TakeableItem;
@@ -25,9 +25,9 @@ public class UseCmd implements Command {
 	}
 	
 	private void updateInventory(String itemName) {
-		TakeableItem item = Inventory.getItem(itemName);
+		TakeableItem item = InventoryController.getItem(itemName);
 		if(item.isPerishable()) {
-			Inventory.removeItem(item);
+			InventoryController.removeItem(item);
 		}
 		
 	}
@@ -36,7 +36,7 @@ public class UseCmd implements Command {
 	public void execute(String[] args) {
 		String itemToUse = args[1];
 		String interactableItem = args[3];
-		if (!Inventory.checkIfExists(itemToUse)) {
+		if (!InventoryController.checkIfExists(itemToUse)) {
 			Output.println("You do not have '" + itemToUse + "' in your inventory");
 			return;
 		}

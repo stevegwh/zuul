@@ -1,6 +1,6 @@
 package commands;
 
-import zuul.Inventory;
+import zuul.InventoryController;
 import zuul.Output;
 import zuul.RoomController;
 import zuul.TakeableItem;
@@ -14,14 +14,14 @@ public class DropCmd implements Command {
 	@Override
 	public void execute(String[] args) {
 		String toDrop = args[1];
-		if(!Inventory.checkIfExists(toDrop)) {
+		if(!InventoryController.checkIfExists(toDrop)) {
 			Output.println("You aren't carrying a " + toDrop);
 			return;
 		}
-		TakeableItem item = Inventory.getItem(toDrop);
+		TakeableItem item = InventoryController.getItem(toDrop);
 		Output.println("You dropped " + toDrop);
-		Inventory.setWeight(-item.getWeight());
-		Inventory.removeItem(item);
+		InventoryController.setWeight(-item.getWeight());
+		InventoryController.removeItem(item);
 		RoomController.addTakeableItem(item);
 		
 	}

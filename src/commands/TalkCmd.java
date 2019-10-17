@@ -1,9 +1,9 @@
 package commands;
 
 import zuul.GameController;
+import zuul.Output;
 import zuul.RoomController;
 
-import java.lang.reflect.InvocationTargetException;
 
 import npc.NPC;
 
@@ -11,11 +11,19 @@ public class TalkCmd implements Command {
 
 	@Override
 	public void execute(String[] args) {
-		// TODO: Check preposition of args[1]
-		String actorName = args[2]; // talk[0] to[1] Barry[2]
-		if(RoomController.hasActor(actorName)) {
-			NPC actor = GameController.getActor(actorName);
-			actor.onTalk();
+		String preposition = args[1];
+		if(preposition.equals("to") || preposition.equals("with")) {
+			String actorName = args[2]; // talk[0] to[1] Barry[2]
+			actorName = actorName.substring(0, 1).toUpperCase() + actorName.substring(1).toLowerCase();
+			if(RoomController.hasActor(actorName)) {
+				NPC actor = GameController.getActor(actorName);
+				actor.onTalk();
+			} else {
+				Output.println("Can't find '" + actorName + "' in the room!");
+			}
+		} else {
+			Output.println("Invalid command");
+			return;
 		}
 	}
 }

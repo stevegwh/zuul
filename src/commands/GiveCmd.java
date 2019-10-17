@@ -2,7 +2,7 @@ package commands;
 
 import npc.NPC;
 import zuul.GameController;
-import zuul.Inventory;
+import zuul.InventoryController;
 import zuul.Output;
 import zuul.TakeableItem;
 
@@ -14,18 +14,22 @@ public class GiveCmd implements Command{
 
 	@Override
 	public void execute(String[] args) {
-		// TODO: Verify
-		String itemName = args[1]; // give x
-		String actorName = args[3]; // to x
-		if(Inventory.checkIfExists(itemName)) {
-			TakeableItem takeableItem = Inventory.getItem(itemName);
+		String preposition = args[2];
+		if(!preposition.equals("to")) {
+			Output.println("Invalid command");
+			return;
+		}
+		String itemName = args[1];
+		String actorName = args[3];
+		if(InventoryController.checkIfExists(itemName)) {
+			TakeableItem takeableItem = InventoryController.getItem(itemName);
 			NPC npc = GameController.getActor(actorName);
 			if(!npc.onGive(takeableItem.getName())) {
 				Output.println(npc.getName() + " didn't seem to want the " + itemName);
 			} else {
 				if(takeableItem.isPerishable()) {
-					Inventory.setWeight(takeableItem.getWeight());
-					Inventory.removeItem(takeableItem);
+					InventoryController.setWeight(takeableItem.getWeight());
+					InventoryController.removeItem(takeableItem);
 					Output.println(itemName + " was removed from your inventory"); // TODO: add this to remove item method in Inventory
 				}
 			}
