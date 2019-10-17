@@ -30,7 +30,6 @@ public class GiveCmd implements Command{
 				if(takeableItem.isPerishable()) {
 					InventoryController.setWeight(takeableItem.getWeight());
 					InventoryController.removeItem(takeableItem);
-					Output.println(itemName + " was removed from your inventory"); // TODO: add this to remove item method in Inventory
 				}
 			}
 		} else {

@@ -2,14 +2,14 @@ package commands;
 
 import java.util.ArrayList;
 
-import zuul.Inventory;
+import zuul.InventoryController;
 import zuul.Output;
 import zuul.TakeableItem;
 
 public class InventoryCmd implements Command {
 
 	public void execute(String[] args) {
-		ArrayList<TakeableItem> inventory = Inventory.getInventory();
+		ArrayList<TakeableItem> inventory = InventoryController.getInventory();
 		if(inventory.size() == 0) {
 			Output.println("You do not currently have anything in your inventory");
 		} else {
