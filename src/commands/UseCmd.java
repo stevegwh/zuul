@@ -32,38 +32,44 @@ public class UseCmd implements Command {
 		
 	}
 
+	// TODO: Messy
 	@Override
 	public void execute(String[] args) {
 		String itemToUse = args[1];
 		String interactableItem = args[3];
-		if (!InventoryController.checkIfExists(itemToUse)) {
-			Output.println("You do not have '" + itemToUse + "' in your inventory");
-			return;
-		}
-		if (RoomController.hasInteractableItems()) {
-			// Get the JSONObject for the interactableItem the user has requested if it exists
-			JSONObject obj = RoomController.ifExistsInArrayReturnObj(interactableItem, "interactableItems");
-			if (obj != null && obj.get("onUse") != null) { // Make sure it exists *and* that it can be acted upon with onUse
-				String name = (String) obj.get("name");
-				String validItem = (String) obj.get("validItem"); //TODO: poor variable name
-				// Get the array that specifies what method to call when InteractableItem is used
-				JSONArray onUse = (JSONArray) obj.get("onUse");
-				//convert JSONArray to String[] to make it more conventional to work with
-				String[] itemMethodArgs = new String[onUse.size()];
-				itemMethodArgs = (String[]) onUse.toArray(itemMethodArgs);
-				// get method name for InteractableItem onUse method
-				InteractableItem item = new InteractableItem(name, validItem);
-				// Attempt to execute onUse() of InteractableItem
-				if (item.onUse(itemToUse, itemMethodArgs)) {
-					// If true overwrite the JSONObject for InteractableItem
-					updateJSON(interactableItem, obj);
-					updateInventory(itemToUse);
-				}
-				return;
-			} else {
-				Output.println("Sorry, you can't do that");
+		if(args[2].equals("on") || args[2].equals("with")) {
+			if (!InventoryController.checkIfExists(itemToUse)) {
+				Output.println("You do not have '" + itemToUse + "' in your inventory");
 				return;
 			}
+			if (RoomController.hasInteractableItems()) {
+				// Get the JSONObject for the interactableItem the user has requested if it exists
+				JSONObject obj = RoomController.ifExistsInArrayReturnObj(interactableItem, "interactableItems");
+				if (obj != null && obj.get("onUse") != null) { // Make sure it exists *and* that it can be acted upon with onUse
+					String name = (String) obj.get("name");
+					String validItem = (String) obj.get("validItem"); //TODO: poor variable name
+					// Get the array that specifies what method to call when InteractableItem is used
+					JSONArray onUse = (JSONArray) obj.get("onUse");
+					//convert JSONArray to String[] to make it more conventional to work with
+					String[] itemMethodArgs = new String[onUse.size()];
+					itemMethodArgs = (String[]) onUse.toArray(itemMethodArgs);
+					// get method name for InteractableItem onUse method
+					InteractableItem item = new InteractableItem(name, validItem);
+					// Attempt to execute onUse() of InteractableItem
+					if (item.onUse(itemToUse, itemMethodArgs)) {
+						// If true overwrite the JSONObject for InteractableItem
+						updateJSON(interactableItem, obj);
+						updateInventory(itemToUse);
+					}
+					return;
+				} else {
+					Output.println("Sorry, you can't do that");
+					return;
+				}
+			}
+		} else {
+			Output.println("Invalid command");
+			
 		}
 		Output.println("Couldn't find " + interactableItem);
 	}

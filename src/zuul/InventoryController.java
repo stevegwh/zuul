@@ -15,9 +15,9 @@ public class InventoryController {
 		totalWeight += weight;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static ArrayList<TakeableItem> getInventory() { //TODO: use reflection to return clone
-		ArrayList<TakeableItem> invClone = (ArrayList<TakeableItem>) inventory.clone();
-		return invClone;
+		return (ArrayList<TakeableItem>) inventory.clone();
 	}
 
 	public static void addItem(TakeableItem item) {
@@ -30,32 +30,17 @@ public class InventoryController {
 	}
 
 	public static TakeableItem getItem(String itemName) {
-		for(TakeableItem takeableItem : inventory) {
-			if(takeableItem.getName().contentEquals(itemName)) {
-				return takeableItem;
-			}
-		}
-		return null;
+		return inventory.stream().filter(o -> (o).getName().equals(itemName)).findFirst().orElse(null);
 	}
 
 	public static boolean checkIfExists(String itemToCheck) {
-		if (inventory.size() == 0) {
-			return false;
-		}
-		for(TakeableItem item : inventory) {
-			String name = item.getName();
-			if(name.equals(itemToCheck)) {
-				return true;
-			}
-		}
-		return false;
+		if (inventory.size() == 0) {return false;}
+		TakeableItem item = inventory.stream().filter(o -> (o).getName().equals(itemToCheck)).findFirst().orElse(null);
+		return item != null;
 	}
 
 	public static boolean overWeightLimit(int weight) {
-		if(totalWeight + weight > WEIGHT_LIMIT) {
-			return true;
-		}
-		return false;
+		return totalWeight + weight > WEIGHT_LIMIT;
 	}
 
 	static {

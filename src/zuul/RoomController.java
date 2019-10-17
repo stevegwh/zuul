@@ -1,7 +1,5 @@
 package zuul;
 
-import java.util.ArrayList;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -19,13 +17,15 @@ public final class RoomController {
 	public static String getExit(String exit) {
 		return (String) ((JSONObject) currentRoomJSON.get("exits")).get(exit);
 	}
-
-	// TODO: Bad practice to return private array like this as it gives full access to a private field.
-	public static JSONObject getAllExits() {
-		return (JSONObject) currentRoomJSON.get("exits");
+	
+	@SuppressWarnings("unchecked")
+	public static void addExit(String direction, String destination) {
+		JSONObject exits = (JSONObject) currentRoomJSON.get("exits");
+		exits.put(direction, destination);
 	}
 
 	//TODO: awful. Replace.
+	@SuppressWarnings("unchecked")
 	public static JSONObject ifExistsInArrayReturnObj(String toCheck, String nameOfArr) {
 		JSONArray arr = nameOfArr == "takeableItems" ? (JSONArray) currentRoomJSON.get("takeableItems") : 
 										(JSONArray) currentRoomJSON.get("interactableItems");
@@ -33,13 +33,7 @@ public final class RoomController {
 			System.out.println("Room doesn't have " + nameOfArr + " as an array");
 			return null;
 		}
-		for (Object element : arr) {
-			JSONObject obj = (JSONObject) element;
-			if (toCheck.equals(obj.get("name"))) {
-				return obj;
-			}
-		}
-		return null;
+		return (JSONObject) arr.stream().filter(o -> ((JSONObject) o).get("name").equals(toCheck)).findFirst().orElse(null);
 	}
 
 	public static void printDescription() {
@@ -55,16 +49,14 @@ public final class RoomController {
 	}
 
 	// Converts TakeableItem to JSONObject and adds it to takeableItems
+	@SuppressWarnings("unchecked")
 	public static void addTakeableItem(TakeableItem toAdd) {
 		JSONObject itemJSON = new JSONObject();
 		itemJSON.put("name", toAdd.getName());
-		String weight = String.valueOf(toAdd.getWeight());
-		itemJSON.put("weight", weight);
+		itemJSON.put("weight",String.valueOf(toAdd.getWeight()));
 		// if the JSONObject for this room doesn't have JSONArray takeableObjects then we initialize it here and add it to the json file
-		if(!hasTakeableItems()) { //TODO: Maybe you should always initalize takeableItems/interactableItems instead of doing it here if needed
-			JSONArray takeableItems = new JSONArray();
-			currentRoomJSON.put("takeableItems", takeableItems);
-		}
+		//TODO: Maybe you should always initalize takeableItems/interactableItems instead of doing it here if needed
+		if(!hasTakeableItems()) {currentRoomJSON.put("takeableItems", new JSONArray());}
 		((JSONArray) currentRoomJSON.get("takeableItems")).add(itemJSON);
 	}
 
@@ -72,11 +64,13 @@ public final class RoomController {
 		((JSONArray) currentRoomJSON.get("interactableItems")).remove(toRemove);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void addInteractableItem(JSONObject toAdd) {
 		((JSONArray) currentRoomJSON.get("interactableItems")).add(toAdd);
 	}
 	
 	// Need to fix this and then make the NPC call this at random
+	@SuppressWarnings("unchecked")
 	public static void moveActor(NPC actor, String destination) {
 		JSONObject destinationJSON = jsonHandler.getField(destination);
 		JSONArray destinationActorList = (JSONArray) destinationJSON.get("actorsInRoom");
@@ -99,15 +93,8 @@ public final class RoomController {
 		return currentRoomJSON.get("interactableItems") != null;
 	}
 	public static boolean hasActor(String actorName) {
-		// TODO: lots of casting
 		JSONArray actors = (JSONArray) currentRoomJSON.get("actorsInRoom");
-		for(Object actor : actors) {
-			actor = (String) actor;
-			if(actor.equals(actorName)) {
-				return true;
-			}
-		}
-		return false;
+		return actors.indexOf(actorName) >= 0;
 	}
 
 	static {
