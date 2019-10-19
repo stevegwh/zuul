@@ -24,7 +24,7 @@ public class GiveCmd implements Command{
 		if(InventoryController.checkIfExists(itemName)) {
 			TakeableItem takeableItem = InventoryController.getItem(itemName);
 			NPC npc = GameController.getActor(actorName);
-			if(!npc.onGive(takeableItem.getName())) {
+			if(!npc.onGive(takeableItem.getName())) { // TODO: problem?
 				Output.println(npc.getName() + " didn't seem to want the " + itemName);
 			} else {
 				if(takeableItem.isPerishable()) {
