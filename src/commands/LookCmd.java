@@ -1,10 +1,14 @@
 package commands;
 
+import org.json.simple.JSONArray;
+
 import IO.OutputHandler;
+import zuul.Player;
 import zuul.RoomController;
 
+// TODO: Print interactableItems and takeableItems
 public class LookCmd implements Command {
-	
+	@SuppressWarnings("unchecked")
 	public void execute(String[] args) {
 		String lookDescription = RoomController.getLookDescription();
 		if (lookDescription != null) {
@@ -12,9 +16,12 @@ public class LookCmd implements Command {
 		} else {
 			OutputHandler.println("Nothing interesting to report");
 		}
-	}
-
-	public LookCmd() {
-		super();
+		JSONArray actors = RoomController.getActorsInRoom(Player.getLocation());
+		if(actors.size() > 0) {
+			OutputHandler.println("People in room: ");
+			actors.forEach((e) -> OutputHandler.println((String) e));
+		} else {
+			OutputHandler.println("Nobody in the room.");
+		}
 	}
 }

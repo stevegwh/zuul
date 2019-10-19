@@ -1,6 +1,6 @@
 package zuul;
 
-public class TakeableItem extends Item{
+public class TakeableItem {
 	private String name;
 	private int weight;
 	boolean perishable = false; //Decides if object should be deleted after use

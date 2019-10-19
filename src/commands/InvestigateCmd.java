@@ -2,7 +2,7 @@ package commands;
 
 import org.json.simple.JSONObject;
 
-import zuul.InteractableItem;
+import interactableItem.InteractableItem;
 import zuul.RoomController;
 import zuul.ZuulMessageHandler;
 

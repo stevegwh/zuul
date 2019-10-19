@@ -1,14 +1,13 @@
-package zuul;
+package interactableItem;
 
 import java.lang.reflect.InvocationTargetException;
 
 import IO.OutputHandler;
-import itemMethods.ItemMethod;
 
 // Class for any item in the game the player can interact with
 // These items get acted upon by the TakeableItem class
 // InteractableItems accept USE and INVESTIGATE commands
-public class InteractableItem extends Item{
+public class InteractableItem {
 	private String validItem;
 	private String descriptionOnInvestigate;
 	
@@ -34,7 +33,7 @@ public class InteractableItem extends Item{
 		methodName = methodName.substring(0,1).toUpperCase() + methodName.substring(1);
 		Object command = null;
 		try {
-			command = Class.forName("itemMethods." + methodName).getConstructor().newInstance();
+			command = Class.forName(this.getClass().getPackageName() + "." + methodName).getConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 			e.printStackTrace();

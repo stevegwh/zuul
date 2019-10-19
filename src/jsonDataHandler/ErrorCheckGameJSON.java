@@ -100,7 +100,7 @@ public class ErrorCheckGameJSON {
 		
 	}
 
-	// Makes sure any method specified in the onUse object is a valid class in the itemMethods package
+	// Makes sure any method specified in the onUse object is a valid class in the interactableItem package
 	private void validateOnUseMethods() {
 		
 	}

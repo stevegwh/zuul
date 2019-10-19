@@ -13,6 +13,9 @@ public final class RoomController {
 
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
+		OutputHandler.println((String) currentRoomJSON.get("description"));
+		printExits();
+		Player.setLocation(nextRoom);
 	}
 
 	public static String getExit(String exit) {
@@ -102,6 +105,12 @@ public final class RoomController {
 	public static boolean hasActor(String actorName) {
 		JSONArray actors = (JSONArray) currentRoomJSON.get("actorsInRoom");
 		return actors.indexOf(actorName) >= 0;
+	}
+	@SuppressWarnings("unchecked")
+	public static void printExits() {
+		JSONObject exits = (JSONObject) currentRoomJSON.get("exits");
+		OutputHandler.println("Exits: ");
+		exits.forEach((k, v) -> OutputHandler.println(ZuulTools.capitalize((String) k) + ": " + v));
 	}
 
 	static {

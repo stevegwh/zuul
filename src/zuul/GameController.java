@@ -52,7 +52,6 @@ public class GameController {
 		while(isRunning) {
 			updateActors();
 			ZuulMessageHandler.printSeperator();
-			RoomController.printDescription();
 			OutputHandler.printf(">> ");
 			String[] inputArray = inputHandler.getInput(MAX_COMMAND_LENGTH);
 			ZuulMessageHandler.printSeperator();

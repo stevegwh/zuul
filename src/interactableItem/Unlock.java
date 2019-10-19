@@ -1,4 +1,4 @@
-package itemMethods;
+package interactableItem;
 
 import IO.OutputHandler;
 import zuul.RoomController;

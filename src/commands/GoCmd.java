@@ -34,11 +34,11 @@ public class GoCmd implements Command {
 	}
 	
 	public void execute(String[] args) {
-		String direction = args[1];
+		String direction = args[1].toLowerCase();
 		String nextRoom = RoomController.getExit(direction);
 		if(nextRoom != null && isValidDirection(direction.toUpperCase())) {
 			// Just to add a bit of colour this grabs a random sentence from the array above.
-			int randNum = (int) Math.floor(((sentences.size() - 1) * Math.random()));
+			int randNum = (int) Math.floor(((sentences.size()) * Math.random()));
 			OutputHandler.println(sentences.get(randNum) + direction.toLowerCase());
 			RoomController.getNewRoom(nextRoom);
 		} else {

@@ -4,7 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import IO.OutputHandler;
-import zuul.InteractableItem;
+import interactableItem.InteractableItem;
 import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;
