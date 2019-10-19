@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 
 import zuul.InteractableItem;
 import zuul.RoomController;
-import zuul.ZuulErrorHandler;
+import zuul.ZuulMessageHandler;
 
 public class InvestigateCmd implements Command {
 	@Override
@@ -19,6 +19,6 @@ public class InvestigateCmd implements Command {
 			item.onInvestigate();
 			return;
 		}
-		ZuulErrorHandler.cantFind(args[1]);
+		ZuulMessageHandler.cantFind(args[1]);
 	}
 }

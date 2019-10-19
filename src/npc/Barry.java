@@ -1,6 +1,6 @@
 package npc;
 
-import zuul.Output;
+import IO.OutputHandler;
 
 public class Barry extends NPC {
     private static Barry SINGLE_INSTANCE = null;
@@ -24,7 +24,7 @@ public class Barry extends NPC {
 	public boolean onGive(String toCompare) {
 		String validItem = super.getValidItem();
 		if(toCompare.contentEquals(validItem)) {
-			Output.println("Oh, thank you for the " + validItem);
+			OutputHandler.println("Oh, thank you for the " + validItem);
 			return true;
 		}
 		return false;

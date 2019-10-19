@@ -2,6 +2,7 @@ package zuul;
 
 import java.lang.reflect.InvocationTargetException;
 
+import IO.OutputHandler;
 import itemMethods.ItemMethod;
 
 // Class for any item in the game the player can interact with
@@ -19,13 +20,13 @@ public class InteractableItem extends Item{
 			executeAction(args);
 			return true;
 		} else {
-			Output.println("That didn't seem to work.");
+			OutputHandler.println("That didn't seem to work.");
 			return false;
 		}
 	}
 	
 	public void onInvestigate() {
-		Output.println(descriptionOnInvestigate);
+		OutputHandler.println(descriptionOnInvestigate);
 	}
 
 	void executeAction(String[] args) {

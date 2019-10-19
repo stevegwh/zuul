@@ -3,6 +3,7 @@ package zuul;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import IO.OutputHandler;
 import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
 
@@ -37,7 +38,7 @@ public final class RoomController {
 	}
 
 	public static void printDescription() {
-		Output.println((String) currentRoomJSON.get("description"));
+		OutputHandler.println((String) currentRoomJSON.get("description"));
 	}
 	
 	public static String getLookDescription() {

@@ -1,6 +1,6 @@
 package commands;
 
-import zuul.Output;
+import IO.OutputHandler;
 
 public class HelpCmd implements Command{
 
@@ -9,13 +9,13 @@ public class HelpCmd implements Command{
 
 	public void printCommands() {
 	    for (CommandWords c : CommandWords.values()) {
-	    	Output.println(c.name());
+	    	OutputHandler.println(c.name());
 	    }
 	}
 
 	@Override
 	public void execute(String[] inputArray) {
-		Output.println("Valid commands are: ");
+		OutputHandler.println("Valid commands are: ");
 		printCommands();
 	}
 }

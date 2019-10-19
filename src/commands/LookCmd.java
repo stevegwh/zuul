@@ -1,6 +1,6 @@
 package commands;
 
-import zuul.Output;
+import IO.OutputHandler;
 import zuul.RoomController;
 
 public class LookCmd implements Command {
@@ -8,9 +8,9 @@ public class LookCmd implements Command {
 	public void execute(String[] args) {
 		String lookDescription = RoomController.getLookDescription();
 		if (lookDescription != null) {
-			Output.println(lookDescription);
+			OutputHandler.println(lookDescription);
 		} else {
-			Output.println("Nothing interesting to report");
+			OutputHandler.println("Nothing interesting to report");
 		}
 	}
 

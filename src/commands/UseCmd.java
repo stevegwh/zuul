@@ -3,12 +3,12 @@ package commands;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import IO.OutputHandler;
 import zuul.InteractableItem;
 import zuul.InventoryController;
-import zuul.Output;
 import zuul.RoomController;
 import zuul.TakeableItem;
-import zuul.ZuulErrorHandler;
+import zuul.ZuulMessageHandler;
 
 public class UseCmd implements Command {
 	
@@ -40,7 +40,7 @@ public class UseCmd implements Command {
 		String interactableItem = args[3];
 		if(args[2].equals("on") || args[2].equals("with")) {
 			if (!InventoryController.checkIfExists(itemToUse)) {
-				Output.println("You do not have '" + itemToUse + "' in your inventory");
+				OutputHandler.println("You do not have '" + itemToUse + "' in your inventory");
 				return;
 			}
 			if (RoomController.hasInteractableItems()) {
@@ -64,15 +64,15 @@ public class UseCmd implements Command {
 					}
 					return;
 				} else {
-					ZuulErrorHandler.invalidCommand();
+					ZuulMessageHandler.invalidCommand();
 					return;
 				}
 			}
 		} else {
-			ZuulErrorHandler.invalidCommand();
+			ZuulMessageHandler.invalidCommand();
 			
 		}
-		ZuulErrorHandler.cantFind(interactableItem);
+		ZuulMessageHandler.cantFind(interactableItem);
 	}
 }
 

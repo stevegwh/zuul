@@ -2,6 +2,8 @@ package zuul;
 
 import java.util.HashMap;
 
+import IO.InputHandler;
+import IO.OutputHandler;
 import npc.Barry;
 import npc.NPC;
 
@@ -14,7 +16,7 @@ public class GameController {
 	private static boolean isRunning = true;
 
 	public static void quit() {
-		Output.println("Thanks for playing!");
+		OutputHandler.println("Thanks for playing!");
 		isRunning = false;
 	}
 	
@@ -45,14 +47,15 @@ public class GameController {
     	return actors.get(actorName);
     }
 
+    // TODO: Messy
 	public void start() {
 		while(isRunning) {
 			updateActors();
-			Output.printSeperator();
+			ZuulMessageHandler.printSeperator();
 			RoomController.printDescription();
-			Output.printf(">> ");
-			String[] inputArray = inputHandler.parseInput(inputHandler.getInput(), MAX_COMMAND_LENGTH);
-			Output.printSeperator();
+			OutputHandler.printf(">> ");
+			String[] inputArray = inputHandler.getInput(MAX_COMMAND_LENGTH);
+			ZuulMessageHandler.printSeperator();
 			commandHandler.handleCommand(inputArray);
 		}
 	}

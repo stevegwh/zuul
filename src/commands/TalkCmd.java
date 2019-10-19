@@ -1,11 +1,9 @@
 package commands;
 
-import zuul.ZuulErrorHandler;
+import zuul.ZuulMessageHandler;
 import zuul.GameController;
-import zuul.Output;
 import zuul.RoomController;
-
-
+import IO.OutputHandler;
 import npc.NPC;
 
 public class TalkCmd implements Command {
@@ -20,10 +18,10 @@ public class TalkCmd implements Command {
 				NPC actor = GameController.getActor(actorName);
 				actor.onTalk();
 			} else {
-				ZuulErrorHandler.cantFind(actorName);
+				ZuulMessageHandler.cantFind(actorName);
 			}
 		} else {
-			ZuulErrorHandler.invalidCommand();
+			ZuulMessageHandler.invalidCommand();
 			return;
 		}
 	}

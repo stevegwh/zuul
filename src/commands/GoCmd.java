@@ -2,7 +2,7 @@ package commands;
 
 import java.util.ArrayList;
 
-import zuul.Output;
+import IO.OutputHandler;
 import zuul.RoomController;
 
 public class GoCmd implements Command {
@@ -39,10 +39,10 @@ public class GoCmd implements Command {
 		if(nextRoom != null && isValidDirection(direction.toUpperCase())) {
 			// Just to add a bit of colour this grabs a random sentence from the array above.
 			int randNum = (int) Math.floor(((sentences.size() - 1) * Math.random()));
-			Output.println(sentences.get(randNum) + direction.toLowerCase());
+			OutputHandler.println(sentences.get(randNum) + direction.toLowerCase());
 			RoomController.getNewRoom(nextRoom);
 		} else {
-			Output.println("Can't go that way");
+			OutputHandler.println("Can't go that way");
 		}
 	}
 

@@ -1,12 +1,13 @@
 package npc;
 
-import zuul.InputHandler;
-import zuul.Output;
 import zuul.RoomController;
+import zuul.ZuulMessageHandler;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import IO.InputHandler;
+import IO.OutputHandler;
 import jsonDataHandler.JSONDataHandler;
 
 public abstract class NPC {
@@ -15,8 +16,8 @@ public abstract class NPC {
 
 	private String getUserChoice() {
 		InputHandler inputHandler = new InputHandler();
-		Output.printf(">> ");
-		String[] inputArray = inputHandler.parseInput(inputHandler.getInput(), 1);
+		OutputHandler.printf(">> ");
+		String[] inputArray = inputHandler.getInput(1);
 		return inputArray[0];
 	}
 
@@ -29,7 +30,7 @@ public abstract class NPC {
 		String userChoice = getUserChoice();
 		int idx = Integer.parseInt(userChoice) - 1;
 		JSONArray dialogResponses = (JSONArray) json.get("dialogResponses");
-		Output.println((String) dialogResponses.get(idx));
+		OutputHandler.println((String) dialogResponses.get(idx));
 	}
 
 	public void update() {
@@ -44,14 +45,14 @@ public abstract class NPC {
 	public void printDialog() {
 		JSONArray dialogOptions = (JSONArray) json.get("dialogOptions");
 		for(int i = 0, len = dialogOptions.size(); i < len ; i++) {
-			Output.println(Integer.toString(i + 1) + ". " + dialogOptions.get(i));
+			OutputHandler.println(Integer.toString(i + 1) + ". " + dialogOptions.get(i));
 		}
-		Output.printSeperator();
+		ZuulMessageHandler.printSeperator();
 	}
 	
 
 	public void onInvestigate() {
-		Output.println("You see " + name); //TODO: Could add a more in-depth description of people.
+		OutputHandler.println("You see " + name); //TODO: Could add a more in-depth description of people.
 	}
 	
 	public String getValidItem() {

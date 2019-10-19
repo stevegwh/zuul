@@ -2,11 +2,11 @@ package commands;
 
 import org.json.simple.JSONObject;
 
+import IO.OutputHandler;
 import zuul.InventoryController;
-import zuul.Output;
 import zuul.RoomController;
 import zuul.TakeableItem;
-import zuul.ZuulErrorHandler;
+import zuul.ZuulMessageHandler;
 
 // TODO: Could be cleaner
 public class TakeCmd implements Command {
@@ -21,7 +21,7 @@ public class TakeCmd implements Command {
 				boolean perishable = obj.containsKey("perishable");
 				TakeableItem item = null;
 				if (!InventoryController.overWeightLimit(weight)) {
-					Output.println("You picked up " + toTake);
+					OutputHandler.println("You picked up " + toTake);
 					if(perishable) {
 						item = new TakeableItem(name, weight, true);
 					} else {
@@ -31,13 +31,13 @@ public class TakeCmd implements Command {
 					InventoryController.setWeight(weight);
 					RoomController.removeTakeableItem(obj);
 				} else {
-					Output.println("Sorry, this item is too heavy for you to carry. Try dropping something first");
+					OutputHandler.println("Sorry, this item is too heavy for you to carry. Try dropping something first");
 				}
 				return;
 			}
 		}
 
-		ZuulErrorHandler.cantFind(args[1]);
+		ZuulMessageHandler.cantFind(args[1]);
 	}
 
 	public TakeCmd() {
