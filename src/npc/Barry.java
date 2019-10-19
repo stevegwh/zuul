@@ -17,6 +17,8 @@ public class Barry extends NPC {
     }
     
 	private Barry() {
+		// TODO: Would be nice to read the json file for the location of the NPC, rather than setting it
+		// here and also in the roomData json
 		super("Barry", "room2");
 	}
 

@@ -78,20 +78,18 @@ public final class RoomController {
 		JSONArray room = (JSONArray) jsonHandler.getField(roomName).get("actorsInRoom");
 		if(room == null) {
 			jsonHandler.getField(roomName).put("actorsInRoom", new JSONArray());
-			getActorsInRoom(roomName); // TODO: potential infinite loop
+			room = (JSONArray) jsonHandler.getField(roomName).get("actorsInRoom");
 		}
 		return room;
 	}
 	
-	// Need to fix this and then make the NPC call this at random
+	// Need to make the NPC call this at random
 	@SuppressWarnings("unchecked")
 	public static void moveActorToRoom(NPC actor, JSONArray destination) {
-		destination.add(actor.getName());
-		// This assumes the NPC is always in the same room as the player. Needs to have its own
-		// currentLocation that you update instead
-		JSONArray currentRoom = (JSONArray) currentRoomJSON.get("actorsInRoom");
-		if(currentRoom != null) {
-			currentRoom.remove(actor.getName());
+		if(destination.indexOf(actor.getName()) < 0) {
+			destination.add(actor.getName());
+			JSONArray npcCurrentRoom = (JSONArray) jsonHandler.getField(actor.getCurrentLocation()).get("actorsInRoom");
+			npcCurrentRoom.remove(actor.getName());
 		}
 	}
 

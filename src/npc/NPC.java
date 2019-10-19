@@ -13,6 +13,7 @@ import jsonDataHandler.JSONDataHandler;
 public abstract class NPC {
 	private JSONObject json;
 	private String name;
+	private String currentLocation;
 
 	private String getUserChoice() {
 		InputHandler inputHandler = new InputHandler();
@@ -38,8 +39,9 @@ public abstract class NPC {
 	}
 	
 	public void move() {
-		JSONArray room = RoomController.getActorsInRoom("room2");
-		RoomController.moveActorToRoom(this, room);
+		// TODO: Eventually needs to be randomized by the movePath
+		JSONArray destinationRoom = RoomController.getActorsInRoom("room3");
+		RoomController.moveActorToRoom(this, destinationRoom);
 	}
 	
 	public void printDialog() {
@@ -62,6 +64,14 @@ public abstract class NPC {
 	public String getName() {
 		return name;
 	}
+
+	public String getCurrentLocation() {
+		return currentLocation;
+	}
+
+	public void setCurrentLocation(String currentLocation) {
+		this.currentLocation = currentLocation;
+	}
 	
 	private void loadJSON(String name) {
 		JSONDataHandler jsonHandler = new JSONDataHandler("res/npcData.json");
@@ -70,8 +80,10 @@ public abstract class NPC {
 
 	public NPC(String name, String currentLocation) {
 		this.name = name; // Not necessary for json load
+		this.setCurrentLocation(currentLocation);
 		loadJSON(name);
 	}
+
 
 
 
