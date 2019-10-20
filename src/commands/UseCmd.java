@@ -12,6 +12,8 @@ import zuul.ZuulMessageHandler;
 
 public class UseCmd implements Command {
 	
+	private int COMMAND_LENGTH = 4;
+	
 	// Updates the interactableItem's JSONObject to disable interactivity and give a different description after use
 	@SuppressWarnings("unchecked")
 	private void updateJSON(String interactableItem, JSONObject interactableItemObj) {
@@ -36,6 +38,16 @@ public class UseCmd implements Command {
 	// TODO: Messy
 	@Override
 	public void execute(String[] args) {
+		// MESSY AND ASSUMES IT WILL ALWAYS BE 4 (What about "use potion" which is len 2?)//////
+		if(args.length < COMMAND_LENGTH) {
+			ZuulMessageHandler.invalidCommand();
+			return;
+		}
+		if(args[1] == null || args[2] == null || args[3] == null ) {
+			ZuulMessageHandler.invalidCommand();
+			return;
+		}
+		///////////////////////////////////////////////////////////////
 		String itemToUse = args[1];
 		String interactableItem = args[3];
 		if(args[2].equals("on") || args[2].equals("with")) {
