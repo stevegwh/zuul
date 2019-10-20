@@ -11,9 +11,18 @@ public class InteractableItem {
 	private String validItem;
 	private String descriptionOnInvestigate;
 	
-	// itemToCheck is the name of the item the user wants to use on the object.
-	// Checks if this is the correct item and then executes the necessary action
-	// Example: InteractableItem is a door. validItem could be 'key'. executeAction() could be "unlock()"
+	/**
+	 * Checks itemToCheck against validItem and then executes the method specified in args.
+	 * Example: InteractableItem is a door. validItem could be 'key'. executeAction() could be "unlock()"
+	 * Example: args could contain ["Unlock", "north", "room3"] with index 0 being the method's name and
+	 * the indexes after being the parameters for that method.
+	 * Note: 'args' should be defined in the room's JsonObject under 'onUse', not passed in directly to this method.
+	 * Example: "onUse" : ["Unlock", "north", "room3"]
+	 * 
+	 * @param itemToCheck the name of the item the user wants to use on the object.
+	 * @param args the name and arguments of the method that will be called on the InteractableItem
+	 * @return
+	 */
 	public boolean onUse(String itemToCheck, String[] args) {
 		if(itemToCheck.equals(validItem)) {
 			executeAction(args);
