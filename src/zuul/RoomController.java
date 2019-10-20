@@ -13,7 +13,7 @@ public final class RoomController {
 
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
-		IOHandler.output.println((String) currentRoomJSON.get("description"));
+		printDescription();
 		printExits();
 		Player.setLocation(nextRoom);
 	}
@@ -39,7 +39,9 @@ public final class RoomController {
 	}
 
 	public static void printDescription() {
+		ZuulMessageHandler.printSeperator();
 		IOHandler.output.println((String) currentRoomJSON.get("description"));
+		ZuulMessageHandler.printSeperator();
 	}
 	
 	public static String getLookDescription() {
@@ -79,6 +81,12 @@ public final class RoomController {
 	}
 	
 	// Need to make the NPC call this at random
+	/** 
+	 * Updates the actorsInRoom field of the destination room and the room specified in the NPC's
+	 * currentLocation field.
+	 * @actor The NPC object.
+	 * @destination The actorsInRoom array of the destination room.
+	 */
 	public static void moveActorToRoom(NPC actor, JsonArray destination) {
 		if(destination.indexOf(actor.getName()) < 0) {
 			destination.add(actor.getName());

@@ -38,21 +38,17 @@ public class GameController {
 //		for(String actor : actors.keySet()) {
 //			actors.get(actor).update();
 //		}
-    	actors.get("Barry").move();
+    	actors.get("Barry").move("room3");
     }
     
     public static NPC getActor(String actorName) {
     	return actors.get(actorName);
     }
-
-    // TODO: Messy
+    
 	public void start() {
 		while(isRunning) {
 			updateActors();
-			ZuulMessageHandler.printSeperator();
-			IOHandler.output.printf(">> ");
 			String[] inputArray = IOHandler.input.getUserInput(MAX_COMMAND_LENGTH);
-			ZuulMessageHandler.printSeperator();
 			commandHandler.handleCommand(inputArray);
 		}
 	}

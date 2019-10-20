@@ -14,7 +14,7 @@ public abstract class NPC {
 	private String name;
 	private String currentLocation;
 
-	private String getUserChoice() {
+	private String getUserDialogChoice() {
 		IOHandler.output.printf(">> ");
 		String[] inputArray = IOHandler.input.getUserInput(1);
 		return inputArray[0];
@@ -26,7 +26,7 @@ public abstract class NPC {
 	// TODO: Validate input
 	public void onTalk() {
 		printDialog();
-		String userChoice = getUserChoice();
+		String userChoice = getUserDialogChoice();
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
 		IOHandler.output.println((String) dialogResponses.get(idx));
@@ -36,10 +36,16 @@ public abstract class NPC {
 		//RoomController.moveActor(this, "room2"); TODO: Should moveActor be part of this class or RoomLoader?
 	}
 	
-	public void move() {
+	/** 
+	 * Selects a location from the NPC's path field and calls RoomController's moveActorToRoom method
+	 * Updates NPC's currentLocation field to destinationRoomName
+	 * @destinationRoomName The name of the room you wish to move the NPC to.
+	 */
+	public void move(String destinationRoomName) {
 		// TODO: Eventually needs to be randomized by the movePath
-		JsonArray destinationRoom = RoomController.getActorsInRoom("room3");
+		JsonArray destinationRoom = RoomController.getActorsInRoom(destinationRoomName);
 		RoomController.moveActorToRoom(this, destinationRoom);
+		currentLocation = destinationRoomName;
 	}
 	
 	public void printDialog() {
@@ -51,24 +57,43 @@ public abstract class NPC {
 	}
 	
 
+	/** 
+	 * Specifies what should happen when the player calls 'investigate' on the NPC.
+	 */
 	public void onInvestigate() {
 		IOHandler.output.println("You see " + name); //TODO: Could add a more in-depth description of people.
 	}
 	
+	/**
+	 * validItem is the name TakeableItem that this NPC accepts.
+	 * For example, the NPC 'John' could accept the TakeableItem 'Gum'
+	 * Can return null if the NPC doesn't accept any TakeableItems.
+	 * Returns the name only, not the object itself.
+	 * @return the name of the TakeableItem that this NPC accepts.
+	 */
 	public String getValidItem() {
 		return (String) json.get("validItem");
 	}
 
+	/**
+	 * @return The name of this NPC.
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @return The current location of this NPC.
+	 */
 	public String getCurrentLocation() {
 		return currentLocation;
 	}
 
-	public void setCurrentLocation(String currentLocation) {
-		this.currentLocation = currentLocation;
+	/**
+	 * @param newLocation The new location for the NPC.
+	 */
+	public void setCurrentLocation(String newLocation) {
+		currentLocation = newLocation;
 	}
 	
 	private void loadJSON(String name) {

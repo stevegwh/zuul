@@ -11,6 +11,11 @@ import com.github.cliftonlabs.json_simple.Jsoner;
 public final class Parser {
 	private Object obj = new Object();
 
+	/**
+	 * Deserializes the JSON file
+	 * @param file Path of the JSON file
+	 * @return The deserialized JSON object
+	 */
     public Object generateData(String file) { //TODO: hacky
         try {
             obj = Jsoner.deserialize(new FileReader(file));
