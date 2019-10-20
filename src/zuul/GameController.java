@@ -2,7 +2,6 @@ package zuul;
 
 import java.util.HashMap;
 
-import IO.InputHandler;
 import IO.IOHandler;
 import npc.Barry;
 import npc.NPC;
@@ -10,7 +9,6 @@ import npc.NPC;
 public class GameController {
 	private static HashMap<String, NPC> actors = new HashMap<>();
 	private static GameController SINGLE_INSTANCE = null;
-	private InputHandler inputHandler;
 	private CommandHandler commandHandler;
 	private int MAX_COMMAND_LENGTH = 4;
 	private static boolean isRunning = true;
@@ -53,14 +51,13 @@ public class GameController {
 			updateActors();
 			ZuulMessageHandler.printSeperator();
 			IOHandler.output.printf(">> ");
-			String[] inputArray = inputHandler.getInput(MAX_COMMAND_LENGTH);
+			String[] inputArray = IOHandler.input.getUserInput(MAX_COMMAND_LENGTH);
 			ZuulMessageHandler.printSeperator();
 			commandHandler.handleCommand(inputArray);
 		}
 	}
 
 	GameController() {
-		inputHandler = new InputHandler();
 		commandHandler = new CommandHandler();
 		actors.put("Barry", Barry.getInstance());
 	}

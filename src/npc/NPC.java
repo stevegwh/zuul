@@ -6,7 +6,6 @@ import zuul.ZuulMessageHandler;
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import IO.InputHandler;
 import IO.IOHandler;
 import jsonDataHandler.JSONDataHandler;
 
@@ -16,9 +15,8 @@ public abstract class NPC {
 	private String currentLocation;
 
 	private String getUserChoice() {
-		InputHandler inputHandler = new InputHandler();
 		IOHandler.output.printf(">> ");
-		String[] inputArray = inputHandler.getInput(1);
+		String[] inputArray = IOHandler.input.getUserInput(1);
 		return inputArray[0];
 	}
 

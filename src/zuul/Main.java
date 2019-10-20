@@ -1,13 +1,13 @@
 package zuul;
 
-import IO.InitIO;
+import IO.IOHandler;
 //import jsonDataHandler.ErrorCheckGameJSON;
 
 public class Main {
 	public static void main(String[] args) {		
 		final boolean DEVELOPER_MODE = false;
 		
-		InitIO.setMode("Console");
+		IOHandler.setIOMode("Console");
 
 		if(DEVELOPER_MODE) {
 //			ErrorCheckGameJSON errorChecker = new ErrorCheckGameJSON();
