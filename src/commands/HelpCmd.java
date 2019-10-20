@@ -1,12 +1,12 @@
 package commands;
 
-import IO.OutputHandler;
+import IO.IOHandler;
 
 public class HelpCmd implements Command{
 
 	@Override
 	public void execute(String[] inputArray) {
-		OutputHandler.println("Valid commands are: ");
+		IOHandler.output.println("Valid commands are: ");
 		CommandWords.printAll();
 	}
 }

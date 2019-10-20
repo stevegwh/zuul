@@ -2,7 +2,7 @@ package zuul;
 
 import java.util.ArrayList;
 
-import IO.OutputHandler;
+import IO.IOHandler;
 
 public class InventoryController {
 	private static int totalWeight;
@@ -27,7 +27,7 @@ public class InventoryController {
 	}
 
 	public static void removeItem(TakeableItem item) {
-		OutputHandler.println(item.getName() + " was removed from your inventory");
+		IOHandler.output.println(item.getName() + " was removed from your inventory");
 		inventory.remove(item);
 	}
 

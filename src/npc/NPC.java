@@ -7,7 +7,7 @@ import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.InputHandler;
-import IO.OutputHandler;
+import IO.IOHandler;
 import jsonDataHandler.JSONDataHandler;
 
 public abstract class NPC {
@@ -17,7 +17,7 @@ public abstract class NPC {
 
 	private String getUserChoice() {
 		InputHandler inputHandler = new InputHandler();
-		OutputHandler.printf(">> ");
+		IOHandler.output.printf(">> ");
 		String[] inputArray = inputHandler.getInput(1);
 		return inputArray[0];
 	}
@@ -31,7 +31,7 @@ public abstract class NPC {
 		String userChoice = getUserChoice();
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
-		OutputHandler.println((String) dialogResponses.get(idx));
+		IOHandler.output.println((String) dialogResponses.get(idx));
 	}
 
 	public void update() {
@@ -47,14 +47,14 @@ public abstract class NPC {
 	public void printDialog() {
 		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
 		for(int i = 0, len = dialogOptions.size(); i < len ; i++) {
-			OutputHandler.println(Integer.toString(i + 1) + ". " + dialogOptions.get(i));
+			IOHandler.output.println(Integer.toString(i + 1) + ". " + dialogOptions.get(i));
 		}
 		ZuulMessageHandler.printSeperator();
 	}
 	
 
 	public void onInvestigate() {
-		OutputHandler.println("You see " + name); //TODO: Could add a more in-depth description of people.
+		IOHandler.output.println("You see " + name); //TODO: Could add a more in-depth description of people.
 	}
 	
 	public String getValidItem() {

@@ -2,7 +2,7 @@ package commands;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import IO.OutputHandler;
+import IO.IOHandler;
 import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;
@@ -21,7 +21,7 @@ public class TakeCmd implements Command {
 				boolean perishable = obj.containsKey("perishable");
 				TakeableItem item = null;
 				if (!InventoryController.overWeightLimit(weight)) {
-					OutputHandler.println("You picked up " + toTake);
+					IOHandler.output.println("You picked up " + toTake);
 					if(perishable) {
 						item = new TakeableItem(name, weight, true);
 					} else {
@@ -31,7 +31,7 @@ public class TakeCmd implements Command {
 					InventoryController.setWeight(weight);
 					RoomController.removeTakeableItem(obj);
 				} else {
-					OutputHandler.println("Sorry, this item is too heavy for you to carry. Try dropping something first");
+					IOHandler.output.println("Sorry, this item is too heavy for you to carry. Try dropping something first");
 				}
 				return;
 			}

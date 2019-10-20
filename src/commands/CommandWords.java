@@ -2,7 +2,7 @@ package commands;
 
 import java.util.ArrayList;
 
-import IO.OutputHandler;
+import IO.IOHandler;;
 
 public class CommandWords {
 	private static ArrayList<String> commands = new ArrayList<String>();
@@ -17,7 +17,7 @@ public class CommandWords {
 		return commands.indexOf(command) >= 0;
 	}
 	public static void printAll() {
-		commands.forEach((e) -> OutputHandler.println(e));
+		commands.forEach((e) -> IOHandler.output.println(e));
 	}
 	static {
 		commands.add("USE");

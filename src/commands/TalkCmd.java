@@ -3,7 +3,6 @@ package commands;
 import zuul.ZuulMessageHandler;
 import zuul.GameController;
 import zuul.RoomController;
-import IO.OutputHandler;
 import npc.NPC;
 
 public class TalkCmd implements Command {

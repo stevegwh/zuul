@@ -3,7 +3,7 @@ package zuul;
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import IO.OutputHandler;
+import IO.IOHandler;
 import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
 
@@ -13,7 +13,7 @@ public final class RoomController {
 
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
-		OutputHandler.println((String) currentRoomJSON.get("description"));
+		IOHandler.output.println((String) currentRoomJSON.get("description"));
 		printExits();
 		Player.setLocation(nextRoom);
 	}
@@ -39,7 +39,7 @@ public final class RoomController {
 	}
 
 	public static void printDescription() {
-		OutputHandler.println((String) currentRoomJSON.get("description"));
+		IOHandler.output.println((String) currentRoomJSON.get("description"));
 	}
 	
 	public static String getLookDescription() {
@@ -100,8 +100,8 @@ public final class RoomController {
 	}
 	public static void printExits() {
 		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
-		OutputHandler.println("Exits: ");
-		exits.forEach((k, v) -> OutputHandler.println(ZuulTools.capitalize((String) k) + ": " + v));
+		IOHandler.output.println("Exits: ");
+		exits.forEach((k, v) -> IOHandler.output.println(ZuulTools.capitalize((String) k) + ": " + v));
 	}
 
 	static {

@@ -2,7 +2,7 @@ package interactableItem;
 
 import java.lang.reflect.InvocationTargetException;
 
-import IO.OutputHandler;
+import IO.IOHandler;
 
 // Class for any item in the game the player can interact with
 // These items get acted upon by the TakeableItem class
@@ -19,13 +19,13 @@ public class InteractableItem {
 			executeAction(args);
 			return true;
 		} else {
-			OutputHandler.println("That didn't seem to work.");
+			IOHandler.output.println("That didn't seem to work.");
 			return false;
 		}
 	}
 	
 	public void onInvestigate() {
-		OutputHandler.println(descriptionOnInvestigate);
+		IOHandler.output.println(descriptionOnInvestigate);
 	}
 
 	void executeAction(String[] args) {

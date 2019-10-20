@@ -1,6 +1,6 @@
 package interactableItem;
 
-import IO.OutputHandler;
+import IO.IOHandler;
 import zuul.RoomController;
 
 public class Unlock implements ItemMethod {
@@ -9,6 +9,6 @@ public class Unlock implements ItemMethod {
 	public void execute(String[] args) {
 		// TODO: Check if these are valid directions and if the room exists
 		RoomController.addExit(args[1], args[2]);
-		OutputHandler.println("Door unlocked! Maybe...");
+		IOHandler.output.println("Door unlocked! Maybe...");
 	}
 }

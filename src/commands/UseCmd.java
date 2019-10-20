@@ -3,7 +3,7 @@ package commands;
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import IO.OutputHandler;
+import IO.IOHandler;
 import interactableItem.InteractableItem;
 import zuul.InventoryController;
 import zuul.RoomController;
@@ -51,7 +51,8 @@ public class UseCmd implements Command {
 		String interactableItem = args[3];
 		if(args[2].equals("on") || args[2].equals("with")) {
 			if (!InventoryController.checkIfExists(itemToUse)) {
-				OutputHandler.println("You do not have '" + itemToUse + "' in your inventory");
+				// TODO: Replace with ZuulMessageHandler
+				IOHandler.output.println("You do not have '" + itemToUse + "' in your inventory");
 				return;
 			}
 			if (RoomController.hasInteractableItems()) {

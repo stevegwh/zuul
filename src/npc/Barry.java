@@ -1,6 +1,6 @@
 package npc;
 
-import IO.OutputHandler;
+import IO.IOHandler;
 
 public class Barry extends NPC {
     private static Barry SINGLE_INSTANCE = null;
@@ -26,7 +26,7 @@ public class Barry extends NPC {
 	public boolean onGive(String toCompare) {
 		String validItem = super.getValidItem();
 		if(toCompare.contentEquals(validItem)) {
-			OutputHandler.println("Oh, thank you for the " + validItem);
+			IOHandler.output.println("Oh, thank you for the " + validItem);
 			return true;
 		}
 		return false;

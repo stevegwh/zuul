@@ -1,18 +1,18 @@
 package zuul;
 
-import IO.OutputHandler;
+import IO.IOHandler;
 
 public class ZuulMessageHandler {
 	public static void invalidCommand() {
-		OutputHandler.println("Invalid command");
+		IOHandler.output.println("Invalid command");
 	}
 	public static void printCantDoThat() {
-		OutputHandler.println("Can't do that");
+		IOHandler.output.println("Can't do that");
 	}
 	public static void cantFind(String e) {
-		OutputHandler.println("Can't find " + e);
+		IOHandler.output.println("Can't find " + e);
 	}
 	public static void printSeperator() {
-		System.out.println("=============");
+		IOHandler.output.println("=============");
 	}
 }

@@ -3,10 +3,8 @@ package zuul;
 
 import commands.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
-import IO.OutputHandler;
 
 public class CommandHandler {
 	
