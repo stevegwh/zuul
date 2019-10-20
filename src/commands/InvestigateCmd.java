@@ -1,6 +1,6 @@
 package commands;
 
-import org.json.simple.JSONObject;
+import com.github.cliftonlabs.json_simple.JsonObject;
 
 import interactableItem.InteractableItem;
 import zuul.RoomController;
@@ -10,7 +10,7 @@ public class InvestigateCmd implements Command {
 	@Override
 	public void execute(String[] args) {
 		String toInvestigate = args[1];
-		JSONObject obj = RoomController.ifExistsInArrayReturnObj(toInvestigate, "interactableItems");
+		JsonObject obj = RoomController.ifExistsInArrayReturnObj(toInvestigate, "interactableItems");
 		if (RoomController.hasInteractableItems() && obj != null) {
 			//You don't really need to even create a new object here, you could just print the investigate description
 			//Maybe for clarity this approach is nicer...

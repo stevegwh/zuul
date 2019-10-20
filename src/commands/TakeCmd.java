@@ -1,6 +1,6 @@
 package commands;
 
-import org.json.simple.JSONObject;
+import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.OutputHandler;
 import zuul.InventoryController;
@@ -14,7 +14,7 @@ public class TakeCmd implements Command {
 	public void execute(String[] args) {
 		String toTake = args[1];
 		if(RoomController.hasTakeableItems()) {
-			JSONObject obj = RoomController.ifExistsInArrayReturnObj(toTake, "takeableItems");
+			JsonObject obj = RoomController.ifExistsInArrayReturnObj(toTake, "takeableItems");
 			if (obj != null) {
 				String name = (String) obj.get("name");
 				int weight = Integer.parseInt((String) obj.get("weight"));

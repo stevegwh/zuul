@@ -1,18 +1,18 @@
 package jsonDataHandler;
 
-import org.json.simple.JSONObject;
+import com.github.cliftonlabs.json_simple.JsonObject;
 
 // Important class that holds JSON data
 public class JSONDataHandler {
-	private JSONObject data;
+	private JsonObject data;
     
-    public JSONObject getField(String fieldName) {
-		JSONObject fieldData = (JSONObject) data.get(fieldName);
+    public JsonObject getField(String fieldName) {
+		JsonObject fieldData = (JsonObject) data.get(fieldName);
     	return fieldData;
     }
 
     public JSONDataHandler(String path) {
     	Parser parser = new Parser();
-    	data = (JSONObject) parser.generateData(path); 
+    	data = (JsonObject) parser.generateData(path); 
     }
 }

@@ -1,7 +1,7 @@
 package zuul;
 
 import IO.InitIO;
-import jsonDataHandler.ErrorCheckGameJSON;
+//import jsonDataHandler.ErrorCheckGameJSON;
 
 public class Main {
 	public static void main(String[] args) {		
@@ -10,8 +10,8 @@ public class Main {
 		InitIO.setMode("Console");
 
 		if(DEVELOPER_MODE) {
-			ErrorCheckGameJSON errorChecker = new ErrorCheckGameJSON();
-			errorChecker.startCheck();
+//			ErrorCheckGameJSON errorChecker = new ErrorCheckGameJSON();
+//			errorChecker.startCheck();
 		} else {
 			GameController game = new GameController();
 			game.start();

@@ -1,7 +1,7 @@
 package commands;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.github.cliftonlabs.json_simple.JsonArray;
+import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.OutputHandler;
 import interactableItem.InteractableItem;
@@ -14,11 +14,10 @@ public class UseCmd implements Command {
 	
 	private int COMMAND_LENGTH = 4;
 	
-	// Updates the interactableItem's JSONObject to disable interactivity and give a different description after use
-	@SuppressWarnings("unchecked")
-	private void updateJSON(String interactableItem, JSONObject interactableItemObj) {
+	// Updates the interactableItem's JsonObject to disable interactivity and give a different description after use
+	private void updateJSON(String interactableItem, JsonObject interactableItemObj) {
 		// Create a new object to erase the old one
-		JSONObject toPush = new JSONObject();
+		JsonObject toPush = new JsonObject();
 		String onInvestigateAfterUse = (String) interactableItemObj.get("onInvestigateAfterUse");
 		toPush.put("name", interactableItem);
 		toPush.put("onInvestigate", onInvestigateAfterUse);
@@ -56,13 +55,13 @@ public class UseCmd implements Command {
 				return;
 			}
 			if (RoomController.hasInteractableItems()) {
-				// Get the JSONObject for the interactableItem the user has requested if it exists
-				JSONObject obj = RoomController.ifExistsInArrayReturnObj(interactableItem, "interactableItems");
+				// Get the JsonObject for the interactableItem the user has requested if it exists
+				JsonObject obj = RoomController.ifExistsInArrayReturnObj(interactableItem, "interactableItems");
 				if (obj != null && obj.get("onUse") != null) { // Make sure it exists *and* that it can be acted upon with onUse
 					String name = (String) obj.get("name");
 					String validItem = (String) obj.get("validItem"); //TODO: poor variable name
 					// Get the array that specifies what method to call when InteractableItem is used
-					JSONArray onUse = (JSONArray) obj.get("onUse");
+					JsonArray onUse = (JsonArray) obj.get("onUse");
 					//convert JSONArray to String[] to make it more conventional to work with
 					String[] itemMethodArgs = new String[onUse.size()];
 					itemMethodArgs = (String[]) onUse.toArray(itemMethodArgs);
@@ -70,7 +69,7 @@ public class UseCmd implements Command {
 					InteractableItem item = new InteractableItem(name, validItem);
 					// Attempt to execute onUse() of InteractableItem
 					if (item.onUse(itemToUse, itemMethodArgs)) {
-						// If true overwrite the JSONObject for InteractableItem
+						// If true overwrite the JsonObject for InteractableItem
 						updateJSON(interactableItem, obj);
 						updateInventory(itemToUse);
 					}

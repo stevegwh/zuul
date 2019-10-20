@@ -3,15 +3,15 @@ package npc;
 import zuul.RoomController;
 import zuul.ZuulMessageHandler;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.github.cliftonlabs.json_simple.JsonArray;
+import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.InputHandler;
 import IO.OutputHandler;
 import jsonDataHandler.JSONDataHandler;
 
 public abstract class NPC {
-	private JSONObject json;
+	private JsonObject json;
 	private String name;
 	private String currentLocation;
 
@@ -30,7 +30,7 @@ public abstract class NPC {
 		printDialog();
 		String userChoice = getUserChoice();
 		int idx = Integer.parseInt(userChoice) - 1;
-		JSONArray dialogResponses = (JSONArray) json.get("dialogResponses");
+		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
 		OutputHandler.println((String) dialogResponses.get(idx));
 	}
 
@@ -40,12 +40,12 @@ public abstract class NPC {
 	
 	public void move() {
 		// TODO: Eventually needs to be randomized by the movePath
-		JSONArray destinationRoom = RoomController.getActorsInRoom("room3");
+		JsonArray destinationRoom = RoomController.getActorsInRoom("room3");
 		RoomController.moveActorToRoom(this, destinationRoom);
 	}
 	
 	public void printDialog() {
-		JSONArray dialogOptions = (JSONArray) json.get("dialogOptions");
+		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
 		for(int i = 0, len = dialogOptions.size(); i < len ; i++) {
 			OutputHandler.println(Integer.toString(i + 1) + ". " + dialogOptions.get(i));
 		}

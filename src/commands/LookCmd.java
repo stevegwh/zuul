@@ -1,6 +1,6 @@
 package commands;
 
-import org.json.simple.JSONArray;
+import com.github.cliftonlabs.json_simple.JsonArray;
 
 import IO.OutputHandler;
 import zuul.Player;
@@ -16,7 +16,7 @@ public class LookCmd implements Command {
 		} else {
 			OutputHandler.println("Nothing interesting to report");
 		}
-		JSONArray actors = RoomController.getActorsInRoom(Player.getLocation());
+		JsonArray actors = RoomController.getActorsInRoom(Player.getLocation());
 		if(actors.size() > 0) {
 			OutputHandler.println("People in room: ");
 			actors.forEach((e) -> OutputHandler.println((String) e));
