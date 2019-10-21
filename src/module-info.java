@@ -1,3 +1,3 @@
-module chooseyourownadventure {
+module zuul {
 	requires json.simple;
 }
