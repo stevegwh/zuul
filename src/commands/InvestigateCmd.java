@@ -2,9 +2,9 @@ package commands;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
+import eventHandler.ZuulEventHandler;
 import interactableItem.InteractableItem;
 import zuul.RoomController;
-import zuulutils.ZuulEventHandler;
 
 public class InvestigateCmd implements Command {
 	@Override

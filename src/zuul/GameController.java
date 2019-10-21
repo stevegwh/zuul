@@ -3,8 +3,9 @@ package zuul;
 import java.util.HashMap;
 
 import IO.IOHandler;
-import npc.Barry;
+import eventHandler.ZuulEventHandler;
 import npc.NPC;
+import npc.NPCFactory;
 
 public class GameController {
 	private static HashMap<String, NPC> actors = new HashMap<>();
@@ -14,7 +15,7 @@ public class GameController {
 	private static boolean isRunning = true;
 
 	public static void quit() {
-		IOHandler.output.println("Thanks for playing!");
+		ZuulEventHandler.quitGame();
 		isRunning = false;
 	}
 	
@@ -55,7 +56,7 @@ public class GameController {
 
 	GameController() {
 		commandHandler = new CommandHandler();
-		actors.put("Barry", Barry.getInstance());
+		actors = NPCFactory.getNPCCollection();
 	}
 
 }

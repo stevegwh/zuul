@@ -3,10 +3,10 @@ package commands;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
+import eventHandler.ZuulEventHandler;
 import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;
-import zuulutils.ZuulEventHandler;
 
 // TODO: Could be cleaner
 public class TakeCmd implements Command {

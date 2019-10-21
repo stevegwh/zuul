@@ -4,11 +4,11 @@ import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
+import eventHandler.ZuulEventHandler;
 import interactableItem.InteractableItem;
 import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;
-import zuulutils.ZuulEventHandler;
 
 public class UseCmd implements Command {
 	

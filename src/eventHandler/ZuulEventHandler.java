@@ -1,4 +1,4 @@
-package zuulutils;
+package eventHandler;
 
 import IO.IOHandler;
 
@@ -24,5 +24,9 @@ public class ZuulEventHandler {
 	}
 	public static void printSeperator() {
 		IOHandler.output.println("=============");
+	}
+	public static void quitGame() {
+		IOHandler.output.println("Thanks for playing!");
+		
 	}
 }

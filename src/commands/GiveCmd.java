@@ -1,10 +1,10 @@
 package commands;
 
+import eventHandler.ZuulEventHandler;
 import npc.NPC;
 import zuul.GameController;
 import zuul.InventoryController;
 import zuul.TakeableItem;
-import zuulutils.ZuulEventHandler;
 import zuulutils.ZuulTools;
 
 public class GiveCmd implements Command{

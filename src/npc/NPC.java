@@ -1,12 +1,12 @@
 package npc;
 
 import zuul.RoomController;
-import zuulutils.ZuulEventHandler;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
+import eventHandler.ZuulEventHandler;
 import jsonDataHandler.JSONDataHandler;
 
 public abstract class NPC {

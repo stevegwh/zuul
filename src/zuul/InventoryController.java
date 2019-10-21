@@ -3,7 +3,7 @@ package zuul;
 import java.util.ArrayList;
 
 import IO.IOHandler;
-import zuulutils.ZuulEventHandler;
+import eventHandler.ZuulEventHandler;
 
 public class InventoryController {
 	private static int totalWeight;

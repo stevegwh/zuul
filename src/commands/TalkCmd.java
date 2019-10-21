@@ -2,8 +2,8 @@ package commands;
 
 import zuul.GameController;
 import zuul.RoomController;
-import zuulutils.ZuulEventHandler;
 import zuulutils.ZuulTools;
+import eventHandler.ZuulEventHandler;
 import npc.NPC;
 
 public class TalkCmd implements Command {

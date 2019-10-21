@@ -2,7 +2,7 @@ package IO;
 
 import java.util.Scanner;
 
-import zuulutils.ZuulEventHandler;
+import eventHandler.ZuulEventHandler;
 
 // TODO: Currently this allows you to write things like 'go north lol lol' because it still fits under the MAX_LENGTH even tho it's invalid.
 public class ConsoleInput implements Input {

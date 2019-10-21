@@ -4,9 +4,9 @@ import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
+import eventHandler.ZuulEventHandler;
 import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
-import zuulutils.ZuulEventHandler;
 import zuulutils.ZuulTools;
 
 public final class RoomController {

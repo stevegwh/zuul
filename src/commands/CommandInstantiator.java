@@ -3,7 +3,7 @@ package commands;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import zuulutils.ZuulEventHandler;
+import eventHandler.ZuulEventHandler;
 import zuulutils.ZuulTools;
 
 import java.io.File;
