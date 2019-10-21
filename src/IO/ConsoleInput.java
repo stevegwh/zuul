@@ -1,7 +1,8 @@
 package IO;
 
 import java.util.Scanner;
-import zuul.ZuulMessageHandler;
+
+import zuulutils.ZuulEventHandler;
 
 // TODO: Currently this allows you to write things like 'go north lol lol' because it still fits under the MAX_LENGTH even tho it's invalid.
 public class ConsoleInput implements Input {
@@ -20,12 +21,12 @@ public class ConsoleInput implements Input {
 	@Override
 	public String[] getUserInput(int MAX_COMMAND_LENGTH) { 
 		String data = "";
-		ZuulMessageHandler.printSeperator();
+		IOHandler.output.printf(">> ");
 		@SuppressWarnings("resource")
 		Scanner scanInput = new Scanner(System.in);
 		data = scanInput.nextLine();
 		scanInput.reset();
-		ZuulMessageHandler.printSeperator();
+		ZuulEventHandler.printSeperator();
 		return parseInput(data, MAX_COMMAND_LENGTH);
 	}
 

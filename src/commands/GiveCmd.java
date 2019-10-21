@@ -1,10 +1,11 @@
 package commands;
 
-import IO.IOHandler;
 import npc.NPC;
 import zuul.GameController;
 import zuul.InventoryController;
 import zuul.TakeableItem;
+import zuulutils.ZuulEventHandler;
+import zuulutils.ZuulTools;
 
 public class GiveCmd implements Command{
 
@@ -13,17 +14,17 @@ public class GiveCmd implements Command{
 	public void execute(String[] args) {
 		String preposition = args[2];
 		if(!preposition.equals("to")) {
-			IOHandler.output.println("Invalid command");
+			ZuulEventHandler.invalidCommand();
 			return;
 		}
 		String itemName = args[1];
 		String actorName = args[3];
-		actorName = actorName.substring(0, 1).toUpperCase() + actorName.substring(1, actorName.length());
+		actorName = ZuulTools.capitalize(actorName);
 		if(InventoryController.checkIfExists(itemName)) {
 			TakeableItem takeableItem = InventoryController.getItem(itemName);
 			NPC npc = GameController.getActor(actorName);
 			if(!npc.onGive(takeableItem.getName())) {
-				IOHandler.output.println(npc.getName() + " didn't seem to want the " + itemName);
+				ZuulEventHandler.onGiveFail(npc.getName(), itemName);
 			} else {
 				if(takeableItem.isPerishable()) {
 					InventoryController.setWeight(takeableItem.getWeight());
@@ -31,7 +32,7 @@ public class GiveCmd implements Command{
 				}
 			}
 		} else {
-			IOHandler.output.println("You do not have " + itemName + " in your inventory"); // TODO: You've written this before
+			ZuulEventHandler.notInInventory(itemName);
 		}
 			
 	}

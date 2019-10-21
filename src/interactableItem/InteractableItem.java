@@ -3,7 +3,7 @@ package interactableItem;
 import java.lang.reflect.InvocationTargetException;
 
 import IO.IOHandler;
-import zuul.ZuulTools;
+import zuulutils.ZuulTools;
 
 // Class for any item in the game the player can interact with
 // These items get acted upon by the TakeableItem class

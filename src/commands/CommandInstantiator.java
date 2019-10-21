@@ -3,8 +3,8 @@ package commands;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import zuul.ZuulMessageHandler;
-import zuul.ZuulTools;
+import zuulutils.ZuulEventHandler;
+import zuulutils.ZuulTools;
 
 import java.io.File;
 
@@ -23,7 +23,7 @@ public class CommandInstantiator {
 		commandName = ZuulTools.capitalize(commandName);
 		commandName += "Cmd";
 		if(commands.indexOf(commandName) < 0) {
-			ZuulMessageHandler.invalidCommand();
+			ZuulEventHandler.invalidCommand();
 			return null;
 		}
 		Object command = null;

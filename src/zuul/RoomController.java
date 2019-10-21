@@ -6,6 +6,8 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 import IO.IOHandler;
 import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
+import zuulutils.ZuulEventHandler;
+import zuulutils.ZuulTools;
 
 public final class RoomController {
 	private static JSONDataHandler jsonHandler;
@@ -39,9 +41,9 @@ public final class RoomController {
 	}
 
 	public static void printDescription() {
-		ZuulMessageHandler.printSeperator();
+		ZuulEventHandler.printSeperator();
 		IOHandler.output.println((String) currentRoomJSON.get("description"));
-		ZuulMessageHandler.printSeperator();
+		ZuulEventHandler.printSeperator();
 	}
 	
 	public static String getLookDescription() {

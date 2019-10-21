@@ -4,7 +4,7 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 
 import interactableItem.InteractableItem;
 import zuul.RoomController;
-import zuul.ZuulMessageHandler;
+import zuulutils.ZuulEventHandler;
 
 public class InvestigateCmd implements Command {
 	@Override
@@ -19,6 +19,6 @@ public class InvestigateCmd implements Command {
 			item.onInvestigate();
 			return;
 		}
-		ZuulMessageHandler.cantFind(args[1]);
+		ZuulEventHandler.cantFind(args[1]);
 	}
 }

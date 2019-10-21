@@ -3,6 +3,7 @@ package zuul;
 import java.util.ArrayList;
 
 import IO.IOHandler;
+import zuulutils.ZuulEventHandler;
 
 public class InventoryController {
 	private static int totalWeight;
@@ -18,7 +19,7 @@ public class InventoryController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<TakeableItem> getInventory() { //TODO: use reflection to return clone
+	public static ArrayList<TakeableItem> getInventory() {
 		return (ArrayList<TakeableItem>) inventory.clone();
 	}
 
@@ -27,7 +28,7 @@ public class InventoryController {
 	}
 
 	public static void removeItem(TakeableItem item) {
-		IOHandler.output.println(item.getName() + " was removed from your inventory");
+		ZuulEventHandler.onRemoveFromInventory(item.getName());
 		inventory.remove(item);
 	}
 

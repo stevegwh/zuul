@@ -1,7 +1,7 @@
 package npc;
 
 import zuul.RoomController;
-import zuul.ZuulMessageHandler;
+import zuulutils.ZuulEventHandler;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
@@ -15,21 +15,24 @@ public abstract class NPC {
 	private String currentLocation;
 
 	private String getUserDialogChoice() {
-		IOHandler.output.printf(">> ");
 		String[] inputArray = IOHandler.input.getUserInput(1);
 		return inputArray[0];
 	}
 
 	public abstract boolean onGive(String takeableItem);
 
-	// parse input method should take a MAX_LENGTH variable. This should pass in the length of the dialogOptions
-	// TODO: Validate input
+	// TODO: parse input method should take a MAX_LENGTH variable. This should pass in the length of the dialogOptions
 	public void onTalk() {
 		printDialog();
 		String userChoice = getUserDialogChoice();
+		if(userChoice.length() > 1 || userChoice.matches("d")) {
+			ZuulEventHandler.invalidCommand();
+			return;
+		}
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
 		IOHandler.output.println((String) dialogResponses.get(idx));
+			
 	}
 
 	public void update() {
@@ -53,7 +56,6 @@ public abstract class NPC {
 		for(int i = 0, len = dialogOptions.size(); i < len ; i++) {
 			IOHandler.output.println(Integer.toString(i + 1) + ". " + dialogOptions.get(i));
 		}
-		ZuulMessageHandler.printSeperator();
 	}
 	
 

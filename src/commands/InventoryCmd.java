@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import IO.IOHandler;
 import zuul.InventoryController;
 import zuul.TakeableItem;
+import zuulutils.ZuulTools;
 
 public class InventoryCmd implements Command {
 
@@ -16,9 +17,8 @@ public class InventoryCmd implements Command {
 			IOHandler.output.println("You are currently carrying: ");
 			for(TakeableItem item: inventory) {
 				String name = item.getName();
-				// TODO: Capitalize
-				name = name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
-				IOHandler.output.println(name); //TODO: could be capitalized
+				name = ZuulTools.capitalize(name);
+				IOHandler.output.println(name);
 			}
 		}
 		

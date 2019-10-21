@@ -6,7 +6,7 @@ import IO.IOHandler;
 import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;
-import zuul.ZuulMessageHandler;
+import zuulutils.ZuulEventHandler;
 
 // TODO: Could be cleaner
 public class TakeCmd implements Command {
@@ -37,7 +37,7 @@ public class TakeCmd implements Command {
 			}
 		}
 
-		ZuulMessageHandler.cantFind(args[1]);
+		ZuulEventHandler.cantFind(args[1]);
 	}
 
 	public TakeCmd() {

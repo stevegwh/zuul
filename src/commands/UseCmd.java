@@ -8,7 +8,7 @@ import interactableItem.InteractableItem;
 import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;
-import zuul.ZuulMessageHandler;
+import zuulutils.ZuulEventHandler;
 
 public class UseCmd implements Command {
 	
@@ -39,11 +39,11 @@ public class UseCmd implements Command {
 	public void execute(String[] args) {
 		// MESSY AND ASSUMES IT WILL ALWAYS BE 4 (What about "use potion" which is len 2?)//////
 		if(args.length < COMMAND_LENGTH) {
-			ZuulMessageHandler.invalidCommand();
+			ZuulEventHandler.invalidCommand();
 			return;
 		}
 		if(args[1] == null || args[2] == null || args[3] == null ) {
-			ZuulMessageHandler.invalidCommand();
+			ZuulEventHandler.invalidCommand();
 			return;
 		}
 		///////////////////////////////////////////////////////////////
@@ -76,15 +76,15 @@ public class UseCmd implements Command {
 					}
 					return;
 				} else {
-					ZuulMessageHandler.invalidCommand();
+					ZuulEventHandler.invalidCommand();
 					return;
 				}
 			}
 		} else {
-			ZuulMessageHandler.invalidCommand();
+			ZuulEventHandler.invalidCommand();
 			
 		}
-		ZuulMessageHandler.cantFind(interactableItem);
+		ZuulEventHandler.cantFind(interactableItem);
 	}
 }
 
