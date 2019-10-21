@@ -3,7 +3,6 @@ package zuul;
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import IO.IOHandler;
 import eventHandler.ZuulEventHandler;
 import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
@@ -12,11 +11,10 @@ public final class RoomController {
 	private static JSONDataHandler jsonHandler;
 	private static JsonObject currentRoomJSON;
 
-	// TODO: Replace with a onEnterRoom event?
+	// TODO: Think if maybe you can call more than one room at a time with this
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
-		printDescription();
-		renderExits();
+		ZuulEventHandler.output.onRoomEnter(currentRoomJSON);
 		Player.setLocation(nextRoom);
 	}
 
@@ -39,13 +37,6 @@ public final class RoomController {
 		}
 		return (JsonObject) arr.stream().filter(o -> ((JsonObject) o).get("name").equals(toCheck)).findFirst().orElse(null);
 	}
-
-	// TODO: Coupled with text
-	public static void printDescription() {
-		ZuulEventHandler.output.printSeperator();
-		IOHandler.output.println((String) currentRoomJSON.get("description"));
-		ZuulEventHandler.output.printSeperator();
-	}
 	
 	public static String getLookDescription() {
 		return (String) currentRoomJSON.get("lookDescription");
@@ -55,12 +46,17 @@ public final class RoomController {
 		((JsonArray) currentRoomJSON.get("takeableItems")).remove(toRemove);
 	}
 
-	// Converts TakeableItem to JsonObject and adds it to takeableItems
+	/**
+	 * Converts TakeableItem to a JsonObject and adds it to the takeableItems JsonArray.
+	 * If the JsonObject for this room doesn't have the JsonArray takeableObjects then it
+	 * is initialised here and added to the main JsonObject
+	 * 
+	 * @param toAdd
+	 */
 	public static void addTakeableItem(TakeableItem toAdd) {
 		JsonObject itemJSON = new JsonObject();
 		itemJSON.put("name", toAdd.getName());
 		itemJSON.put("weight",String.valueOf(toAdd.getWeight()));
-		// if the JsonObject for this room doesn't have JsonArray takeableObjects then we initialize it here and add it to the json file
 		//TODO: Maybe you should always initalize takeableItems/interactableItems instead of doing it here if needed
 		if(!hasTakeableItems()) {currentRoomJSON.put("takeableItems", new JsonArray());}
 		((JsonArray) currentRoomJSON.get("takeableItems")).add(itemJSON);
@@ -74,6 +70,11 @@ public final class RoomController {
 		((JsonArray) currentRoomJSON.get("interactableItems")).add(toAdd);
 	}
 	
+	/**
+	 * Returns all Actors/NPCs in the requested room's JsonObject
+	 * @param roomName key of the JsonObject needed.
+	 * @return JsonObject of key roomName.
+	 */
 	public static JsonArray getActorsInRoom(String roomName) {
 		JsonArray room = (JsonArray) jsonHandler.getField(roomName).get("actorsInRoom");
 		if(room == null) {
@@ -98,14 +99,27 @@ public final class RoomController {
 		}
 	}
 
+	/**
+	 * Checks if the current room's JsonObject has a 'takeableItems' field.
+	 * @return true/false
+	 */
 	public static boolean hasTakeableItems() {
 		return currentRoomJSON.get("takeableItems") != null;
 	}
 
+	/**
+	 * Checks if the current room's JsonObject has an 'interactableItems' field.
+	 * @return true/false
+	 */
 	public static boolean hasInteractableItems() {
 		return currentRoomJSON.get("interactableItems") != null;
 	}
 
+	/**
+	 * Checks if the current room's JsonObject has the specified NPC/Actor.
+	 * @param actorName the actor/NPC name
+	 * @return true/false
+	 */
 	public static boolean hasActor(String actorName) {
 		JsonArray actors = (JsonArray) currentRoomJSON.get("actorsInRoom");
 		return actors.indexOf(actorName) >= 0;

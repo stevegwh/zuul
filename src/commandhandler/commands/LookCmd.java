@@ -7,7 +7,7 @@ import commandhandler.Command;
 import zuul.Player;
 import zuul.RoomController;
 
-// TODO: Print interactableItems and takeableItems
+// TODO: Print interactableItems and takeableItems.
 public class LookCmd implements Command {
 	public void execute(String[] args) {
 		String lookDescription = RoomController.getLookDescription();
@@ -18,6 +18,7 @@ public class LookCmd implements Command {
 		}
 		JsonArray actors = RoomController.getActorsInRoom(Player.getLocation());
 		if(actors.size() > 0) {
+		// TODO: Coupled with console output... could print the people in room etc onRoomEnter in ConsoleEventHandler?
 			IOHandler.output.println("People in room: ");
 			actors.forEach((e) -> IOHandler.output.println((String) e));
 		} else {

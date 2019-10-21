@@ -50,4 +50,23 @@ public class ConsoleEventHandler implements IEventHandler {
 		IOHandler.output.println("You picked up " + toTake);
 		
 	}
+	@Override
+	public void onDrop(String toDrop) {
+		IOHandler.output.println("You dropped " + toDrop);
+		
+	}
+	@Override
+	public void itemTooHeavy() {
+		IOHandler.output.println("Sorry, this item is too heavy for you to carry. Try dropping something first");
+		
+	}
+	@Override
+	public void onRoomEnter(JsonObject roomData) {
+		printSeperator();
+		IOHandler.output.println((String) roomData.get("description"));
+		printSeperator();
+		JsonObject exits = (JsonObject) roomData.get("exits");
+		renderExits(exits);
+		
+	}
 }

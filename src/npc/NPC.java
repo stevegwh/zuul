@@ -14,6 +14,7 @@ public abstract class NPC {
 	private String name;
 	private String currentLocation;
 
+	// TODO: Coupled with text input. Possibly.
 	private String getUserDialogChoice() {
 		String[] inputArray = IOHandler.input.getUserInput(1);
 		return inputArray[0];
@@ -22,7 +23,6 @@ public abstract class NPC {
 	public abstract boolean onGive(String takeableItem);
 
 	// TODO: parse input method should take a MAX_LENGTH variable. This should pass in the length of the dialogOptions.
-	// TODO: Coupled with text output. 
 	public void onTalk() {
 		printDialog();
 		String userChoice = getUserDialogChoice();
@@ -52,6 +52,7 @@ public abstract class NPC {
 		currentLocation = destinationRoomName;
 	}
 	
+	// TODO: Coupled with console output. 
 	public void printDialog() {
 		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
 		for(int i = 0, len = dialogOptions.size(); i < len ; i++) {
@@ -65,6 +66,7 @@ public abstract class NPC {
 	 */
 	public void onInvestigate() {
 		IOHandler.output.println("You see " + name); //TODO: Could add a more in-depth description of people.
+		// TODO: Coupled with console output?
 	}
 	
 	/**

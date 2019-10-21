@@ -3,11 +3,17 @@ package interactableItem;
 import java.lang.reflect.InvocationTargetException;
 
 import IO.IOHandler;
+import eventHandler.ZuulEventHandler;
 import zuulutils.ZuulTools;
 
-// Class for any item in the game the player can interact with
-// These items get acted upon by the TakeableItem class
-// InteractableItems accept USE and INVESTIGATE commands
+/**
+ * Class for any item in the game the player can interact with.
+ * These items get acted upon by the TakeableItem class.
+ * InteractableItems accept USE and INVESTIGATE commands.
+ * 
+ * @author Steve
+ *
+ */
 public class InteractableItem {
 	private String validItem;
 	private String descriptionOnInvestigate;
@@ -25,7 +31,7 @@ public class InteractableItem {
 			executeAction(args);
 			return true;
 		} else {
-			IOHandler.output.println("That didn't seem to work.");
+			ZuulEventHandler.output.invalidCommand();
 			return false;
 		}
 	}

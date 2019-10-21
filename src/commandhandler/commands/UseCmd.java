@@ -52,8 +52,7 @@ public class UseCmd implements Command {
 		String interactableItem = args[3];
 		if(args[2].equals("on") || args[2].equals("with")) {
 			if (!InventoryController.checkIfExists(itemToUse)) {
-				// TODO: Replace with ZuulMessageHandler
-				IOHandler.output.println("You do not have '" + itemToUse + "' in your inventory");
+				ZuulEventHandler.output.notInInventory(itemToUse);
 				return;
 			}
 			if (RoomController.hasInteractableItems()) {

@@ -1,7 +1,14 @@
 package eventHandler;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
-
+/**
+ * Interface for all types of events that can happen in the game. Designed to allow future developers to implement any resolution to the even they wish.
+ * For example, you could quite easily resolve the event by playing sounds, starting an animation etc.
+ * All implementations must use the same prefix as specified in the --io flag when executing the game.
+ * 
+ * @author Steve
+ *
+ */
 public interface IEventHandler {
 	public void invalidCommand();
 	public void printCantDoThat();
@@ -13,4 +20,8 @@ public interface IEventHandler {
 	public void quitGame();
 	public void renderExits(JsonObject exits);
 	public void onTake(String toTake);
+	public void onDrop(String toDrop);
+	public void itemTooHeavy();
+	public void onRoomEnter(JsonObject roomData);
 }
+// TODO: rethink some of these method names to be more inclusive of different outputs
