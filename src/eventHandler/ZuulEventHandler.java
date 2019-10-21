@@ -33,7 +33,7 @@ import java.lang.reflect.InvocationTargetException;
 
 // TODO: If I/O has already been set is this necessary?
 public class ZuulEventHandler {
-	public static EventHandler output = null;
+	public static IEventHandler output = null;
 	/**
 	 * Sets input/output to the mode specified. If "console" is passed in then this class will attempt to assign the input/output variables to
 	 * a class called ConsoleEventHandler. If "gui" is passed in then this class will attempt to find "GuiEventHandler" in the package etc.
@@ -42,7 +42,7 @@ public class ZuulEventHandler {
 	 */
 	public static void setIOMode(String mode) {
 		try {
-			output = (EventHandler) Class.forName(ZuulEventHandler.class.getPackageName() + "." + mode + "EventHandler").getConstructor().newInstance();
+			output = (IEventHandler) Class.forName(ZuulEventHandler.class.getPackageName() + "." + mode + "EventHandler").getConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block

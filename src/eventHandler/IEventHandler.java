@@ -2,7 +2,7 @@ package eventHandler;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-public interface EventHandler {
+public interface IEventHandler {
 	public void invalidCommand();
 	public void printCantDoThat();
 	public void cantFind(String e);

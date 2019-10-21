@@ -5,7 +5,7 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 import IO.IOHandler;
 import zuulutils.ZuulTools;
 
-public class ConsoleEventHandler implements EventHandler {
+public class ConsoleEventHandler implements IEventHandler {
 	@Override
 	public void invalidCommand() {
 		IOHandler.output.println("Invalid command");
@@ -22,6 +22,7 @@ public class ConsoleEventHandler implements EventHandler {
 	public void notInInventory(String itemName) {
 		IOHandler.output.println("You do not have a " + itemName + " in your inventory");
 	}
+	// TODO: Should this be in the NPC class directly?
 	@Override
 	public void onGiveFail(String name, String itemName) {
 		IOHandler.output.println(name + " didn't seem to want the " + itemName);
