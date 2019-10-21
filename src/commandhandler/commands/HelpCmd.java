@@ -1,6 +1,7 @@
-package commands;
+package commandhandler.commands;
 
 import IO.IOHandler;
+import commandhandler.Command;
 
 public class HelpCmd implements Command{
 

@@ -1,8 +1,9 @@
-package commands;
+package commandhandler.commands;
 
 import java.util.ArrayList;
 
 import IO.IOHandler;
+import commandhandler.Command;
 import zuul.RoomController;
 
 public class GoCmd implements Command {

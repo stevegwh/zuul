@@ -7,16 +7,16 @@ import IO.IOHandler;
 import eventHandler.ZuulEventHandler;
 import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
-import zuulutils.ZuulTools;
 
 public final class RoomController {
 	private static JSONDataHandler jsonHandler;
 	private static JsonObject currentRoomJSON;
 
+	// TODO: Replace with a onEnterRoom event?
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
 		printDescription();
-		printExits();
+		renderExits();
 		Player.setLocation(nextRoom);
 	}
 
@@ -40,10 +40,11 @@ public final class RoomController {
 		return (JsonObject) arr.stream().filter(o -> ((JsonObject) o).get("name").equals(toCheck)).findFirst().orElse(null);
 	}
 
+	// TODO: Coupled with text
 	public static void printDescription() {
-		ZuulEventHandler.printSeperator();
+		ZuulEventHandler.output.printSeperator();
 		IOHandler.output.println((String) currentRoomJSON.get("description"));
-		ZuulEventHandler.printSeperator();
+		ZuulEventHandler.output.printSeperator();
 	}
 	
 	public static String getLookDescription() {
@@ -104,14 +105,15 @@ public final class RoomController {
 	public static boolean hasInteractableItems() {
 		return currentRoomJSON.get("interactableItems") != null;
 	}
+
 	public static boolean hasActor(String actorName) {
 		JsonArray actors = (JsonArray) currentRoomJSON.get("actorsInRoom");
 		return actors.indexOf(actorName) >= 0;
 	}
-	public static void printExits() {
+
+	public static void renderExits() {
 		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
-		IOHandler.output.println("Exits: ");
-		exits.forEach((k, v) -> IOHandler.output.println(ZuulTools.capitalize((String) k) + ": " + v));
+		ZuulEventHandler.output.renderExits(exits);
 	}
 
 	static {

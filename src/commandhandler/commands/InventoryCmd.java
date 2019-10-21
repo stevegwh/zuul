@@ -1,8 +1,9 @@
-package commands;
+package commandhandler.commands;
 
 import java.util.ArrayList;
 
 import IO.IOHandler;
+import commandhandler.Command;
 import zuul.InventoryController;
 import zuul.TakeableItem;
 import zuulutils.ZuulTools;

@@ -1,8 +1,9 @@
-package commands;
+package commandhandler.commands;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
+import commandhandler.Command;
 import eventHandler.ZuulEventHandler;
 import zuul.InventoryController;
 import zuul.RoomController;
@@ -21,7 +22,8 @@ public class TakeCmd implements Command {
 				boolean perishable = obj.containsKey("perishable");
 				TakeableItem item = null;
 				if (!InventoryController.overWeightLimit(weight)) {
-					IOHandler.output.println("You picked up " + toTake);
+					// TODO: Replace with event
+					ZuulEventHandler.output.onTake(toTake);
 					if(perishable) {
 						item = new TakeableItem(name, weight, true);
 					} else {
@@ -31,13 +33,14 @@ public class TakeCmd implements Command {
 					InventoryController.setWeight(weight);
 					RoomController.removeTakeableItem(obj);
 				} else {
+					// TODO: Replace with event
 					IOHandler.output.println("Sorry, this item is too heavy for you to carry. Try dropping something first");
 				}
 				return;
 			}
 		}
 
-		ZuulEventHandler.cantFind(args[1]);
+		ZuulEventHandler.output.cantFind(args[1]);
 	}
 
 	public TakeCmd() {

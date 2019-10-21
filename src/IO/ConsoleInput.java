@@ -26,7 +26,7 @@ public class ConsoleInput implements Input {
 		Scanner scanInput = new Scanner(System.in);
 		data = scanInput.nextLine();
 		scanInput.reset();
-		ZuulEventHandler.printSeperator();
+		ZuulEventHandler.output.printSeperator();
 		return parseInput(data, MAX_COMMAND_LENGTH);
 	}
 

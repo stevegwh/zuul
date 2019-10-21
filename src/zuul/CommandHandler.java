@@ -1,9 +1,9 @@
 //responsible for validating and executing commands 
 package zuul;
 
-import commands.*;
-
 import java.util.HashMap;
+
+import commandhandler.*;
 
 
 public class CommandHandler {

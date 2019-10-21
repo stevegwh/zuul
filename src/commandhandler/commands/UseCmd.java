@@ -1,9 +1,10 @@
-package commands;
+package commandhandler.commands;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
+import commandhandler.Command;
 import eventHandler.ZuulEventHandler;
 import interactableItem.InteractableItem;
 import zuul.InventoryController;
@@ -37,13 +38,13 @@ public class UseCmd implements Command {
 	// TODO: Messy
 	@Override
 	public void execute(String[] args) {
-		// MESSY AND ASSUMES IT WILL ALWAYS BE 4 (What about "use potion" which is len 2?)//////
+		// TODO: MESSY AND ASSUMES IT WILL ALWAYS BE 4 (What about "use potion" which is len 2?)//////
 		if(args.length < COMMAND_LENGTH) {
-			ZuulEventHandler.invalidCommand();
+			ZuulEventHandler.output.invalidCommand();
 			return;
 		}
 		if(args[1] == null || args[2] == null || args[3] == null ) {
-			ZuulEventHandler.invalidCommand();
+			ZuulEventHandler.output.invalidCommand();
 			return;
 		}
 		///////////////////////////////////////////////////////////////
@@ -76,15 +77,15 @@ public class UseCmd implements Command {
 					}
 					return;
 				} else {
-					ZuulEventHandler.invalidCommand();
+					ZuulEventHandler.output.invalidCommand();
 					return;
 				}
 			}
 		} else {
-			ZuulEventHandler.invalidCommand();
+			ZuulEventHandler.output.invalidCommand();
 			
 		}
-		ZuulEventHandler.cantFind(interactableItem);
+		ZuulEventHandler.output.cantFind(interactableItem);
 	}
 }
 

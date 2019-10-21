@@ -10,7 +10,6 @@ import zuulutils.ZuulTools;
 // TODO: Change this from static.
 // TODO: Javadocs.
 public class NPCFactory {
-	private static String[] ignoreList = {"NPC.java", "NPCFactory.java"};
 	private static HashMap<String, NPC> npcs = new HashMap<String, NPC>();
 	
 
@@ -22,7 +21,8 @@ public class NPCFactory {
 	private static NPC attemptInstantiate(String className) {
 		Object npc = null;
 		try {
-			npc = Class.forName(NPCFactory.class.getPackageName() + "." + className).getConstructor().newInstance();
+			// TODO: Hard coded path
+			npc = Class.forName(NPCFactory.class.getPackageName() + ".npcs." + className).getConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -36,24 +36,23 @@ public class NPCFactory {
 	 * All files specified in the ignoreList array above are ignored.
 	 */
 	private static void populateNPCArr() {
-		File file = new File("src/" + NPCFactory.class.getPackageName() + "/");
+		// TODO: Hard coded path
+		File file = new File("src/" + NPCFactory.class.getPackageName() + "/npcs/");
 		String[] list = file.list();
 		for(String item : list) {
-			if(ZuulTools.getIndex(ignoreList, item) < 0) {
-				String[] tmp = item.split(".java");
-				item = tmp[0];
-				NPC npc = attemptInstantiate(item);
-				if(npc != null) {
-					if(npcs.containsKey(npc.getName())) {
-						System.out.println("Failed to instantiate " + item + " class. Duplicate class");
-						return;
-					}
-					
-					npcs.put(npc.getName(), npc);
-				} else {
-					System.out.println("Failed to instantiate " + item + " class. Please check file.");
+			String[] tmp = item.split(".java");
+			item = tmp[0];
+			NPC npc = attemptInstantiate(item);
+			if(npc != null) {
+				if(npcs.containsKey(npc.getName())) {
+					System.out.println("Failed to instantiate " + item + " class. Duplicate class");
 					return;
 				}
+				
+				npcs.put(npc.getName(), npc);
+			} else {
+				System.out.println("Failed to instantiate " + item + " class. Please check file.");
+				return;
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-package commands;
+package commandhandler;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -9,7 +9,6 @@ import zuulutils.ZuulTools;
 import java.io.File;
 
 public class CommandInstantiator {
-	private static String[] ignoreList = {"Command.java", "CommandInstantiator.java"};
 	private static ArrayList<String> commands = new ArrayList<>();
 	
 
@@ -23,12 +22,13 @@ public class CommandInstantiator {
 		commandName = ZuulTools.capitalize(commandName);
 		commandName += "Cmd";
 		if(commands.indexOf(commandName) < 0) {
-			ZuulEventHandler.invalidCommand();
+			ZuulEventHandler.output.invalidCommand();
 			return null;
 		}
 		Object command = null;
 		try {
-			command = Class.forName(CommandInstantiator.class.getPackageName() + "." + commandName).getConstructor().newInstance();
+			//TODO: Hard coded path
+			command = Class.forName(CommandInstantiator.class.getPackageName() + ".commands." + commandName).getConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -43,14 +43,13 @@ public class CommandInstantiator {
 	 * All files specified in the ignoreList array above are ignored.
 	 */
 	private static void populateCommandArr() {
-		File file = new File("src/" + CommandInstantiator.class.getPackageName() + "/");
+		//TODO: Hard coded path
+		File file = new File("src/" + CommandInstantiator.class.getPackageName() + "/commands/");
 		String[] list = file.list();
 		for(String item : list) {
-			if(ZuulTools.getIndex(ignoreList, item) < 0) {
-				String[] tmp = item.split(".java");
-				item = tmp[0];
-				commands.add(item);
-			}
+			String[] tmp = item.split(".java");
+			item = tmp[0];
+			commands.add(item);
 		}
 	}
 	

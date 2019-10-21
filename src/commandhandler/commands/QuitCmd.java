@@ -1,5 +1,6 @@
-package commands;
+package commandhandler.commands;
 
+import commandhandler.Command;
 import zuul.GameController;
 
 public class QuitCmd implements Command {

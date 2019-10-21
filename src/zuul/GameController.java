@@ -15,7 +15,7 @@ public class GameController {
 	private static boolean isRunning = true;
 
 	public static void quit() {
-		ZuulEventHandler.quitGame();
+		ZuulEventHandler.output.quitGame();
 		isRunning = false;
 	}
 	

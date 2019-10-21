@@ -1,6 +1,7 @@
-package npc;
+package npc.npcs;
 
 import IO.IOHandler;
+import npc.NPC;
 
 public class Barry extends NPC {
 //    private static Barry SINGLE_INSTANCE = null;

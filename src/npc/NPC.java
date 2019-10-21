@@ -21,12 +21,13 @@ public abstract class NPC {
 
 	public abstract boolean onGive(String takeableItem);
 
-	// TODO: parse input method should take a MAX_LENGTH variable. This should pass in the length of the dialogOptions
+	// TODO: parse input method should take a MAX_LENGTH variable. This should pass in the length of the dialogOptions.
+	// TODO: Coupled with text output. 
 	public void onTalk() {
 		printDialog();
 		String userChoice = getUserDialogChoice();
 		if(userChoice.length() > 1 || userChoice.matches("d")) {
-			ZuulEventHandler.invalidCommand();
+			ZuulEventHandler.output.invalidCommand();
 			return;
 		}
 		int idx = Integer.parseInt(userChoice) - 1;

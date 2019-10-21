@@ -1,8 +1,9 @@
-package commands;
+package commandhandler.commands;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 
 import IO.IOHandler;
+import commandhandler.Command;
 import zuul.Player;
 import zuul.RoomController;
 

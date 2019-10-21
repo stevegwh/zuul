@@ -1,5 +1,6 @@
-package commands;
+package commandhandler.commands;
 
+import commandhandler.Command;
 import eventHandler.ZuulEventHandler;
 import npc.NPC;
 import zuul.GameController;
@@ -14,7 +15,7 @@ public class GiveCmd implements Command{
 	public void execute(String[] args) {
 		String preposition = args[2];
 		if(!preposition.equals("to")) {
-			ZuulEventHandler.invalidCommand();
+			ZuulEventHandler.output.invalidCommand();
 			return;
 		}
 		String itemName = args[1];
@@ -24,7 +25,7 @@ public class GiveCmd implements Command{
 			TakeableItem takeableItem = InventoryController.getItem(itemName);
 			NPC npc = GameController.getActor(actorName);
 			if(!npc.onGive(takeableItem.getName())) {
-				ZuulEventHandler.onGiveFail(npc.getName(), itemName);
+				ZuulEventHandler.output.onGiveFail(npc.getName(), itemName);
 			} else {
 				if(takeableItem.isPerishable()) {
 					InventoryController.setWeight(takeableItem.getWeight());
@@ -32,7 +33,7 @@ public class GiveCmd implements Command{
 				}
 			}
 		} else {
-			ZuulEventHandler.notInInventory(itemName);
+			ZuulEventHandler.output.notInInventory(itemName);
 		}
 			
 	}

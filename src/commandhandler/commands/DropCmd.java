@@ -1,6 +1,7 @@
-package commands;
+package commandhandler.commands;
 
 import IO.IOHandler;
+import commandhandler.Command;
 import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;

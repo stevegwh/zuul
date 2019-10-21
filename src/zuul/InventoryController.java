@@ -28,7 +28,7 @@ public class InventoryController {
 	}
 
 	public static void removeItem(TakeableItem item) {
-		ZuulEventHandler.onRemoveFromInventory(item.getName());
+		ZuulEventHandler.output.onRemoveFromInventory(item.getName());
 		inventory.remove(item);
 	}
 
