@@ -1,5 +1,8 @@
 package eventHandler;
 
+import java.util.ArrayList;
+
+import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 /**
  * Interface for all types of events that can happen in the game. Designed to allow future developers to implement any resolution to the even they wish.
@@ -23,5 +26,9 @@ public interface IEventHandler {
 	public void onDrop(String toDrop);
 	public void itemTooHeavy();
 	public void onRoomEnter(JsonObject roomData);
+	public void renderActors(JsonArray actors);
+	public void renderItems(ArrayList<String> items);
+	public void onGo(String direction);
+	public void onGoFail();
 }
 // TODO: rethink some of these method names to be more inclusive of different outputs

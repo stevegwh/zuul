@@ -1,5 +1,8 @@
 package eventHandler;
 
+import java.util.ArrayList;
+
+import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
@@ -41,11 +44,6 @@ public class ConsoleEventHandler implements IEventHandler {
 		IOHandler.output.println("Thanks for playing!");
 	}
 	@Override
-	public void renderExits(JsonObject exits) {
-		IOHandler.output.println("Exits: ");
-		exits.forEach((k, v) -> IOHandler.output.println(ZuulTools.capitalize((String) k) + ": " + v));
-	}
-	@Override
 	public void onTake(String toTake) {
 		IOHandler.output.println("You picked up " + toTake);
 		
@@ -65,8 +63,42 @@ public class ConsoleEventHandler implements IEventHandler {
 		printSeperator();
 		IOHandler.output.println((String) roomData.get("description"));
 		printSeperator();
-		JsonObject exits = (JsonObject) roomData.get("exits");
-		renderExits(exits);
 		
+	}
+	@Override
+	public void renderActors(JsonArray actors) {
+		if(actors.size() > 0) {
+		// TODO: Coupled with console output... could print the people in room etc onRoomEnter in ConsoleEventHandler?
+			IOHandler.output.println("People in room: ");
+			actors.forEach((e) -> IOHandler.output.println((String) e));
+		} else {
+			IOHandler.output.println("Nobody in the room.");
+		}
+		printSeperator();
+	}
+	@Override
+	public void renderItems(ArrayList<String> items) {
+		if(items != null) {
+			IOHandler.output.println("Items in room: ");
+			items.forEach(e -> IOHandler.output.println(ZuulTools.capitalize(e)));
+		} else {
+			IOHandler.output.println("No items in room");
+		}
+		printSeperator();
+	}
+	@Override
+	public void renderExits(JsonObject exits) {
+		IOHandler.output.println("Exits: ");
+		exits.forEach((k, v) -> IOHandler.output.println(ZuulTools.capitalize((String) k) + ": " + v));
+		printSeperator();
+	}
+	@Override
+	public void onGo(String direction) {
+		IOHandler.output.println("You go " + direction);
+	}
+	@Override
+	public void onGoFail() {
+		IOHandler.output.println("You can't go that way.");
+		printSeperator();
 	}
 }

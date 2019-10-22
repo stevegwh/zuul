@@ -1,5 +1,7 @@
 package zuul;
 
+import java.util.ArrayList;
+
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
@@ -16,6 +18,11 @@ public final class RoomController {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
 		ZuulEventHandler.output.onRoomEnter(currentRoomJSON);
 		Player.setLocation(nextRoom);
+	}
+
+	public static JsonObject getAllExits() {
+		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
+		return (JsonObject) exits.clone();
 	}
 
 	public static String getExit(String exit) {
@@ -113,6 +120,21 @@ public final class RoomController {
 	 */
 	public static boolean hasInteractableItems() {
 		return currentRoomJSON.get("interactableItems") != null;
+	}
+
+	// TODO: Messy. Refactor.
+	public static ArrayList<String> getInteractableItems() {
+		if(hasInteractableItems()) {
+			JsonArray interactableItems = (JsonArray) currentRoomJSON.get("interactableItems");
+			ArrayList<String> arr = new ArrayList<>();
+			for(Object item : interactableItems) {
+				JsonObject obj = (JsonObject) item;
+				String name = (String) obj.get("name");
+				arr.add(name);
+			}
+			return arr;
+		}
+		return null;
 	}
 
 	/**

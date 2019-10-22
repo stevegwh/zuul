@@ -1,13 +1,19 @@
 package commandhandler.commands;
 
+import java.util.ArrayList;
+
 import com.github.cliftonlabs.json_simple.JsonArray;
+import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
 import commandhandler.Command;
+import eventHandler.ZuulEventHandler;
 import zuul.Player;
 import zuul.RoomController;
 
 // TODO: Print interactableItems and takeableItems.
+// TODO: Need to print takeableItems too.
+// TODO: Remove look description if not necessary for game.
 public class LookCmd implements Command {
 	public void execute(String[] args) {
 		String lookDescription = RoomController.getLookDescription();
@@ -17,12 +23,10 @@ public class LookCmd implements Command {
 			IOHandler.output.println("Nothing interesting to report");
 		}
 		JsonArray actors = RoomController.getActorsInRoom(Player.getLocation());
-		if(actors.size() > 0) {
-		// TODO: Coupled with console output... could print the people in room etc onRoomEnter in ConsoleEventHandler?
-			IOHandler.output.println("People in room: ");
-			actors.forEach((e) -> IOHandler.output.println((String) e));
-		} else {
-			IOHandler.output.println("Nobody in the room.");
-		}
+		ZuulEventHandler.output.renderActors(actors);
+		ArrayList<String> items = RoomController.getInteractableItems();
+		ZuulEventHandler.output.renderItems(items);
+		JsonObject exits = (JsonObject) RoomController.getAllExits();
+		ZuulEventHandler.output.renderExits(exits);
 	}
 }

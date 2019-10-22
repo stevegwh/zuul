@@ -1,6 +1,4 @@
-/eventHandler/
-/IO/
 /commandhandler/
-/npc/
+/eventHandler/
+/zuulutils/
 /zuul/
-/interactableItem/

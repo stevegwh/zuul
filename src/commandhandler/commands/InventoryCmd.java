@@ -8,6 +8,7 @@ import zuul.InventoryController;
 import zuul.TakeableItem;
 import zuulutils.ZuulTools;
 
+// TODO: Tied to console text
 public class InventoryCmd implements Command {
 
 	public void execute(String[] args) {
@@ -22,7 +23,6 @@ public class InventoryCmd implements Command {
 				IOHandler.output.println(name);
 			}
 		}
-		
 	}
 
 	public InventoryCmd() {
