@@ -3,13 +3,15 @@ package commandhandler;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+import IO.IOHandler;
 //import eventHandler.ZuulEventRouter;
 import zuulutils.ZuulTools;
 
 import java.io.File;
-
+// TODO: De-static
 public class CommandInstantiator {
 	private static ArrayList<String> commands = new ArrayList<>();
+	private static String dir = "commandOutputLayers";
 	
 
 	/**
@@ -20,16 +22,15 @@ public class CommandInstantiator {
 	 */
 	public static CommandBase createInstance(String commandName) {
 		commandName = ZuulTools.capitalize(commandName);
-		commandName += "CmdComplete";
+		commandName += "CmdLayer";
 		if(commands.indexOf(commandName) < 0) {
-			// TODO: Replace this
-//			ZuulEventRouter.output.invalidCommand();
+			IOHandler.output.printError("Invalid Command");
 			return null;
 		}
 		Object command = null;
 		try {
 			//TODO: Hard coded path
-			command = Class.forName(CommandInstantiator.class.getPackageName() + ".fullCommands." + commandName).getConstructor().newInstance();
+			command = Class.forName(CommandInstantiator.class.getPackageName() + "." + dir + "." + commandName).getConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -45,7 +46,7 @@ public class CommandInstantiator {
 	 */
 	private static void populateCommandArr() {
 		//TODO: Hard coded path
-		File file = new File("src/" + CommandInstantiator.class.getPackageName() + "/fullCommands/");
+		File file = new File("src/" + CommandInstantiator.class.getPackageName() + "/" + dir + "/");
 		String[] list = file.list();
 		for(String item : list) {
 			String[] tmp = item.split(".java");

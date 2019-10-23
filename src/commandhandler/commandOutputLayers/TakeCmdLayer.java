@@ -1,10 +1,10 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
-import commandhandler.FullCommand;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.TakeCmd;
 
-public class TakeCmdComplete extends TakeCmd implements FullCommand {
+public class TakeCmdLayer extends TakeCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		if(super.execute(args)) {
 			onSuccess();

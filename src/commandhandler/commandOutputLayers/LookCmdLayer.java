@@ -1,16 +1,14 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
-import commandhandler.FullCommand;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.LookCmd;
 import zuulutils.ZuulTools;
 
-public class LookCmdComplete extends LookCmd implements FullCommand {
+public class LookCmdLayer extends LookCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		if(super.execute(args)) {
 			onSuccess();
-		} else {
-			onFail();
 		}
 	}
 	private void printSeperator() {
@@ -39,6 +37,5 @@ public class LookCmdComplete extends LookCmd implements FullCommand {
 		printSeperator();
 	}
 	
-	public void onFail() {}
 
 }

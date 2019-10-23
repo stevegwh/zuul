@@ -1,11 +1,11 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
-import commandhandler.FullCommand;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.GoCmd;
 import zuul.RoomController;
 
-public class GoCmdComplete extends GoCmd implements FullCommand {
+public class GoCmdLayer extends GoCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		String error = super.validateUserInput(args);
 		if(error != null) {

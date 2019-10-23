@@ -1,10 +1,10 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
-import commandhandler.FullCommand;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.HelpCmd;
 
-public class HelpCmdComplete extends HelpCmd implements FullCommand {
+public class HelpCmdLayer extends HelpCmd implements CommandOutputLayer {
 
 	public void init(String[] args) {
 		IOHandler.output.println("Valid commands are: ");

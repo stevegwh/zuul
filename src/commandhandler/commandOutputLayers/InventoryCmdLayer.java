@@ -1,11 +1,11 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
-import commandhandler.FullCommand;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.InventoryCmd;
 import zuulutils.ZuulTools;
 
-public class InventoryCmdComplete extends InventoryCmd implements FullCommand {
+public class InventoryCmdLayer extends InventoryCmd implements CommandOutputLayer {
 
 	public void init(String[] args) {
 		if(super.execute(args)) {

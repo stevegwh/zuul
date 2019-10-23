@@ -1,10 +1,10 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
-import commandhandler.FullCommand;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.GiveCmd;
 
-public class GiveCmdComplete extends GiveCmd implements FullCommand {
+public class GiveCmdLayer extends GiveCmd implements CommandOutputLayer {
 	
 	public void init(String[] args) {
 		String error = super.validateUserInput(args);

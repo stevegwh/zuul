@@ -21,4 +21,5 @@ public interface Output {
 	 * @param ele The string you want to print
 	 */
 	public void printCharDialog(String ele);
+	public void printError(String error);
 }

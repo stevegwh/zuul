@@ -1,10 +1,10 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
-import commandhandler.FullCommand;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.DropCmd;
 
-public class DropCmdComplete extends DropCmd implements FullCommand {
+public class DropCmdLayer extends DropCmd implements CommandOutputLayer {
 	
 	public void init(String[] args) {
 		if(super.execute(args)) {

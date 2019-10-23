@@ -1,10 +1,10 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
-import commandhandler.FullCommand;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.TalkCmd;
 
-public class TalkCmdComplete extends TalkCmd implements FullCommand {
+public class TalkCmdLayer extends TalkCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		if(super.execute(args)) {
 			onSuccess();

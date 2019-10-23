@@ -1,10 +1,10 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
-import commandhandler.FullCommand;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.InvestigateCmd;
 
-public class InvestigateCmdComplete extends InvestigateCmd implements FullCommand {
+public class InvestigateCmdLayer extends InvestigateCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		if(super.execute(args)) {
 			onSuccess();

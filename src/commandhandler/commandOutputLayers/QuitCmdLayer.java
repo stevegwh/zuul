@@ -1,10 +1,11 @@
-package commandhandler.fullCommands;
+package commandhandler.commandOutputLayers;
 
 import IO.IOHandler;
+import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.QuitCmd;
 import zuul.GameController;
 
-public class QuitCmdComplete extends QuitCmd {
+public class QuitCmdLayer extends QuitCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		if(super.execute(args)) {
 			onSuccess();
@@ -13,12 +14,12 @@ public class QuitCmdComplete extends QuitCmd {
 		}
 	}
 	
-	private void onSuccess() {
+	public void onSuccess() {
 		IOHandler.output.println("Thanks for playing!");
 		GameController.quit();
 	}
 	
-	private void onFail() {
+	public void onFail() {
 	}
 
 }

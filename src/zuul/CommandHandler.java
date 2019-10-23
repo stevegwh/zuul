@@ -13,7 +13,7 @@ import commandhandler.*;
  */
 public class CommandHandler {
 	
-	HashMap<String, FullCommand> commands = new HashMap<>();
+	HashMap<String, CommandOutputLayer> commands = new HashMap<>();
 
 	/**
 	 * Takes the first element of the inputArray and attempts to instantiate it. 
@@ -24,8 +24,8 @@ public class CommandHandler {
 		if(!commands.containsKey(commandName)) {
 			Object command = CommandInstantiator.createInstance(commandName);
 			if(command != null) {
-				commands.put(commandName, (FullCommand) command);
-				((FullCommand) command).init(inputArray);
+				commands.put(commandName, (CommandOutputLayer) command);
+				((CommandOutputLayer) command).init(inputArray);
 			}
 		} else {
 			commands.get(commandName).init(inputArray);
