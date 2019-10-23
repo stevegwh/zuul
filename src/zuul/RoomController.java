@@ -13,7 +13,6 @@ public final class RoomController {
 	private static JSONDataHandler jsonHandler;
 	private static JsonObject currentRoomJSON;
 
-	// TODO: Think if maybe you can call more than one room at a time with this
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
 		ZuulEventHandler.output.onRoomEnter(currentRoomJSON);
