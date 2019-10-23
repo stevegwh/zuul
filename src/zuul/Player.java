@@ -1,15 +1,15 @@
 package zuul;
 
 public class Player {
-	// TODO: Getter?
-	public InventoryController inventory = new InventoryController();
+	private InventoryController inventory = new InventoryController();
 	private String currentLocation;
-	
+	public InventoryController getInvController() {
+		return inventory;
+	}
 	public void setLocation(String location) {
 		currentLocation = location;
 	}
 	public String getLocation() {
 		return currentLocation;
 	}
-
 }

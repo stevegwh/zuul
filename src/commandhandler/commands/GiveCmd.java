@@ -21,15 +21,15 @@ public class GiveCmd implements Command{
 		String itemName = args[1];
 		String actorName = args[3];
 		actorName = ZuulTools.capitalize(actorName);
-		if(GameController.getCurrentPlayer().inventory.checkIfExists(itemName)) {
-			TakeableItem takeableItem = GameController.getCurrentPlayer().inventory.getItem(itemName);
+		if(GameController.getCurrentPlayer().getInvController().checkIfExists(itemName)) {
+			TakeableItem takeableItem = GameController.getCurrentPlayer().getInvController().getItem(itemName);
 			NPC npc = GameController.getActor(actorName);
 			if(!npc.onGive(takeableItem.getName())) {
 				ZuulEventHandler.output.onGiveFail(npc.getName(), itemName);
 			} else {
 				if(takeableItem.isPerishable()) {
-					GameController.getCurrentPlayer().inventory.setWeight(takeableItem.getWeight());
-					GameController.getCurrentPlayer().inventory.removeItem(takeableItem);
+					GameController.getCurrentPlayer().getInvController().setWeight(takeableItem.getWeight());
+					GameController.getCurrentPlayer().getInvController().removeItem(takeableItem);
 				}
 			}
 		} else {

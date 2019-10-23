@@ -29,9 +29,9 @@ public class UseCmd implements Command {
 	}
 	
 	private void updateInventory(String itemName) {
-		TakeableItem item = GameController.getCurrentPlayer().inventory.getItem(itemName);
+		TakeableItem item = GameController.getCurrentPlayer().getInvController().getItem(itemName);
 		if(item.isPerishable()) {
-			GameController.getCurrentPlayer().inventory.removeItem(item);
+			GameController.getCurrentPlayer().getInvController().removeItem(item);
 		}
 		
 	}
@@ -52,7 +52,7 @@ public class UseCmd implements Command {
 		String itemToUse = args[1];
 		String interactableItem = args[3];
 		if(args[2].equals("on") || args[2].equals("with")) {
-			if (!GameController.getCurrentPlayer().inventory.checkIfExists(itemToUse)) {
+			if (!GameController.getCurrentPlayer().getInvController().checkIfExists(itemToUse)) {
 				ZuulEventHandler.output.notInInventory(itemToUse);
 				return;
 			}

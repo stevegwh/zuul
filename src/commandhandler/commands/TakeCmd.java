@@ -21,15 +21,15 @@ public class TakeCmd implements Command {
 				int weight = Integer.parseInt((String) obj.get("weight"));
 				boolean perishable = obj.containsKey("perishable");
 				TakeableItem item = null;
-				if (!GameController.getCurrentPlayer().inventory.overWeightLimit(weight)) {
+				if (!GameController.getCurrentPlayer().getInvController().overWeightLimit(weight)) {
 					ZuulEventHandler.output.onTake(toTake);
 					if(perishable) {
 						item = new TakeableItem(name, weight, true);
 					} else {
 						item = new TakeableItem(name, weight);
 					}
-					GameController.getCurrentPlayer().inventory.addItem(item);
-					GameController.getCurrentPlayer().inventory.setWeight(weight);
+					GameController.getCurrentPlayer().getInvController().addItem(item);
+					GameController.getCurrentPlayer().getInvController().setWeight(weight);
 					RoomController.removeTakeableItem(obj);
 				} else {
 					ZuulEventHandler.output.itemTooHeavy();

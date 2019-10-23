@@ -18,16 +18,16 @@ public class GameController {
 	public static Player getCurrentPlayer() {
 		return currentPlayer;
 	}
-
+	public static void setCurrentPlayer(Player player) {
+		currentPlayer = player;
+	}
 	public static void quit() {
 		ZuulEventHandler.output.quitGame();
 		isRunning = false;
 	}
-	
 	public static void restart() {
 		SINGLE_INSTANCE = new GameController();
 	}
-
     public static GameController getInstance() {
         if (SINGLE_INSTANCE == null) {
             synchronized (GameController.class) {
@@ -37,20 +37,16 @@ public class GameController {
             }
         }
         return SINGLE_INSTANCE;
-
     }
-    
     private void updateActors() {
 //		for(String actor : actors.keySet()) {
 //			actors.get(actor).update();
 //		}
     	actors.get("Barry").move("room3");
     }
-    
     public static NPC getActor(String actorName) {
     	return actors.get(actorName);
     }
-    
 	public void start() {
 		while(isRunning) {
 			updateActors();
@@ -58,11 +54,9 @@ public class GameController {
 			commandHandler.handleCommand(inputArray);
 		}
 	}
-
 	GameController() {
 		commandHandler = new CommandHandler();
 		actors = NPCFactory.getNPCCollection();
 		currentPlayer = new Player();
 	}
-
 }
