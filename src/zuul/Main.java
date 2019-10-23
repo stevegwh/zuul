@@ -1,7 +1,6 @@
 package zuul;
 
 import IO.IOHandler;
-import eventHandler.ZuulEventRouter;
 //import jsonDataHandler.ErrorCheckGameJSON;
 
 public class Main {
@@ -19,7 +18,6 @@ public class Main {
 				if(args[i].equals("--io")) {
 					if(i != len - 1) {
 						IOHandler.setIOMode(args[i+1]);
-						ZuulEventRouter.setIOMode(args[i+1]);
 					} else {
 						printUsage();
 						return;
@@ -33,7 +31,6 @@ public class Main {
 		// Set default output mode if none specified.
 		if(IOHandler.output == null) {
 			IOHandler.setIOMode("Console");
-			ZuulEventRouter.setIOMode("Console");
 			defaultUsed = true;
 		}
 

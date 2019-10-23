@@ -1,24 +1,23 @@
-package commandhandler.commands;
+package commandhandler.commandBases;
 
-import commandhandler.Command;
-import eventHandler.ZuulEventRouter;
+import commandhandler.CommandBase;
 import zuul.GameController;
 import zuul.RoomController;
 import zuul.TakeableItem;
 
-public class DropCmd implements Command {
+public class DropCmd implements CommandBase {
+	protected String toDrop;
 	@Override
-	public void execute(String[] args) {
-		String toDrop = args[1];
+	public boolean execute(String[] args) {
+		toDrop = args[1];
 		if(!GameController.getCurrentPlayer().getInvController().checkIfExists(toDrop)) {
-			ZuulEventRouter.output.notInInventory(toDrop);
-			return;
+			return false;
 		}
 		TakeableItem item = GameController.getCurrentPlayer().getInvController().getItem(toDrop);
-		ZuulEventRouter.output.onDrop(toDrop);
 		GameController.getCurrentPlayer().getInvController().setWeight(-item.getWeight());
 		GameController.getCurrentPlayer().getInvController().removeItem(item);
 		RoomController.addTakeableItem(item);
+		return true;
 	}
 
 }

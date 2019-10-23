@@ -3,7 +3,7 @@ package zuul;
 import java.util.ArrayList;
 
 import IO.IOHandler;
-import eventHandler.ZuulEventRouter;
+//import eventHandler.ZuulEventRouter;
 
 public class InventoryController {
 	private int totalWeight;
@@ -28,7 +28,7 @@ public class InventoryController {
 	}
 
 	public void removeItem(TakeableItem item) {
-		ZuulEventRouter.output.onRemoveFromInventory(item.getName());
+//		ZuulEventRouter.output.onRemoveFromInventory(item.getName());
 		inventory.remove(item);
 	}
 

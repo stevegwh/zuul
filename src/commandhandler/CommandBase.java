@@ -9,6 +9,6 @@ package commandhandler;
  * @author Steve
  *
  */
-public interface Command {
-	void execute(String[] inputArray);
+public interface CommandBase {
+	boolean execute(String[] inputArray);
 }

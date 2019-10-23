@@ -3,7 +3,7 @@ package zuul;
 import java.util.HashMap;
 
 import IO.IOHandler;
-import eventHandler.ZuulEventRouter;
+//import eventHandler.ZuulEventRouter;
 import npc.NPC;
 import npc.NPCFactory;
 
@@ -22,7 +22,6 @@ public class GameController {
 		currentPlayer = player;
 	}
 	public static void quit() {
-		ZuulEventRouter.output.quitGame();
 		isRunning = false;
 	}
 	public static void restart() {
@@ -56,7 +55,8 @@ public class GameController {
 	}
 	GameController() {
 		commandHandler = new CommandHandler();
-		actors = NPCFactory.getNPCCollection();
+		NPCFactory npcFactory = new NPCFactory();
+		actors = npcFactory.getNPCCollection();
 		currentPlayer = new Player();
 	}
 }

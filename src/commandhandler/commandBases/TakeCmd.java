@@ -1,19 +1,19 @@
-package commandhandler.commands;
+package commandhandler.commandBases;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import commandhandler.Command;
-import eventHandler.ZuulEventRouter;
+import commandhandler.CommandBase;
 import zuul.GameController;
 import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;
 
 // TODO: Could be cleaner
-public class TakeCmd implements Command {
+public class TakeCmd implements CommandBase {
+	protected String toTake;
 	@Override
-	public void execute(String[] args) {
-		String toTake = args[1];
+	public boolean execute(String[] args) {
+		toTake = args[1];
 		if(RoomController.hasTakeableItems()) {
 			JsonObject obj = RoomController.ifExistsInArrayReturnObj(toTake, "takeableItems");
 			if (obj != null) {
@@ -22,7 +22,6 @@ public class TakeCmd implements Command {
 				boolean perishable = obj.containsKey("perishable");
 				TakeableItem item = null;
 				if (!GameController.getCurrentPlayer().getInvController().overWeightLimit(weight)) {
-					ZuulEventRouter.output.onTake(toTake);
 					if(perishable) {
 						item = new TakeableItem(name, weight, true);
 					} else {
@@ -31,13 +30,15 @@ public class TakeCmd implements Command {
 					GameController.getCurrentPlayer().getInvController().addItem(item);
 					GameController.getCurrentPlayer().getInvController().setWeight(weight);
 					RoomController.removeTakeableItem(obj);
+					return true;
 				} else {
-					ZuulEventRouter.output.onTakeFail();
+					return false;
 				}
-				return;
 			}
 		}
+		return false;
 
-		ZuulEventRouter.output.cantFind(args[1]);
+		// TODO: Not been covered by subclass
+//		ZuulEventRouter.output.cantFind(args[1]);
 	}
 }
