@@ -15,7 +15,7 @@ public abstract class NPC {
 
 	// TODO: Coupled with text input. Possibly.
 	private String getUserDialogChoice() {
-		String[] inputArray = IOHandler.input.getUserInput(1);
+		String[] inputArray = IOHandler.input.getUserInput();
 		return inputArray[0];
 	}
 

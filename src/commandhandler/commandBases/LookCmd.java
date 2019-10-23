@@ -28,4 +28,9 @@ public class LookCmd implements CommandBase {
 		exits = (JsonObject) RoomController.getAllExits();
 		return true;
 	}
+	@Override
+	public String validateUserInput(String[] inputArray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

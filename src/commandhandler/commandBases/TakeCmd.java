@@ -41,4 +41,9 @@ public class TakeCmd implements CommandBase {
 		// TODO: Not been covered by subclass
 //		ZuulEventRouter.output.cantFind(args[1]);
 	}
+	@Override
+	public String validateUserInput(String[] inputArray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

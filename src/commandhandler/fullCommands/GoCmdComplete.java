@@ -7,6 +7,11 @@ import zuul.RoomController;
 
 public class GoCmdComplete extends GoCmd implements FullCommand {
 	public void init(String[] args) {
+		String error = super.validateUserInput(args);
+		if(error != null) {
+			IOHandler.output.println(error);
+			return;
+		}
 		if(super.execute(args)) {
 			onSuccess();
 		} else {

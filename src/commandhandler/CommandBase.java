@@ -10,5 +10,6 @@ package commandhandler;
  *
  */
 public interface CommandBase {
+	default String validateUserInput(String[] inputArray) { return null; };
 	boolean execute(String[] inputArray);
 }

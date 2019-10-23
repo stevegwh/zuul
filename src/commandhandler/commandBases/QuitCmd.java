@@ -7,4 +7,10 @@ public class QuitCmd implements CommandBase {
 	public boolean execute(String[] inputArray) {
 		return true;
 	}
+
+	@Override
+	public String validateUserInput(String[] inputArray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

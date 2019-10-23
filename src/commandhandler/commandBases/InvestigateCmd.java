@@ -21,4 +21,11 @@ public class InvestigateCmd implements CommandBase {
 		}
 		return false;
 	}
+	// TODO: Validate if the NPC is in the room
+	// TODO: Validate if InteractableItem is in room
+	@Override
+	public String validateUserInput(String[] inputArray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

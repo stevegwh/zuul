@@ -22,4 +22,9 @@ public class TalkCmd implements CommandBase {
 			return false;
 		}
 	}
+	@Override
+	public String validateUserInput(String[] inputArray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

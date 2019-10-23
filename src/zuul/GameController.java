@@ -11,7 +11,6 @@ public class GameController {
 	private static HashMap<String, NPC> actors = new HashMap<>();
 	private static GameController SINGLE_INSTANCE = null;
 	private CommandHandler commandHandler;
-	private int MAX_COMMAND_LENGTH = 4;
 	private static boolean isRunning = true;
 	private static Player currentPlayer;
 	
@@ -49,7 +48,7 @@ public class GameController {
 	public void start() {
 		while(isRunning) {
 			updateActors();
-			String[] inputArray = IOHandler.input.getUserInput(MAX_COMMAND_LENGTH);
+			String[] inputArray = IOHandler.input.getUserInput();
 			commandHandler.handleCommand(inputArray);
 		}
 	}

@@ -21,9 +21,8 @@ public class GoCmd implements CommandBase {
 	}
 	
 	public boolean execute(String[] args) {
-		direction = args[1].toLowerCase();
 		nextRoom = RoomController.getExit(direction);
-		if(nextRoom != null && isValidDirection(direction.toUpperCase())) {
+		if(nextRoom != null) {
 			return true;
 		} else {
 			return false;
@@ -32,5 +31,14 @@ public class GoCmd implements CommandBase {
 
 	public GoCmd() {
 		super();
+	}
+
+	@Override
+	public String validateUserInput(String[] inputArray) {
+		direction = inputArray[1].toLowerCase();
+		if(!isValidDirection(direction.toUpperCase())) {
+			return "Invalid Direction";
+		}
+		return null;
 	}
 }

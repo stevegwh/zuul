@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import commandhandler.CommandBase;
 import zuul.GameController;
-import zuul.InventoryController;
 import zuul.TakeableItem;
 
 public class InventoryCmd implements CommandBase {

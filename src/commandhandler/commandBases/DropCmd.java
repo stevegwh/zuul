@@ -19,5 +19,10 @@ public class DropCmd implements CommandBase {
 		RoomController.addTakeableItem(item);
 		return true;
 	}
+	@Override
+	public String validateUserInput(String[] inputArray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
