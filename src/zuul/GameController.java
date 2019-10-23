@@ -13,6 +13,11 @@ public class GameController {
 	private CommandHandler commandHandler;
 	private int MAX_COMMAND_LENGTH = 4;
 	private static boolean isRunning = true;
+	private static Player currentPlayer;
+	
+	public static Player getCurrentPlayer() {
+		return currentPlayer;
+	}
 
 	public static void quit() {
 		ZuulEventHandler.output.quitGame();
@@ -57,6 +62,7 @@ public class GameController {
 	GameController() {
 		commandHandler = new CommandHandler();
 		actors = NPCFactory.getNPCCollection();
+		currentPlayer = new Player();
 	}
 
 }

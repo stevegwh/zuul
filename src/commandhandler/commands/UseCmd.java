@@ -7,6 +7,7 @@ import IO.IOHandler;
 import commandhandler.Command;
 import eventHandler.ZuulEventHandler;
 import interactableItem.InteractableItem;
+import zuul.GameController;
 import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;
@@ -28,9 +29,9 @@ public class UseCmd implements Command {
 	}
 	
 	private void updateInventory(String itemName) {
-		TakeableItem item = InventoryController.getItem(itemName);
+		TakeableItem item = GameController.getCurrentPlayer().inventory.getItem(itemName);
 		if(item.isPerishable()) {
-			InventoryController.removeItem(item);
+			GameController.getCurrentPlayer().inventory.removeItem(item);
 		}
 		
 	}
@@ -51,7 +52,7 @@ public class UseCmd implements Command {
 		String itemToUse = args[1];
 		String interactableItem = args[3];
 		if(args[2].equals("on") || args[2].equals("with")) {
-			if (!InventoryController.checkIfExists(itemToUse)) {
+			if (!GameController.getCurrentPlayer().inventory.checkIfExists(itemToUse)) {
 				ZuulEventHandler.output.notInInventory(itemToUse);
 				return;
 			}

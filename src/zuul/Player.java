@@ -1,15 +1,14 @@
 package zuul;
 
-import java.util.ArrayList;
-
 public class Player {
-	private ArrayList<String> inventory = new ArrayList<>();
-	private static String currentLocation;
+	// TODO: Getter?
+	public InventoryController inventory = new InventoryController();
+	private String currentLocation;
 	
-	public static void setLocation(String location) {
+	public void setLocation(String location) {
 		currentLocation = location;
 	}
-	public static String getLocation() {
+	public String getLocation() {
 		return currentLocation;
 	}
 

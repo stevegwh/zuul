@@ -8,6 +8,7 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 import IO.IOHandler;
 import commandhandler.Command;
 import eventHandler.ZuulEventHandler;
+import zuul.GameController;
 import zuul.Player;
 import zuul.RoomController;
 
@@ -23,7 +24,7 @@ public class LookCmd implements Command {
 		} else {
 			IOHandler.output.println("Nothing interesting to report");
 		}
-		JsonArray actors = RoomController.getActorsInRoom(Player.getLocation());
+		JsonArray actors = RoomController.getActorsInRoom(GameController.getCurrentPlayer().getLocation());
 		ZuulEventHandler.output.renderActors(actors);
 		ArrayList<String> items = RoomController.getInteractableItems();
 		ZuulEventHandler.output.renderItems(items);

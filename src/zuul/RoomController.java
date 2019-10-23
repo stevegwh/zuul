@@ -16,7 +16,7 @@ public final class RoomController {
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
 		ZuulEventHandler.output.onRoomEnter(currentRoomJSON);
-		Player.setLocation(nextRoom);
+		GameController.getCurrentPlayer().setLocation(nextRoom);
 	}
 
 	public static JsonObject getAllExits() {
