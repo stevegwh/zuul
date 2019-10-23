@@ -14,8 +14,8 @@ public class CommandInstantiator {
 
 	/**
 	 * Attempts to create an instance of the class that the user has specified as a command.
-	 * Looks in the commands array to see if the command is valid.
-	 * @param commandName The command the user has entered (after capitalized and having the Cmd suffix added).
+	 * 
+	 * @param commandName The command the user has entered
 	 * @return A Command object or Null.
 	 */
 	public static Command createInstance(String commandName) {
@@ -38,9 +38,9 @@ public class CommandInstantiator {
 	}
 
 	/**
-	 * Scans the commands package for all command files and stores them in the commands ArrayList
+	 * Scans the commandhandler.commands package for all command files and stores them in the commands ArrayList
 	 * All commands should be capitalized correctly and have the suffix "Cmd". E.g. "GoCmd".
-	 * All files specified in the ignoreList array above are ignored.
+	 * 
 	 */
 	private static void populateCommandArr() {
 		//TODO: Hard coded path

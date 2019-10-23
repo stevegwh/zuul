@@ -2,30 +2,18 @@ package commandhandler.commands;
 
 import java.util.ArrayList;
 
-import IO.IOHandler;
 import commandhandler.Command;
+import eventHandler.ZuulEventHandler;
 import zuul.InventoryController;
 import zuul.TakeableItem;
-import zuulutils.ZuulTools;
 
-// TODO: Tied to console text
 public class InventoryCmd implements Command {
-
 	public void execute(String[] args) {
 		ArrayList<TakeableItem> inventory = InventoryController.getInventory();
 		if(inventory.size() == 0) {
-			IOHandler.output.println("You do not currently have anything in your inventory");
+			ZuulEventHandler.output.onInventoryFail();
 		} else {
-			IOHandler.output.println("You are currently carrying: ");
-			for(TakeableItem item: inventory) {
-				String name = item.getName();
-				name = ZuulTools.capitalize(name);
-				IOHandler.output.println(name);
-			}
+			ZuulEventHandler.output.renderInventory(inventory);
 		}
-	}
-
-	public InventoryCmd() {
-		super();
 	}
 }

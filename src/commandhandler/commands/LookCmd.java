@@ -14,6 +14,7 @@ import zuul.RoomController;
 // TODO: Print interactableItems and takeableItems.
 // TODO: Need to print takeableItems too.
 // TODO: Remove look description if not necessary for game.
+// TODO: Events being handled outside of handler
 public class LookCmd implements Command {
 	public void execute(String[] args) {
 		String lookDescription = RoomController.getLookDescription();

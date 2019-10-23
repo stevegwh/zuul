@@ -6,6 +6,7 @@ import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
+import zuul.TakeableItem;
 import zuulutils.ZuulTools;
 
 public class ConsoleEventHandler implements IEventHandler {
@@ -25,7 +26,6 @@ public class ConsoleEventHandler implements IEventHandler {
 	public void notInInventory(String itemName) {
 		IOHandler.output.println("You do not have a " + itemName + " in your inventory");
 	}
-	// TODO: Should this be in the NPC class directly?
 	@Override
 	public void onGiveFail(String name, String itemName) {
 		IOHandler.output.println(name + " didn't seem to want the " + itemName);
@@ -51,24 +51,20 @@ public class ConsoleEventHandler implements IEventHandler {
 	@Override
 	public void onDrop(String toDrop) {
 		IOHandler.output.println("You dropped " + toDrop);
-		
 	}
 	@Override
 	public void itemTooHeavy() {
 		IOHandler.output.println("Sorry, this item is too heavy for you to carry. Try dropping something first");
-		
 	}
 	@Override
 	public void onRoomEnter(JsonObject roomData) {
 		printSeperator();
 		IOHandler.output.println((String) roomData.get("description"));
 		printSeperator();
-		
 	}
 	@Override
 	public void renderActors(JsonArray actors) {
 		if(actors.size() > 0) {
-		// TODO: Coupled with console output... could print the people in room etc onRoomEnter in ConsoleEventHandler?
 			IOHandler.output.println("People in room: ");
 			actors.forEach((e) -> IOHandler.output.println((String) e));
 		} else {
@@ -100,5 +96,25 @@ public class ConsoleEventHandler implements IEventHandler {
 	public void onGoFail() {
 		IOHandler.output.println("You can't go that way.");
 		printSeperator();
+	}
+	@Override
+	public void renderDialogOptions(JsonArray dialogOptions) {
+		for(int i = 0, len = dialogOptions.size(); i < len ; i++) {
+			IOHandler.output.println(Integer.toString(i + 1) + ". " + dialogOptions.get(i));
+		}
+	}
+	@Override
+	public void renderInventory(ArrayList<TakeableItem> inventory) {
+		IOHandler.output.println("You are currently carrying: ");
+		inventory.forEach(s-> IOHandler.output.println(ZuulTools.capitalize(s.getName())));
+	}
+	@Override
+	public void onInventoryFail() {
+		IOHandler.output.println("You do not currently have anything in your inventory");
+	}
+	@Override
+	public void onDoorUnlock() {
+		// TODO: Should maybe take the direction and room as an argument.
+		IOHandler.output.println("Door unlocked! Maybe...");
 	}
 }

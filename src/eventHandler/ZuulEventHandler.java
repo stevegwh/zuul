@@ -2,9 +2,8 @@ package eventHandler;
 
 import java.lang.reflect.InvocationTargetException;
 
-// TODO: If I/O has already been set is this necessary?
 /**
- * Routes all the game's events to the requested implementation of the IEventHandler interface.
+ * Routes all the game's events to the necessary implementation of the IEventHandler interface.
  * @author Steve
  *
  */

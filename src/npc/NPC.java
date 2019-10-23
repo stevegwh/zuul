@@ -32,6 +32,7 @@ public abstract class NPC {
 		}
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
+		// TODO: Event being resolved outside of EventHandler
 		IOHandler.output.println((String) dialogResponses.get(idx));
 			
 	}
@@ -52,12 +53,9 @@ public abstract class NPC {
 		currentLocation = destinationRoomName;
 	}
 	
-	// TODO: Coupled with console output. 
 	public void printDialog() {
 		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
-		for(int i = 0, len = dialogOptions.size(); i < len ; i++) {
-			IOHandler.output.println(Integer.toString(i + 1) + ". " + dialogOptions.get(i));
-		}
+		ZuulEventHandler.output.renderDialogOptions(dialogOptions);
 	}
 	
 
@@ -66,7 +64,7 @@ public abstract class NPC {
 	 */
 	public void onInvestigate() {
 		IOHandler.output.println("You see " + name); //TODO: Could add a more in-depth description of people.
-		// TODO: Coupled with console output?
+		// TODO: Event being handled outside of event handler
 	}
 	
 	/**

@@ -37,6 +37,7 @@ public class InteractableItem {
 	}
 	
 	public void onInvestigate() {
+		// TODO: Event being handled outside of event handler
 		IOHandler.output.println(descriptionOnInvestigate);
 	}
 

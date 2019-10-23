@@ -15,4 +15,10 @@ public interface Output {
 	 * @param ele The string you want to print
 	 */
 	public void printf(String ele);
+	/**
+	 * Prints specified string formatted for character speech
+	 * 
+	 * @param ele The string you want to print
+	 */
+	public void printCharDialog(String ele);
 }

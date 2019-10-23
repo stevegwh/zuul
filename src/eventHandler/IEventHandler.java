@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
+
+import zuul.TakeableItem;
 /**
- * Interface for all types of events that can happen in the game. Designed to allow future developers to implement any resolution to the even they wish.
+ * Interface for all types of events that can happen in the game. Designed to allow future developers to implement any resolution to the event they wish.
  * For example, you could quite easily resolve the event by playing sounds, starting an animation etc.
  * All implementations must use the same prefix as specified in the --io flag when executing the game.
+ * Example: '--io Console' would need a 'ConsoleEventHandler' implementation.
  * 
  * @author Steve
  *
@@ -30,5 +33,9 @@ public interface IEventHandler {
 	public void renderItems(ArrayList<String> items);
 	public void onGo(String direction);
 	public void onGoFail();
+	public void renderDialogOptions(JsonArray dialogOptions);
+	public void renderInventory(ArrayList<TakeableItem> inventory);
+	public void onInventoryFail();
+	public void onDoorUnlock();
 }
 // TODO: rethink some of these method names to be more inclusive of different outputs

@@ -12,4 +12,10 @@ public class ConsoleOutput implements Output {
 		System.out.printf(ele);
 	}
 
+	@Override
+	public void printCharDialog(String ele) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
