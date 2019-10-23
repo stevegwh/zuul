@@ -105,7 +105,7 @@ public abstract class NPC {
 	}
 
 	public NPC(String name, String currentLocation) {
-		this.name = name; // Not necessary for json load
+		this.name = name;
 		this.setCurrentLocation(currentLocation);
 		loadJSON(name);
 	}

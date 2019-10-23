@@ -23,6 +23,7 @@ public class Barry extends NPC {
 		super("Barry", "room2");
 	}
 
+
 	@Override
 	public boolean onGive(String toCompare) {
 		String validItem = super.getValidItem();

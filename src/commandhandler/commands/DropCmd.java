@@ -3,7 +3,6 @@ package commandhandler.commands;
 import commandhandler.Command;
 import eventHandler.ZuulEventHandler;
 import zuul.GameController;
-import zuul.InventoryController;
 import zuul.RoomController;
 import zuul.TakeableItem;
 
