@@ -3,7 +3,7 @@ package zuul;
 import java.util.HashMap;
 
 import IO.IOHandler;
-import eventHandler.ZuulEventHandler;
+import eventHandler.ZuulEventRouter;
 import npc.NPC;
 import npc.NPCFactory;
 
@@ -22,7 +22,7 @@ public class GameController {
 		currentPlayer = player;
 	}
 	public static void quit() {
-		ZuulEventHandler.output.quitGame();
+		ZuulEventRouter.output.quitGame();
 		isRunning = false;
 	}
 	public static void restart() {

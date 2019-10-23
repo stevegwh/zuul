@@ -1,11 +1,11 @@
 package commandhandler.commands;
 
 import commandhandler.Command;
-import zuul.GameController;
-// TODO: Event being resolved outside of event handler 
+import eventHandler.ZuulEventRouter;
+
 public class QuitCmd implements Command {
 	@Override
 	public void execute(String[] inputArray) {
-		GameController.quit();
+		ZuulEventRouter.output.quitGame();
 	}
 }

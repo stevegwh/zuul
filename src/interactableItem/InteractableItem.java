@@ -3,7 +3,7 @@ package interactableItem;
 import java.lang.reflect.InvocationTargetException;
 
 import IO.IOHandler;
-import eventHandler.ZuulEventHandler;
+import eventHandler.ZuulEventRouter;
 import zuulutils.ZuulTools;
 
 /**
@@ -31,14 +31,13 @@ public class InteractableItem {
 			executeAction(args);
 			return true;
 		} else {
-			ZuulEventHandler.output.invalidCommand();
+			ZuulEventRouter.output.invalidCommand();
 			return false;
 		}
 	}
 	
 	public void onInvestigate() {
-		// TODO: Event being handled outside of event handler
-		IOHandler.output.println(descriptionOnInvestigate);
+		ZuulEventRouter.output.onInvestigate(descriptionOnInvestigate);
 	}
 
 	/** 

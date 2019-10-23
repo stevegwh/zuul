@@ -5,7 +5,7 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
 import commandhandler.Command;
-import eventHandler.ZuulEventHandler;
+import eventHandler.ZuulEventRouter;
 import interactableItem.InteractableItem;
 import zuul.GameController;
 import zuul.InventoryController;
@@ -41,11 +41,11 @@ public class UseCmd implements Command {
 	public void execute(String[] args) {
 		// TODO: MESSY AND ASSUMES IT WILL ALWAYS BE 4 (What about "use potion" which is len 2?)//////
 		if(args.length < COMMAND_LENGTH) {
-			ZuulEventHandler.output.invalidCommand();
+			ZuulEventRouter.output.invalidCommand();
 			return;
 		}
 		if(args[1] == null || args[2] == null || args[3] == null ) {
-			ZuulEventHandler.output.invalidCommand();
+			ZuulEventRouter.output.invalidCommand();
 			return;
 		}
 		///////////////////////////////////////////////////////////////
@@ -53,7 +53,7 @@ public class UseCmd implements Command {
 		String interactableItem = args[3];
 		if(args[2].equals("on") || args[2].equals("with")) {
 			if (!GameController.getCurrentPlayer().getInvController().checkIfExists(itemToUse)) {
-				ZuulEventHandler.output.notInInventory(itemToUse);
+				ZuulEventRouter.output.notInInventory(itemToUse);
 				return;
 			}
 			if (RoomController.hasInteractableItems()) {
@@ -77,15 +77,15 @@ public class UseCmd implements Command {
 					}
 					return;
 				} else {
-					ZuulEventHandler.output.invalidCommand();
+					ZuulEventRouter.output.invalidCommand();
 					return;
 				}
 			}
 		} else {
-			ZuulEventHandler.output.invalidCommand();
+			ZuulEventRouter.output.invalidCommand();
 			
 		}
-		ZuulEventHandler.output.cantFind(interactableItem);
+		ZuulEventRouter.output.cantFind(interactableItem);
 	}
 }
 

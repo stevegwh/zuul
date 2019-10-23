@@ -3,7 +3,7 @@ package commandhandler.commands;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import commandhandler.Command;
-import eventHandler.ZuulEventHandler;
+import eventHandler.ZuulEventRouter;
 import zuul.GameController;
 import zuul.InventoryController;
 import zuul.RoomController;
@@ -22,7 +22,7 @@ public class TakeCmd implements Command {
 				boolean perishable = obj.containsKey("perishable");
 				TakeableItem item = null;
 				if (!GameController.getCurrentPlayer().getInvController().overWeightLimit(weight)) {
-					ZuulEventHandler.output.onTake(toTake);
+					ZuulEventRouter.output.onTake(toTake);
 					if(perishable) {
 						item = new TakeableItem(name, weight, true);
 					} else {
@@ -32,12 +32,12 @@ public class TakeCmd implements Command {
 					GameController.getCurrentPlayer().getInvController().setWeight(weight);
 					RoomController.removeTakeableItem(obj);
 				} else {
-					ZuulEventHandler.output.itemTooHeavy();
+					ZuulEventRouter.output.onTakeFail();
 				}
 				return;
 			}
 		}
 
-		ZuulEventHandler.output.cantFind(args[1]);
+		ZuulEventRouter.output.cantFind(args[1]);
 	}
 }

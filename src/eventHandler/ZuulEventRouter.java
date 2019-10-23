@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author Steve
  *
  */
-public class ZuulEventHandler {
+public class ZuulEventRouter {
 	public static IEventHandler output = null;
 	/**
 	 * Sets output to the mode specified. If "console" is passed in then this class will attempt to assign the output variable to
@@ -18,7 +18,7 @@ public class ZuulEventHandler {
 	public static void setIOMode(String mode) {
 		try {
 			// TODO: hard coded path
-			output = (IEventHandler) Class.forName(ZuulEventHandler.class.getPackageName() + "." + mode + "EventHandler").getConstructor().newInstance();
+			output = (IEventHandler) Class.forName(ZuulEventRouter.class.getPackageName() + "." + mode + "EventHandler").getConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block

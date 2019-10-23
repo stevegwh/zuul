@@ -6,6 +6,7 @@ import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
+import zuul.GameController;
 import zuul.TakeableItem;
 import zuulutils.ZuulTools;
 
@@ -42,6 +43,7 @@ public class ConsoleEventHandler implements IEventHandler {
 	@Override
 	public void quitGame() {
 		IOHandler.output.println("Thanks for playing!");
+		GameController.quit();
 	}
 	@Override
 	public void onTake(String toTake) {
@@ -53,7 +55,7 @@ public class ConsoleEventHandler implements IEventHandler {
 		IOHandler.output.println("You dropped " + toDrop);
 	}
 	@Override
-	public void itemTooHeavy() {
+	public void onTakeFail() {
 		IOHandler.output.println("Sorry, this item is too heavy for you to carry. Try dropping something first");
 	}
 	@Override
@@ -64,12 +66,9 @@ public class ConsoleEventHandler implements IEventHandler {
 	}
 	@Override
 	public void renderActors(JsonArray actors) {
-		if(actors.size() > 0) {
-			IOHandler.output.println("People in room: ");
-			actors.forEach((e) -> IOHandler.output.println((String) e));
-		} else {
-			IOHandler.output.println("Nobody in the room.");
-		}
+		printSeperator();
+		IOHandler.output.println("People in room: ");
+		actors.forEach((e) -> IOHandler.output.println((String) e));
 		printSeperator();
 	}
 	@Override
@@ -104,7 +103,7 @@ public class ConsoleEventHandler implements IEventHandler {
 		}
 	}
 	@Override
-	public void renderInventory(ArrayList<TakeableItem> inventory) {
+	public void onInventory(ArrayList<TakeableItem> inventory) {
 		IOHandler.output.println("You are currently carrying: ");
 		inventory.forEach(s-> IOHandler.output.println(ZuulTools.capitalize(s.getName())));
 	}
@@ -116,5 +115,24 @@ public class ConsoleEventHandler implements IEventHandler {
 	public void onDoorUnlock() {
 		// TODO: Should maybe take the direction and room as an argument.
 		IOHandler.output.println("Door unlocked! Maybe...");
+	}
+	@Override
+	public void onInvestigate(String descriptionOnInvestigate) {
+		IOHandler.output.println(descriptionOnInvestigate);
+		
+	}
+	@Override
+	public void renderDialogResponse(String response) {
+		IOHandler.output.println(response);
+		
+	}
+	@Override
+	public void onLook(String lookDescription) {
+		IOHandler.output.println(lookDescription);
+		
+	}
+	@Override
+	public void onLookFail() {
+		IOHandler.output.println("Nothing interesting to report");
 	}
 }

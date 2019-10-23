@@ -4,7 +4,7 @@ import zuul.GameController;
 import zuul.RoomController;
 import zuulutils.ZuulTools;
 import commandhandler.Command;
-import eventHandler.ZuulEventHandler;
+import eventHandler.ZuulEventRouter;
 import npc.NPC;
 
 public class TalkCmd implements Command {
@@ -19,10 +19,10 @@ public class TalkCmd implements Command {
 				NPC actor = GameController.getActor(actorName);
 				actor.onTalk();
 			} else {
-				ZuulEventHandler.output.cantFind(actorName);
+				ZuulEventRouter.output.cantFind(actorName);
 			}
 		} else {
-			ZuulEventHandler.output.invalidCommand();
+			ZuulEventRouter.output.invalidCommand();
 			return;
 		}
 	}

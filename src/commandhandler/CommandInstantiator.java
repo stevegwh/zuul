@@ -3,7 +3,7 @@ package commandhandler;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import eventHandler.ZuulEventHandler;
+import eventHandler.ZuulEventRouter;
 import zuulutils.ZuulTools;
 
 import java.io.File;
@@ -22,7 +22,7 @@ public class CommandInstantiator {
 		commandName = ZuulTools.capitalize(commandName);
 		commandName += "Cmd";
 		if(commands.indexOf(commandName) < 0) {
-			ZuulEventHandler.output.invalidCommand();
+			ZuulEventRouter.output.invalidCommand();
 			return null;
 		}
 		Object command = null;

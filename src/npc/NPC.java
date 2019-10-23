@@ -6,7 +6,7 @@ import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
-import eventHandler.ZuulEventHandler;
+import eventHandler.ZuulEventRouter;
 import jsonDataHandler.JSONDataHandler;
 
 public abstract class NPC {
@@ -27,13 +27,12 @@ public abstract class NPC {
 		printDialog();
 		String userChoice = getUserDialogChoice();
 		if(userChoice.length() > 1 || userChoice.matches("d")) {
-			ZuulEventHandler.output.invalidCommand();
+			ZuulEventRouter.output.invalidCommand();
 			return;
 		}
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
-		// TODO: Event being resolved outside of EventHandler
-		IOHandler.output.println((String) dialogResponses.get(idx));
+		ZuulEventRouter.output.renderDialogResponse(((String) dialogResponses.get(idx)));
 			
 	}
 
@@ -55,16 +54,17 @@ public abstract class NPC {
 	
 	public void printDialog() {
 		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
-		ZuulEventHandler.output.renderDialogOptions(dialogOptions);
+		ZuulEventRouter.output.renderDialogOptions(dialogOptions);
 	}
 	
 
 	/** 
 	 * Specifies what should happen when the player calls 'investigate' on the NPC.
 	 */
+	// TODO: Error: Prints "Room doesn't have interactableItems" currently
 	public void onInvestigate() {
-		IOHandler.output.println("You see " + name); //TODO: Could add a more in-depth description of people.
-		// TODO: Event being handled outside of event handler
+		String descriptionOnInvestigate = "You see " + name; //TODO: Could add a more in-depth description of people
+		ZuulEventRouter.output.onInvestigate(descriptionOnInvestigate);
 	}
 	
 	/**

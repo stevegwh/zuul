@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import eventHandler.ZuulEventHandler;
+import eventHandler.ZuulEventRouter;
 import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
 
@@ -15,7 +15,7 @@ public final class RoomController {
 
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
-		ZuulEventHandler.output.onRoomEnter(currentRoomJSON);
+		ZuulEventRouter.output.onRoomEnter(currentRoomJSON);
 		GameController.getCurrentPlayer().setLocation(nextRoom);
 	}
 
@@ -135,6 +135,19 @@ public final class RoomController {
 		}
 		return null;
 	}
+	public static ArrayList<String> getTakeableItems() {
+		if(hasTakeableItems()) {
+			JsonArray takeableItems = (JsonArray) currentRoomJSON.get("takeableItems");
+			ArrayList<String> arr = new ArrayList<>();
+			for(Object item : takeableItems) {
+				JsonObject obj = (JsonObject) item;
+				String name = (String) obj.get("name");
+				arr.add(name);
+			}
+			return arr;
+		}
+		return null;
+	}
 
 	/**
 	 * Checks if the current room's JsonObject has the specified NPC/Actor.
@@ -148,7 +161,7 @@ public final class RoomController {
 
 	public static void renderExits() {
 		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
-		ZuulEventHandler.output.renderExits(exits);
+		ZuulEventRouter.output.renderExits(exits);
 	}
 
 	static {

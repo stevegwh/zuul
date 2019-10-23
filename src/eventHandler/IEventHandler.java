@@ -21,21 +21,25 @@ public interface IEventHandler {
 	public void cantFind(String e);
 	public void notInInventory(String itemName);
 	public void onGiveFail(String name, String itemName);
-	public void onRemoveFromInventory(String itemName);
 	public void printSeperator();
 	public void quitGame();
-	public void renderExits(JsonObject exits);
 	public void onTake(String toTake);
+	public void onTakeFail();
 	public void onDrop(String toDrop);
-	public void itemTooHeavy();
 	public void onRoomEnter(JsonObject roomData);
+	public void renderExits(JsonObject exits);
 	public void renderActors(JsonArray actors);
 	public void renderItems(ArrayList<String> items);
 	public void onGo(String direction);
 	public void onGoFail();
-	public void renderDialogOptions(JsonArray dialogOptions);
-	public void renderInventory(ArrayList<TakeableItem> inventory);
+	public void onInventory(ArrayList<TakeableItem> inventory);
+	public void onRemoveFromInventory(String itemName);
 	public void onInventoryFail();
 	public void onDoorUnlock();
+	public void onInvestigate(String descriptionOnInvestigate);
+	public void renderDialogOptions(JsonArray dialogOptions);
+	public void renderDialogResponse(String response);
+	public void onLook(String lookDescription);
+	public void onLookFail();
 }
 // TODO: rethink some of these method names to be more inclusive of different outputs

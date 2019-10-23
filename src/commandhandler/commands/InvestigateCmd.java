@@ -3,7 +3,7 @@ package commandhandler.commands;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import commandhandler.Command;
-import eventHandler.ZuulEventHandler;
+import eventHandler.ZuulEventRouter;
 import interactableItem.InteractableItem;
 import zuul.RoomController;
 
@@ -20,6 +20,6 @@ public class InvestigateCmd implements Command {
 			item.onInvestigate();
 			return;
 		}
-		ZuulEventHandler.output.cantFind(args[1]);
+		ZuulEventRouter.output.cantFind(args[1]);
 	}
 }

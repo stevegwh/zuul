@@ -31,14 +31,6 @@
     "room2" : {
         "description" : "You enter room2",
 		"actorsInRoom" : [],
-        "interactableItems" : [
-            {
-            	"name" : "door",
-				"validItem" : "key",
-				"onUse" : ["unlock", "north", "room4"],
-				"onInvestigate" : "There is a big oak door in front of you blocking the path to the north."
-			}
-		],
         "exits": {
             "north" : "room3",
             "west" : "room1"

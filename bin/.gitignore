@@ -1,2 +1,6 @@
 /zuul/
 /npc/
+/commandResolver/
+/interactableItem/
+/commandhandler/
+/IO/
