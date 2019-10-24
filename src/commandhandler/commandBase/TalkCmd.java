@@ -1,12 +1,12 @@
-package commandhandler.commandLogic;
+package commandhandler.commandBase;
 
 import zuul.GameController;
 import zuulutils.ZuulTools;
-import commandhandler.CommandLogic;
+import commandhandler.Command;
 import npc.NPC;
 
 
-public class TalkCmd implements CommandLogic {
+public abstract class TalkCmd extends Command {
 	protected NPC actor;
 	protected String toTalk;
 	// TODO: Validate prepositions etc
@@ -22,7 +22,7 @@ public class TalkCmd implements CommandLogic {
 		}
 	}
 	@Override
-	public String validateUserInput(String[] inputArray) {
+	protected String validateUserInput(String[] inputArray) {
 		// TODO Auto-generated method stub
 		return null;
 	}

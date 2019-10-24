@@ -1,13 +1,13 @@
-package commandhandler.commandLogic;
+package commandhandler.commandBase;
 
-import commandhandler.CommandLogic;
+import commandhandler.Command;
 import zuul.GameController;
 import zuul.TakeableItem;
 
-public class DropCmd implements CommandLogic {
+public abstract class DropCmd extends Command {
 	protected String toDrop;
 	@Override
-	public boolean execute(String[] args) {
+	protected boolean execute(String[] args) {
 		toDrop = args[1];
 		if(!GameController.getCurrentPlayer().getInvController().checkIfExists(toDrop)) {
 			return false;
@@ -17,5 +17,10 @@ public class DropCmd implements CommandLogic {
 		GameController.getCurrentPlayer().getInvController().removeItem(item);
 		GameController.getRoomController().addTakeableItem(item);
 		return true;
+	}
+	@Override
+	protected String validateUserInput(String[] inputArray) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

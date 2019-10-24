@@ -1,12 +1,12 @@
-package commandhandler.commandLogic;
+package commandhandler.commandBase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import commandhandler.CommandLogic;
+import commandhandler.Command;
 import commandhandler.CommandInstantiator;
 
-public class HelpCmd implements CommandLogic{
+public abstract class HelpCmd extends Command {
 	protected List<String> commands = new ArrayList<>();
 
 	@Override
@@ -14,5 +14,10 @@ public class HelpCmd implements CommandLogic{
 		CommandInstantiator instantiator = new CommandInstantiator();
 		commands = instantiator.getCommands();
 		return true;
+	}
+	@Override
+	protected String validateUserInput(String[] inputArray) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

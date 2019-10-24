@@ -1,17 +1,17 @@
-package commandhandler.commandLogic;
+package commandhandler.commandBase;
 
-import commandhandler.CommandLogic;
+import commandhandler.Command;
 import zuul.GameController;
 
-public class GoCmd implements CommandLogic {
+public abstract class GoCmd extends Command {
 	protected String direction;
 	protected String nextRoom;
 	
-	public enum Directions {
+	private enum Directions {
 		NORTH, SOUTH, EAST, WEST
 	}
 
-	public boolean isValidDirection(String userInput) {
+	private boolean isValidDirection(String userInput) {
 	    for (Directions c : Directions.values()) {
 	        if (c.name().equals(userInput)) {
 	            return true;
@@ -31,9 +31,6 @@ public class GoCmd implements CommandLogic {
 		}
 	}
 
-	public GoCmd() {
-		super();
-	}
 
 	@Override
 	public String validateUserInput(String[] inputArray) {

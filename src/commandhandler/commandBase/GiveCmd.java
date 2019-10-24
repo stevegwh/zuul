@@ -1,12 +1,12 @@
-package commandhandler.commandLogic;
+package commandhandler.commandBase;
 
-import commandhandler.CommandLogic;
+import commandhandler.Command;
 import npc.NPC;
 import zuul.GameController;
 import zuul.TakeableItem;
 import zuulutils.ZuulTools;
 
-public class GiveCmd implements CommandLogic{
+public abstract class GiveCmd extends Command {
 	protected String itemName;
 	protected String actorName;
 	protected TakeableItem takeableItem;

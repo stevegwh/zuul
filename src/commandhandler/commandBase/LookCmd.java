@@ -1,14 +1,14 @@
-package commandhandler.commandLogic;
+package commandhandler.commandBase;
 
 import java.util.ArrayList;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import commandhandler.CommandLogic;
+import commandhandler.Command;
 import zuul.GameController;
 
-public class LookCmd implements CommandLogic {
+public abstract class LookCmd extends Command {
 	protected String description;
 	protected JsonArray actors;
 	protected ArrayList<String> items = new ArrayList<>();

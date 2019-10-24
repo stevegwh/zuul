@@ -1,13 +1,11 @@
-package commandhandler.consoleOutputLayer;
+package commandhandler.consoleCommandOutput;
 
 import IO.IOHandler;
-import commandhandler.CommandOutputLayer;
-import commandhandler.commandLogic.HelpCmd;
+import commandhandler.CommandOutput;
+import commandhandler.commandBase.HelpCmd;
 
 // TODO: End list in full stop, not comma
-public class HelpCmdOutput extends HelpCmd implements CommandOutputLayer {
-
-	@Override
+public class HelpCmdOutput extends HelpCmd implements CommandOutput {
 	public void init(String[] args) {
 		if(super.execute(args)) {
 			IOHandler.output.println("You are lost. You are alone. You wander around at the university");
@@ -17,5 +15,4 @@ public class HelpCmdOutput extends HelpCmd implements CommandOutputLayer {
 			IOHandler.output.println(" ");
 		}
 	}
-
 }

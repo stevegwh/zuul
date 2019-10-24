@@ -48,7 +48,7 @@ public class CommandInstantiator {
 	 * @param commandName The command the user has entered
 	 * @return A CommandOutputLayer object or Null.
 	 */
-	public CommandOutputLayer createInstance(String commandName) {
+	public CommandOutput createInstance(String commandName) {
 		commandName = buildFileName(commandName);
 		if(isValid(commandName)) {
 			IOHandler.output.printError("Invalid Command");
@@ -62,7 +62,7 @@ public class CommandInstantiator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return (CommandOutputLayer) command;
+		return (CommandOutput) command;
 	}
 
 	/**

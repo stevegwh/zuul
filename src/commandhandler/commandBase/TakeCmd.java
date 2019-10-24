@@ -1,13 +1,13 @@
-package commandhandler.commandLogic;
+package commandhandler.commandBase;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import commandhandler.CommandLogic;
+import commandhandler.Command;
 import zuul.GameController;
 import zuul.TakeableItem;
 
 // TODO: Could be cleaner
-public class TakeCmd implements CommandLogic {
+public abstract class TakeCmd extends Command {
 	protected String toTake;
 	@Override
 	public boolean execute(String[] args) {
@@ -40,7 +40,7 @@ public class TakeCmd implements CommandLogic {
 //		ZuulEventRouter.output.cantFind(args[1]);
 	}
 	@Override
-	public String validateUserInput(String[] inputArray) {
+	protected String validateUserInput(String[] inputArray) {
 		if(inputArray.length == 1) {
 			return "Take what?";
 		}
