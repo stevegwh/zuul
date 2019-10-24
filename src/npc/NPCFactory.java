@@ -6,11 +6,9 @@ import java.util.HashMap;
 
 import zuulutils.ZuulTools;
 
-// TODO: Find a better solution than an ignore list.
-// TODO: Change this from static.
 // TODO: Javadocs.
 public class NPCFactory {
-	private static HashMap<String, NPC> npcs = new HashMap<String, NPC>();
+	private HashMap<String, NPC> npcs = new HashMap<String, NPC>();
 	
 
 	/**
@@ -18,7 +16,7 @@ public class NPCFactory {
 	 * @param className The current class' file name.
 	 * @return An NPC object or null.
 	 */
-	private static NPC attemptInstantiate(String className) {
+	private NPC attemptInstantiate(String className) {
 		Object npc = null;
 		try {
 			// TODO: Hard coded path
@@ -35,7 +33,7 @@ public class NPCFactory {
 	 * Scans the npc package for all npc files and stores them in the npcs HashMap
 	 * All files specified in the ignoreList array above are ignored.
 	 */
-	private static void populateNPCArr() {
+	private void populateNPCArr() {
 		// TODO: Hard coded path
 		File file = new File("src/" + NPCFactory.class.getPackageName() + "/npcs/");
 		String[] list = file.list();
@@ -48,7 +46,6 @@ public class NPCFactory {
 					System.out.println("Failed to instantiate " + item + " class. Duplicate class");
 					return;
 				}
-				
 				npcs.put(npc.getName(), npc);
 			} else {
 				System.out.println("Failed to instantiate " + item + " class. Please check file.");
@@ -57,11 +54,11 @@ public class NPCFactory {
 		}
 	}
 	
-	public static HashMap<String, NPC> getNPCCollection() {
+	public HashMap<String, NPC> getNPCCollection() {
 		return npcs;
 	}
 	
-	static {
+	public NPCFactory() {
 		populateNPCArr();
 	}
 }

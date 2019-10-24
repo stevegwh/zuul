@@ -6,7 +6,6 @@ import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
-import eventHandler.ZuulEventRouter;
 import jsonDataHandler.JSONDataHandler;
 
 public abstract class NPC {
@@ -16,7 +15,7 @@ public abstract class NPC {
 
 	// TODO: Coupled with text input. Possibly.
 	private String getUserDialogChoice() {
-		String[] inputArray = IOHandler.input.getUserInput(1);
+		String[] inputArray = IOHandler.input.getUserInput();
 		return inputArray[0];
 	}
 
@@ -27,12 +26,14 @@ public abstract class NPC {
 		printDialog();
 		String userChoice = getUserDialogChoice();
 		if(userChoice.length() > 1 || userChoice.matches("d")) {
-			ZuulEventRouter.output.invalidCommand();
+			// TODO: Replace with printDialog
+//			ZuulEventRouter.output.invalidCommand();
 			return;
 		}
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
-		ZuulEventRouter.output.renderDialogResponse(((String) dialogResponses.get(idx)));
+	// TODO: Replace with print dialog
+//		ZuulEventRouter.output.renderDialogResponse(((String) dialogResponses.get(idx)));
 			
 	}
 
@@ -54,17 +55,18 @@ public abstract class NPC {
 	
 	public void printDialog() {
 		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
-		ZuulEventRouter.output.renderDialogOptions(dialogOptions);
+	// TODO: Replace with printDialog
+//		ZuulEventRouter.output.renderDialogOptions(dialogOptions);
 	}
 	
 
 	/** 
 	 * Specifies what should happen when the player calls 'investigate' on the NPC.
 	 */
-	// TODO: Error: Prints "Room doesn't have interactableItems" currently
+	// TODO: To be implemented
 	public void onInvestigate() {
 		String descriptionOnInvestigate = "You see " + name; //TODO: Could add a more in-depth description of people
-		ZuulEventRouter.output.onInvestigate(descriptionOnInvestigate);
+//		ZuulEventRouter.output.onInvestigate(descriptionOnInvestigate);
 	}
 	
 	/**

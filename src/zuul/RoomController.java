@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import eventHandler.ZuulEventRouter;
+import IO.IOHandler;
 import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
 
@@ -15,7 +15,9 @@ public final class RoomController {
 
 	public static void getNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
-		ZuulEventRouter.output.onRoomEnter(currentRoomJSON);
+//		ZuulEventRouter.output.onRoomEnter(currentRoomJSON);
+		// TODO: Rogue output
+		IOHandler.output.println((String) currentRoomJSON.get("description"));
 		GameController.getCurrentPlayer().setLocation(nextRoom);
 	}
 
@@ -157,11 +159,6 @@ public final class RoomController {
 	public static boolean hasActor(String actorName) {
 		JsonArray actors = (JsonArray) currentRoomJSON.get("actorsInRoom");
 		return actors.indexOf(actorName) >= 0;
-	}
-
-	public static void renderExits() {
-		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
-		ZuulEventRouter.output.renderExits(exits);
 	}
 
 	static {
