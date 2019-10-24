@@ -2,9 +2,9 @@ package commandhandler.consoleOutputLayer;
 
 import IO.IOHandler;
 import commandhandler.CommandOutputLayer;
-import commandhandler.commandBases.TalkCmd;
+import commandhandler.commandLogic.TalkCmd;
 
-public class TalkCmdLayer extends TalkCmd implements CommandOutputLayer {
+public class TalkCmdOutput extends TalkCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		if(super.execute(args)) {
 			onSuccess();

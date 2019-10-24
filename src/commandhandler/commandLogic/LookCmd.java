@@ -1,24 +1,22 @@
-package commandhandler.commandBases;
+package commandhandler.commandLogic;
 
 import java.util.ArrayList;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import commandhandler.CommandBase;
+import commandhandler.CommandLogic;
 import zuul.GameController;
 
-public class LookCmd implements CommandBase {
-	protected String lookDescription;
+public class LookCmd implements CommandLogic {
+	protected String description;
 	protected JsonArray actors;
 	protected ArrayList<String> items = new ArrayList<>();
 	protected JsonObject exits;
 	public boolean execute(String[] args) {
-		lookDescription = GameController.getRoomController().getLookDescription();
+		description = GameController.getRoomController().getDescription();
 		actors = GameController.getRoomController().getActorsInRoom(GameController.getCurrentPlayer().getLocation());
-		if(GameController.getRoomController().hasTakeableItems()) {
-			items = GameController.getRoomController().getTakeableItems();
-		}
+		items = GameController.getRoomController().getTakeableItems();
 		exits = (JsonObject) GameController.getRoomController().getAllExits();
 		return true;
 	}

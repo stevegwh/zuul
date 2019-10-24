@@ -31,7 +31,8 @@ public final class RoomController {
 		exits.put(direction, destination);
 	}
 
-	public JsonObject ifExistsInArrayReturnObj(String toCheck) {
+	// TODO: This isn't obvious
+	public JsonObject ifItemExistsReturnIt(String toCheck) {
 		JsonArray arr = (JsonArray) currentRoomJSON.get("takeableItems");
 		return (JsonObject) arr.stream().filter(o -> ((JsonObject) o).get("name").equals(toCheck)).findFirst().orElse(null);
 	}
@@ -74,7 +75,7 @@ public final class RoomController {
 		return room;
 	}
 	
-	// Need to make the NPC call this at random
+	// TODO: Need to make the NPC call this at random
 	/** 
 	 * Updates the actorsInRoom field of the destination room and the room specified in the NPC's
 	 * currentLocation field.

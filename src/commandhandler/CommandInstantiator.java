@@ -14,7 +14,7 @@ public class CommandInstantiator {
 	private ArrayList<String> commands = new ArrayList<>();
 	// TODO: Make dynamic depending on IO mode
 	private String dir = "consoleOutputLayer";
-	private String fileSuffix = "CmdLayer";
+	private String fileSuffix = "CmdOutput";
 	
 	/**
 	 * @return A list of the command names

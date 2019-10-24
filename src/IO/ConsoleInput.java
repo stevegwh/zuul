@@ -3,7 +3,6 @@ package IO;
 import java.util.Scanner;
 
 
-// TODO: Currently this allows you to write things like 'go north lol lol' because it still fits under the MAX_LENGTH even tho it's invalid.
 public class ConsoleInput implements Input {
 	private String[] parseInput(String input) {
 		input = input.trim().replaceAll(" +", " ");

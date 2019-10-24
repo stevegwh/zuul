@@ -2,9 +2,9 @@ package commandhandler.consoleOutputLayer;
 
 import IO.IOHandler;
 import commandhandler.CommandOutputLayer;
-import commandhandler.commandBases.GiveCmd;
+import commandhandler.commandLogic.GiveCmd;
 
-public class GiveCmdLayer extends GiveCmd implements CommandOutputLayer {
+public class GiveCmdOutput extends GiveCmd implements CommandOutputLayer {
 	
 	public void init(String[] args) {
 		String error = super.validateUserInput(args);

@@ -1,12 +1,12 @@
-package commandhandler.commandBases;
+package commandhandler.commandLogic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import commandhandler.CommandBase;
+import commandhandler.CommandLogic;
 import commandhandler.CommandInstantiator;
 
-public class HelpCmd implements CommandBase{
+public class HelpCmd implements CommandLogic{
 	protected List<String> commands = new ArrayList<>();
 
 	@Override

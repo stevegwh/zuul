@@ -1,12 +1,12 @@
-package commandhandler.commandBases;
+package commandhandler.commandLogic;
 
 import zuul.GameController;
 import zuulutils.ZuulTools;
-import commandhandler.CommandBase;
+import commandhandler.CommandLogic;
 import npc.NPC;
 
 
-public class TalkCmd implements CommandBase {
+public class TalkCmd implements CommandLogic {
 	protected NPC actor;
 	protected String toTalk;
 	// TODO: Validate prepositions etc

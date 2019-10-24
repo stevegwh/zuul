@@ -1,10 +1,10 @@
-package commandhandler.commandBases;
+package commandhandler.commandLogic;
 
-import commandhandler.CommandBase;
+import commandhandler.CommandLogic;
 import zuul.GameController;
 import zuul.TakeableItem;
 
-public class DropCmd implements CommandBase {
+public class DropCmd implements CommandLogic {
 	protected String toDrop;
 	@Override
 	public boolean execute(String[] args) {
@@ -18,10 +18,4 @@ public class DropCmd implements CommandBase {
 		GameController.getRoomController().addTakeableItem(item);
 		return true;
 	}
-	@Override
-	public String validateUserInput(String[] inputArray) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

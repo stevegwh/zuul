@@ -1,9 +1,9 @@
-package commandhandler.commandBases;
+package commandhandler.commandLogic;
 
-import commandhandler.CommandBase;
+import commandhandler.CommandLogic;
 import zuul.GameController;
 
-public class GoCmd implements CommandBase {
+public class GoCmd implements CommandLogic {
 	protected String direction;
 	protected String nextRoom;
 	

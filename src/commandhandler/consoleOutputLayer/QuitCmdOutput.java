@@ -2,10 +2,10 @@ package commandhandler.consoleOutputLayer;
 
 import IO.IOHandler;
 import commandhandler.CommandOutputLayer;
-import commandhandler.commandBases.QuitCmd;
+import commandhandler.commandLogic.QuitCmd;
 import zuul.GameController;
 
-public class QuitCmdLayer extends QuitCmd implements CommandOutputLayer {
+public class QuitCmdOutput extends QuitCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		if(super.execute(args)) {
 			onSuccess();

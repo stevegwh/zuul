@@ -2,9 +2,9 @@ package commandhandler.consoleOutputLayer;
 
 import IO.IOHandler;
 import commandhandler.CommandOutputLayer;
-import commandhandler.commandBases.DropCmd;
+import commandhandler.commandLogic.DropCmd;
 
-public class DropCmdLayer extends DropCmd implements CommandOutputLayer {
+public class DropCmdOutput extends DropCmd implements CommandOutputLayer {
 	
 	public void init(String[] args) {
 		if(super.execute(args)) {

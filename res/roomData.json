@@ -1,7 +1,6 @@
 {
     "room1" : {
         "description" : "You enter room1. You feel a great sense of adventure.",
-        "lookDescription" : "The room smells vaguely of doritos",
         "actorsInRoom" : [],
         "takeableItems" :  [
         	{
@@ -35,7 +34,6 @@
     },
     "room4" : {
         "description" : "You enter room4",
-        "lookDescription" : "You feel a great sense of adventure. Room2 is to the north, room3 is to the south.",
         "exits": {
         	"south" : "room1"
        } 

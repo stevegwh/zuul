@@ -9,7 +9,7 @@ package commandhandler;
  * @author Steve
  *
  */
-public interface CommandBase {
+public interface CommandLogic {
 	default String validateUserInput(String[] inputArray) { return null; };
 	boolean execute(String[] inputArray);
 }

@@ -2,9 +2,9 @@ package commandhandler.consoleOutputLayer;
 
 import IO.IOHandler;
 import commandhandler.CommandOutputLayer;
-import commandhandler.commandBases.TakeCmd;
+import commandhandler.commandLogic.TakeCmd;
 
-public class TakeCmdLayer extends TakeCmd implements CommandOutputLayer {
+public class TakeCmdOutput extends TakeCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		if(super.execute(args)) {
 			onSuccess();

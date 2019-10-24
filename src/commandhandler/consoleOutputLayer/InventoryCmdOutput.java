@@ -2,10 +2,10 @@ package commandhandler.consoleOutputLayer;
 
 import IO.IOHandler;
 import commandhandler.CommandOutputLayer;
-import commandhandler.commandBases.InventoryCmd;
+import commandhandler.commandLogic.InventoryCmd;
 import zuulutils.ZuulTools;
 
-public class InventoryCmdLayer extends InventoryCmd implements CommandOutputLayer {
+public class InventoryCmdOutput extends InventoryCmd implements CommandOutputLayer {
 
 	public void init(String[] args) {
 		if(super.execute(args)) {

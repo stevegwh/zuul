@@ -1,12 +1,12 @@
-package commandhandler.commandBases;
+package commandhandler.commandLogic;
 
-import commandhandler.CommandBase;
+import commandhandler.CommandLogic;
 import npc.NPC;
 import zuul.GameController;
 import zuul.TakeableItem;
 import zuulutils.ZuulTools;
 
-public class GiveCmd implements CommandBase{
+public class GiveCmd implements CommandLogic{
 	protected String itemName;
 	protected String actorName;
 	protected TakeableItem takeableItem;
@@ -27,7 +27,6 @@ public class GiveCmd implements CommandBase{
 
 	@Override
 	public String validateUserInput(String[] inputArray) {
-		System.out.println(inputArray.length);
 		final int COMMAND_LENGTH = 4;
 		if(inputArray.length > COMMAND_LENGTH) {
 			return "Invalid Command";
@@ -43,6 +42,9 @@ public class GiveCmd implements CommandBase{
 			return "Can't find " + actorName;
 		} else {
 			this.npc = npc;
+		}
+		if(!npc.getCurrentLocation().equals(GameController.getCurrentPlayer().getLocation())) {
+			return "Can't find " + actorName;
 		}
 		itemName = inputArray[1];
 		takeableItem = GameController.getCurrentPlayer().getInvController().getItem(itemName);

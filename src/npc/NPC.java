@@ -39,7 +39,6 @@ public abstract class NPC {
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
 		IOHandler.output.printCharDialog(((String) dialogResponses.get(idx)));
-			
 	}
 
 	public void update() {

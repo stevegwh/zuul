@@ -1,19 +1,19 @@
-package commandhandler.commandBases;
+package commandhandler.commandLogic;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import commandhandler.CommandBase;
+import commandhandler.CommandLogic;
 import zuul.GameController;
 import zuul.TakeableItem;
 
 // TODO: Could be cleaner
-public class TakeCmd implements CommandBase {
+public class TakeCmd implements CommandLogic {
 	protected String toTake;
 	@Override
 	public boolean execute(String[] args) {
 		toTake = args[1];
 		if(GameController.getRoomController().hasTakeableItems()) {
-			JsonObject obj = GameController.getRoomController().ifExistsInArrayReturnObj(toTake);
+			JsonObject obj = GameController.getRoomController().ifItemExistsReturnIt(toTake);
 			if (obj != null) {
 				String name = (String) obj.get("name");
 				int weight = Integer.parseInt((String) obj.get("weight"));
