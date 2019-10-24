@@ -1,4 +1,4 @@
-package commandhandler.commandOutputLayers;
+package commandhandler.consoleOutputLayer;
 
 import IO.IOHandler;
 import commandhandler.CommandOutputLayer;

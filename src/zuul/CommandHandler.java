@@ -22,7 +22,8 @@ public class CommandHandler {
 	public void handleCommand(String[] inputArray) {
 		String commandName = inputArray[0];
 		if(!commands.containsKey(commandName)) {
-			Object command = CommandInstantiator.createInstance(commandName);
+			CommandInstantiator instantiator = new CommandInstantiator();
+			Object command = instantiator.createInstance(commandName);
 			if(command != null) {
 				commands.put(commandName, (CommandOutputLayer) command);
 				((CommandOutputLayer) command).init(inputArray);

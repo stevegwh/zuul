@@ -8,44 +8,50 @@ import IO.IOHandler;
 import zuulutils.ZuulTools;
 
 import java.io.File;
-// TODO: De-static
 public class CommandInstantiator {
-	private static ArrayList<String> commands = new ArrayList<>();
-	private static String dir = "commandOutputLayers";
+	private ArrayList<String> commands = new ArrayList<>();
+	// TODO: Make dynamic depending on IO mode
+	private String dir = "consoleOutputLayer";
+	
+	private String buildFileName(String commandName) {
+		commandName = ZuulTools.capitalize(commandName);
+		commandName += "CmdLayer";
+		return commandName;
+	}
+	
+	private boolean isValid(String commandName) {
+		return commands.indexOf(commandName) < 0;
+	}
 	
 
 	/**
 	 * Attempts to create an instance of the class that the user has specified as a command.
 	 * 
 	 * @param commandName The command the user has entered
-	 * @return A CommandBase object or Null.
+	 * @return A CommandOutputLayer object or Null.
 	 */
-	public static CommandBase createInstance(String commandName) {
-		commandName = ZuulTools.capitalize(commandName);
-		commandName += "CmdLayer";
-		if(commands.indexOf(commandName) < 0) {
+	public CommandOutputLayer createInstance(String commandName) {
+		commandName = buildFileName(commandName);
+		if(isValid(commandName)) {
 			IOHandler.output.printError("Invalid Command");
 			return null;
 		}
 		Object command = null;
 		try {
-			//TODO: Hard coded path
 			command = Class.forName(CommandInstantiator.class.getPackageName() + "." + dir + "." + commandName).getConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return (CommandBase) command;
+		return (CommandOutputLayer) command;
 	}
 
 	/**
-	 * Scans the commandhandler.commandBases package for all command files and stores them in the commands ArrayList
-	 * All commands should be capitalized correctly and have the suffix "Cmd". E.g. "GoCmd".
+	 * Scans the OutputLayer directory for your specified output for all command files and stores them in the commands ArrayList
 	 * 
 	 */
-	private static void populateCommandArr() {
-		//TODO: Hard coded path
+	private void populateCommandArr() {
 		File file = new File("src/" + CommandInstantiator.class.getPackageName() + "/" + dir + "/");
 		String[] list = file.list();
 		for(String item : list) {
@@ -55,7 +61,8 @@ public class CommandInstantiator {
 		}
 	}
 	
-	static {
+	// TODO: Maybe pass in IO mode here?
+	public CommandInstantiator() {
 		populateCommandArr();
 	}
 }
