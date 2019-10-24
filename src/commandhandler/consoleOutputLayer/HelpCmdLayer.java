@@ -6,21 +6,12 @@ import commandhandler.commandBases.HelpCmd;
 
 public class HelpCmdLayer extends HelpCmd implements CommandOutputLayer {
 
+	@Override
 	public void init(String[] args) {
-		IOHandler.output.println("Valid commands are: ");
-		// TODO: implement
-	}
-
-	@Override
-	public void onSuccess() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onFail() {
-		// TODO Auto-generated method stub
-		
+		if(super.execute(args)) {
+			IOHandler.output.println("Valid commands are: ");
+			commands.forEach(e->IOHandler.output.println(e));
+		}
 	}
 
 }

@@ -14,12 +14,12 @@ public class DropCmdLayer extends DropCmd implements CommandOutputLayer {
 		}
 	}
 	
-	public void onSuccess() {
+	private void onSuccess() {
 		IOHandler.output.println("You dropped " + toDrop);
 		
 	}
 	
-	public void onFail() {
+	private void onFail() {
 		IOHandler.output.println("You do not have a " + toDrop + " in your inventory");
 	}
 

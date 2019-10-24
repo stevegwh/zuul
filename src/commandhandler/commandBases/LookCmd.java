@@ -17,14 +17,9 @@ public class LookCmd implements CommandBase {
 	public boolean execute(String[] args) {
 		lookDescription = RoomController.getLookDescription();
 		actors = RoomController.getActorsInRoom(GameController.getCurrentPlayer().getLocation());
-		ArrayList<String> items2 = new ArrayList<>();
-		if(RoomController.hasInteractableItems()) {
-			items = RoomController.getInteractableItems();
-		}
 		if(RoomController.hasTakeableItems()) {
-			items2 = RoomController.getTakeableItems();
+			items = RoomController.getTakeableItems();
 		}
-		items.addAll(items2);
 		exits = (JsonObject) RoomController.getAllExits();
 		return true;
 	}

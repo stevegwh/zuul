@@ -14,12 +14,11 @@ public class ConsoleOutput implements Output {
 
 	@Override
 	public void printCharDialog(String ele) {
-		// TODO Auto-generated method stub
+		System.out.println(ele);
 	}
 
 	@Override
 	public void printError(String error) {
-		// TODO Auto-generated method stub
 		System.out.println(error);
 	}
 

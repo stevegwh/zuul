@@ -2,6 +2,8 @@ package commandhandler;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import IO.IOHandler;
 //import eventHandler.ZuulEventRouter;
@@ -12,13 +14,29 @@ public class CommandInstantiator {
 	private ArrayList<String> commands = new ArrayList<>();
 	// TODO: Make dynamic depending on IO mode
 	private String dir = "consoleOutputLayer";
+	private String fileSuffix = "CmdLayer";
+	
+	/**
+	 * @return A list of the command names
+	 */
+	public List<String> getCommands() {
+		return commands.stream()
+				.map(e->e.replace(fileSuffix, ""))
+				.collect(Collectors.toList());
+	}
 	
 	private String buildFileName(String commandName) {
 		commandName = ZuulTools.capitalize(commandName);
-		commandName += "CmdLayer";
+		commandName += fileSuffix;
 		return commandName;
 	}
 	
+	/**
+	 * Checks the array of commands that populateArray() pushed for the command entered
+	 * 
+	 * @param commandName command requested
+	 * @return
+	 */
 	private boolean isValid(String commandName) {
 		return commands.indexOf(commandName) < 0;
 	}
@@ -48,8 +66,7 @@ public class CommandInstantiator {
 	}
 
 	/**
-	 * Scans the OutputLayer directory for your specified output for all command files and stores them in the commands ArrayList
-	 * 
+	 * Scans the OutputLayer directory and stores all file names in the commands ArrayList
 	 */
 	private void populateCommandArr() {
 		File file = new File("src/" + CommandInstantiator.class.getPackageName() + "/" + dir + "/");

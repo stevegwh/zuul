@@ -35,14 +35,8 @@ public final class RoomController {
 		exits.put(direction, destination);
 	}
 
-	//TODO: awful. Replace.
-	public static JsonObject ifExistsInArrayReturnObj(String toCheck, String nameOfArr) {
-		JsonArray arr = nameOfArr == "takeableItems" ? (JsonArray) currentRoomJSON.get("takeableItems") : 
-										(JsonArray) currentRoomJSON.get("interactableItems");
-		if(arr == null) {
-			System.out.println("Room doesn't have " + nameOfArr + " as an array");
-			return null;
-		}
+	public static JsonObject ifExistsInArrayReturnObj(String toCheck) {
+		JsonArray arr = (JsonArray) currentRoomJSON.get("takeableItems");
 		return (JsonObject) arr.stream().filter(o -> ((JsonObject) o).get("name").equals(toCheck)).findFirst().orElse(null);
 	}
 	
@@ -68,14 +62,6 @@ public final class RoomController {
 		//TODO: Maybe you should always initalize takeableItems/interactableItems instead of doing it here if needed
 		if(!hasTakeableItems()) {currentRoomJSON.put("takeableItems", new JsonArray());}
 		((JsonArray) currentRoomJSON.get("takeableItems")).add(itemJSON);
-	}
-
-	public static void removeInteractableItem(JsonObject toRemove) {
-		((JsonArray) currentRoomJSON.get("interactableItems")).remove(toRemove);
-	}
-
-	public static void addInteractableItem(JsonObject toAdd) {
-		((JsonArray) currentRoomJSON.get("interactableItems")).add(toAdd);
 	}
 	
 	/**
@@ -115,28 +101,6 @@ public final class RoomController {
 		return currentRoomJSON.get("takeableItems") != null;
 	}
 
-	/**
-	 * Checks if the current room's JsonObject has an 'interactableItems' field.
-	 * @return true/false
-	 */
-	public static boolean hasInteractableItems() {
-		return currentRoomJSON.get("interactableItems") != null;
-	}
-
-	// TODO: Messy. Refactor.
-	public static ArrayList<String> getInteractableItems() {
-		if(hasInteractableItems()) {
-			JsonArray interactableItems = (JsonArray) currentRoomJSON.get("interactableItems");
-			ArrayList<String> arr = new ArrayList<>();
-			for(Object item : interactableItems) {
-				JsonObject obj = (JsonObject) item;
-				String name = (String) obj.get("name");
-				arr.add(name);
-			}
-			return arr;
-		}
-		return null;
-	}
 	public static ArrayList<String> getTakeableItems() {
 		if(hasTakeableItems()) {
 			JsonArray takeableItems = (JsonArray) currentRoomJSON.get("takeableItems");

@@ -2,9 +2,6 @@ package zuul;
 
 import java.util.ArrayList;
 
-import IO.IOHandler;
-//import eventHandler.ZuulEventRouter;
-
 public class InventoryController {
 	private int totalWeight;
 	private final int WEIGHT_LIMIT = 10;
@@ -28,7 +25,6 @@ public class InventoryController {
 	}
 
 	public void removeItem(TakeableItem item) {
-//		ZuulEventRouter.output.onRemoveFromInventory(item.getName());
 		inventory.remove(item);
 	}
 

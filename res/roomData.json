@@ -15,15 +15,6 @@
 				"perishable" : true
         	}
         ],
-        "interactableItems" : [
-            {
-            	"name" : "door",
-				"validItem" : "key",
-				"onUse" : ["Unlock", "north", "room4"],
-				"onInvestigate" : "There is a big oak door in front of you blocking the path to the north.",
-				"onInvestigateAfterUse" : "The big oak door swung open with tremendous force"
-			}
-		],
         "exits": {
             "east" : "room2"
        } 

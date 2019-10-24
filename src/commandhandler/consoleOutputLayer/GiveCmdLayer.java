@@ -9,7 +9,7 @@ public class GiveCmdLayer extends GiveCmd implements CommandOutputLayer {
 	public void init(String[] args) {
 		String error = super.validateUserInput(args);
 		if(error != null) {
-			IOHandler.output.println(error);
+			IOHandler.output.printError(error);
 			return;
 		}
 		if(super.execute(args)) {

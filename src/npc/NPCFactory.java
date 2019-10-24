@@ -4,8 +4,6 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
-import zuulutils.ZuulTools;
-
 // TODO: Javadocs.
 public class NPCFactory {
 	private HashMap<String, NPC> npcs = new HashMap<String, NPC>();

@@ -21,19 +21,24 @@ public abstract class NPC {
 
 	public abstract boolean onGive(String takeableItem);
 
-	// TODO: parse input method should take a MAX_LENGTH variable. This should pass in the length of the dialogOptions.
+	public void printDialog() {
+		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
+		for(int i=0, len=dialogOptions.size(); i<len; i++) {
+			String option = (String) dialogOptions.get(i);
+			IOHandler.output.printCharDialog(Integer.toString(i + 1) + ": " + option);
+		}
+	}
+
 	public void onTalk() {
 		printDialog();
 		String userChoice = getUserDialogChoice();
 		if(userChoice.length() > 1 || userChoice.matches("d")) {
-			// TODO: Replace with printDialog
-//			ZuulEventRouter.output.invalidCommand();
+			IOHandler.output.printError("Invalid Command");
 			return;
 		}
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
-	// TODO: Replace with print dialog
-//		ZuulEventRouter.output.renderDialogResponse(((String) dialogResponses.get(idx)));
+		IOHandler.output.printCharDialog(((String) dialogResponses.get(idx)));
 			
 	}
 
@@ -53,22 +58,8 @@ public abstract class NPC {
 		currentLocation = destinationRoomName;
 	}
 	
-	public void printDialog() {
-		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
-	// TODO: Replace with printDialog
-//		ZuulEventRouter.output.renderDialogOptions(dialogOptions);
-	}
 	
 
-	/** 
-	 * Specifies what should happen when the player calls 'investigate' on the NPC.
-	 */
-	// TODO: To be implemented
-	public void onInvestigate() {
-		String descriptionOnInvestigate = "You see " + name; //TODO: Could add a more in-depth description of people
-//		ZuulEventRouter.output.onInvestigate(descriptionOnInvestigate);
-	}
-	
 	/**
 	 * validItem is the name TakeableItem that this NPC accepts.
 	 * For example, the NPC 'John' could accept the TakeableItem 'Gum'

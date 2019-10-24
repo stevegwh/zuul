@@ -15,11 +15,11 @@ public class InventoryCmdLayer extends InventoryCmd implements CommandOutputLaye
 		}
 		
 	}
-	public void onSuccess() {
+	private void onSuccess() {
 		IOHandler.output.println("You are currently carrying: ");
 		inventory.forEach(s-> IOHandler.output.println(ZuulTools.capitalize(s.getName())));
 	}
-	public void onFail() {
+	private void onFail() {
 		IOHandler.output.println("You do not currently have anything in your inventory");
 	}
 }

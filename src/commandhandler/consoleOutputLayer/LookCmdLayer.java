@@ -15,7 +15,7 @@ public class LookCmdLayer extends LookCmd implements CommandOutputLayer {
 		IOHandler.output.println("=============");
 	}
 
-	public void onSuccess() {
+	private void onSuccess() {
 		if (lookDescription != null) {
 			IOHandler.output.println(lookDescription);
 		} else {
