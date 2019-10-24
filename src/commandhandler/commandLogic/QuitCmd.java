@@ -10,7 +10,9 @@ public class QuitCmd implements CommandLogic {
 
 	@Override
 	public String validateUserInput(String[] inputArray) {
-		// TODO Auto-generated method stub
+		if(inputArray.length > 1) {
+			return "Quit what?";
+		}
 		return null;
 	}
 }

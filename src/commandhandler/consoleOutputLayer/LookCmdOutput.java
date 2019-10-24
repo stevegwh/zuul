@@ -18,6 +18,7 @@ public class LookCmdOutput extends LookCmd implements CommandOutputLayer {
 		IOHandler.output.printf("People in room: ");
 		actors.forEach((e) -> IOHandler.output.printf((String) e + ", "));
 		IOHandler.output.println(" ");
+		// TODO: Need to print weights as well as item name
 		if(items != null) {
 			IOHandler.output.printf("Items in room: ");
 			items.forEach(e -> IOHandler.output.printf(ZuulTools.capitalize(e) + ", "));

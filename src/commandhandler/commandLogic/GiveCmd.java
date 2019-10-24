@@ -31,25 +31,32 @@ public class GiveCmd implements CommandLogic{
 		if(inputArray.length > COMMAND_LENGTH) {
 			return "Invalid Command";
 		}
+		if(inputArray.length == 1) {
+			return "Give what?";
+		}
+		itemName = inputArray[1];
+		takeableItem = GameController.getCurrentPlayer().getInvController().getItem(itemName);
+		boolean itemInInv = GameController.getCurrentPlayer().getInvController().checkIfExists(itemName); 
+		if(!itemInInv) {
+			return "You don't have the " + itemName;
+		}
+		if(itemInInv && inputArray.length <= 3) {
+			return "Give to who?";
+		}
 		String preposition = inputArray[2];
 		if(!preposition.equals("to")) {
-			return "Invalid Command";
+			return "Do you mean 'to'?";
 		}
 		String actorName = inputArray[3];
 		actorName = ZuulTools.capitalize(actorName);
 		NPC npc = GameController.getActor(actorName);
 		if(npc == null) {
-			return "Can't find " + actorName;
+			return actorName + " is not in the room";
 		} else {
 			this.npc = npc;
 		}
 		if(!npc.getCurrentLocation().equals(GameController.getCurrentPlayer().getLocation())) {
-			return "Can't find " + actorName;
-		}
-		itemName = inputArray[1];
-		takeableItem = GameController.getCurrentPlayer().getInvController().getItem(itemName);
-		if(!GameController.getCurrentPlayer().getInvController().checkIfExists(itemName)) { 
-			return itemName + " not in inventory";
+			return actorName + " is not in the room";
 		}
 
 		return null;

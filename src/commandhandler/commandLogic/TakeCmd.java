@@ -41,7 +41,9 @@ public class TakeCmd implements CommandLogic {
 	}
 	@Override
 	public String validateUserInput(String[] inputArray) {
-		// TODO Auto-generated method stub
+		if(inputArray.length == 1) {
+			return "Take what?";
+		}
 		return null;
 	}
 }

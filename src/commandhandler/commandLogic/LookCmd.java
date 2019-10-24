@@ -22,7 +22,6 @@ public class LookCmd implements CommandLogic {
 	}
 	@Override
 	public String validateUserInput(String[] inputArray) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
