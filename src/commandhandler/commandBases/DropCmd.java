@@ -2,7 +2,6 @@ package commandhandler.commandBases;
 
 import commandhandler.CommandBase;
 import zuul.GameController;
-import zuul.RoomController;
 import zuul.TakeableItem;
 
 public class DropCmd implements CommandBase {
@@ -16,7 +15,7 @@ public class DropCmd implements CommandBase {
 		TakeableItem item = GameController.getCurrentPlayer().getInvController().getItem(toDrop);
 		GameController.getCurrentPlayer().getInvController().setWeight(-item.getWeight());
 		GameController.getCurrentPlayer().getInvController().removeItem(item);
-		RoomController.addTakeableItem(item);
+		GameController.getRoomController().addTakeableItem(item);
 		return true;
 	}
 	@Override

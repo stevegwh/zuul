@@ -1,6 +1,6 @@
 package npc;
 
-import zuul.RoomController;
+import zuul.GameController;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
@@ -45,7 +45,6 @@ public abstract class NPC {
 	public void update() {
 		//RoomController.moveActor(this, "room2"); TODO: Should moveActor be part of this class or RoomLoader?
 	}
-	
 	/** 
 	 * Selects a location from the NPC's path field and calls RoomController's moveActorToRoom method
 	 * Updates NPC's currentLocation field to destinationRoomName
@@ -53,13 +52,10 @@ public abstract class NPC {
 	 */
 	public void move(String destinationRoomName) {
 		// TODO: Eventually needs to be randomized by the movePath
-		JsonArray destinationRoom = RoomController.getActorsInRoom(destinationRoomName);
-		RoomController.moveActorToRoom(this, destinationRoom);
+		JsonArray destinationRoom = GameController.getRoomController().getActorsInRoom(destinationRoomName);
+		GameController.getRoomController().moveActorToRoom(this, destinationRoom);
 		currentLocation = destinationRoomName;
 	}
-	
-	
-
 	/**
 	 * validItem is the name TakeableItem that this NPC accepts.
 	 * For example, the NPC 'John' could accept the TakeableItem 'Gum'

@@ -11,8 +11,14 @@ public class GameController {
 	private static HashMap<String, NPC> actors = new HashMap<>();
 	private static GameController SINGLE_INSTANCE = null;
 	private CommandHandler commandHandler;
+	private static RoomController roomController;
 	private static boolean isRunning = true;
 	private static Player currentPlayer;
+	private final String START_LOCATION = "room1";
+	
+	public static RoomController getRoomController() {
+		return roomController;
+	}
 	
 	public static Player getCurrentPlayer() {
 		return currentPlayer;
@@ -56,6 +62,8 @@ public class GameController {
 		commandHandler = new CommandHandler();
 		NPCFactory npcFactory = new NPCFactory();
 		actors = npcFactory.getNPCCollection();
-		currentPlayer = new Player();
+		currentPlayer = new Player(START_LOCATION);
+		roomController = new RoomController(START_LOCATION);
+		// TODO: Game onStart method
 	}
 }

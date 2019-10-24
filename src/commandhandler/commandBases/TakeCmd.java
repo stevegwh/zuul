@@ -4,7 +4,6 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 
 import commandhandler.CommandBase;
 import zuul.GameController;
-import zuul.RoomController;
 import zuul.TakeableItem;
 
 // TODO: Could be cleaner
@@ -13,8 +12,8 @@ public class TakeCmd implements CommandBase {
 	@Override
 	public boolean execute(String[] args) {
 		toTake = args[1];
-		if(RoomController.hasTakeableItems()) {
-			JsonObject obj = RoomController.ifExistsInArrayReturnObj(toTake);
+		if(GameController.getRoomController().hasTakeableItems()) {
+			JsonObject obj = GameController.getRoomController().ifExistsInArrayReturnObj(toTake);
 			if (obj != null) {
 				String name = (String) obj.get("name");
 				int weight = Integer.parseInt((String) obj.get("weight"));
@@ -28,7 +27,7 @@ public class TakeCmd implements CommandBase {
 					}
 					GameController.getCurrentPlayer().getInvController().addItem(item);
 					GameController.getCurrentPlayer().getInvController().setWeight(weight);
-					RoomController.removeTakeableItem(obj);
+					GameController.getRoomController().removeTakeableItem(obj);
 					return true;
 				} else {
 					return false;

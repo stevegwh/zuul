@@ -7,7 +7,6 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 
 import commandhandler.CommandBase;
 import zuul.GameController;
-import zuul.RoomController;
 
 public class LookCmd implements CommandBase {
 	protected String lookDescription;
@@ -15,12 +14,12 @@ public class LookCmd implements CommandBase {
 	protected ArrayList<String> items = new ArrayList<>();
 	protected JsonObject exits;
 	public boolean execute(String[] args) {
-		lookDescription = RoomController.getLookDescription();
-		actors = RoomController.getActorsInRoom(GameController.getCurrentPlayer().getLocation());
-		if(RoomController.hasTakeableItems()) {
-			items = RoomController.getTakeableItems();
+		lookDescription = GameController.getRoomController().getLookDescription();
+		actors = GameController.getRoomController().getActorsInRoom(GameController.getCurrentPlayer().getLocation());
+		if(GameController.getRoomController().hasTakeableItems()) {
+			items = GameController.getRoomController().getTakeableItems();
 		}
-		exits = (JsonObject) RoomController.getAllExits();
+		exits = (JsonObject) GameController.getRoomController().getAllExits();
 		return true;
 	}
 	@Override

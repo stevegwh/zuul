@@ -3,11 +3,7 @@ package zuul;
 public class Player {
 	private InventoryController inventory = new InventoryController();
 	private String currentLocation;
-	private RoomController roomController = new RoomController();
 
-	public RoomController getRoomController() {
-		return roomController;
-	}
 	public InventoryController getInvController() {
 		return inventory;
 	}
@@ -16,5 +12,8 @@ public class Player {
 	}
 	public String getLocation() {
 		return currentLocation;
+	}
+	public Player(String startingLocation) {
+		currentLocation = startingLocation;
 	}
 }

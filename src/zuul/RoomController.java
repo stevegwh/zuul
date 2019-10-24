@@ -5,46 +5,42 @@ import java.util.ArrayList;
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import IO.IOHandler;
 import jsonDataHandler.JSONDataHandler;
 import npc.NPC;
 
+// TODO: Singleton or not?
 public final class RoomController {
 	private static JSONDataHandler jsonHandler;
-	private static JsonObject currentRoomJSON;
+	private JsonObject currentRoomJSON;
 
-	public static void getNewRoom(String nextRoom) {
+	public void setNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
-//		ZuulEventRouter.output.onRoomEnter(currentRoomJSON);
-		// TODO: Rogue output
-		IOHandler.output.println((String) currentRoomJSON.get("description"));
-		GameController.getCurrentPlayer().setLocation(nextRoom);
 	}
 
-	public static JsonObject getAllExits() {
+	public JsonObject getAllExits() {
 		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
 		return (JsonObject) exits.clone();
 	}
 
-	public static String getExit(String exit) {
+	public String getExit(String exit) {
 		return (String) ((JsonObject) currentRoomJSON.get("exits")).get(exit);
 	}
 	
-	public static void addExit(String direction, String destination) {
+	public void addExit(String direction, String destination) {
 		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
 		exits.put(direction, destination);
 	}
 
-	public static JsonObject ifExistsInArrayReturnObj(String toCheck) {
+	public JsonObject ifExistsInArrayReturnObj(String toCheck) {
 		JsonArray arr = (JsonArray) currentRoomJSON.get("takeableItems");
 		return (JsonObject) arr.stream().filter(o -> ((JsonObject) o).get("name").equals(toCheck)).findFirst().orElse(null);
 	}
 	
-	public static String getLookDescription() {
+	public String getLookDescription() {
 		return (String) currentRoomJSON.get("lookDescription");
 	}
 
-	public static void removeTakeableItem(JsonObject toRemove) {
+	public void removeTakeableItem(JsonObject toRemove) {
 		((JsonArray) currentRoomJSON.get("takeableItems")).remove(toRemove);
 	}
 
@@ -55,7 +51,7 @@ public final class RoomController {
 	 * 
 	 * @param toAdd
 	 */
-	public static void addTakeableItem(TakeableItem toAdd) {
+	public void addTakeableItem(TakeableItem toAdd) {
 		JsonObject itemJSON = new JsonObject();
 		itemJSON.put("name", toAdd.getName());
 		itemJSON.put("weight",String.valueOf(toAdd.getWeight()));
@@ -69,7 +65,7 @@ public final class RoomController {
 	 * @param roomName key of the JsonObject needed.
 	 * @return JsonObject of key roomName.
 	 */
-	public static JsonArray getActorsInRoom(String roomName) {
+	public JsonArray getActorsInRoom(String roomName) {
 		JsonArray room = (JsonArray) jsonHandler.getField(roomName).get("actorsInRoom");
 		if(room == null) {
 			jsonHandler.getField(roomName).put("actorsInRoom", new JsonArray());
@@ -85,7 +81,7 @@ public final class RoomController {
 	 * @actor The NPC object.
 	 * @destination The actorsInRoom array of the destination room.
 	 */
-	public static void moveActorToRoom(NPC actor, JsonArray destination) {
+	public void moveActorToRoom(NPC actor, JsonArray destination) {
 		if(destination.indexOf(actor.getName()) < 0) {
 			destination.add(actor.getName());
 			JsonArray npcCurrentRoom = (JsonArray) jsonHandler.getField(actor.getCurrentLocation()).get("actorsInRoom");
@@ -97,11 +93,11 @@ public final class RoomController {
 	 * Checks if the current room's JsonObject has a 'takeableItems' field.
 	 * @return true/false
 	 */
-	public static boolean hasTakeableItems() {
+	public boolean hasTakeableItems() {
 		return currentRoomJSON.get("takeableItems") != null;
 	}
 
-	public static ArrayList<String> getTakeableItems() {
+	public ArrayList<String> getTakeableItems() {
 		if(hasTakeableItems()) {
 			JsonArray takeableItems = (JsonArray) currentRoomJSON.get("takeableItems");
 			ArrayList<String> arr = new ArrayList<>();
@@ -120,15 +116,20 @@ public final class RoomController {
 	 * @param actorName the actor/NPC name
 	 * @return true/false
 	 */
-	public static boolean hasActor(String actorName) {
+	public boolean hasActor(String actorName) {
 		JsonArray actors = (JsonArray) currentRoomJSON.get("actorsInRoom");
 		return actors.indexOf(actorName) >= 0;
 	}
 
-	static {
-		jsonHandler = new JSONDataHandler("res/roomData.json");
-		getNewRoom("room1");
+	public String getDescription() {
+		return (String) currentRoomJSON.get("description");
 	}
+
+	public RoomController(String room) {
+		jsonHandler = new JSONDataHandler("res/roomData.json");
+		setNewRoom(room);
+	}
+
 
 
 }

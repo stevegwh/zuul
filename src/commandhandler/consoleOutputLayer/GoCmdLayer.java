@@ -3,7 +3,7 @@ package commandhandler.consoleOutputLayer;
 import IO.IOHandler;
 import commandhandler.CommandOutputLayer;
 import commandhandler.commandBases.GoCmd;
-import zuul.RoomController;
+import zuul.GameController;
 
 public class GoCmdLayer extends GoCmd implements CommandOutputLayer {
 	public void init(String[] args) {
@@ -18,9 +18,10 @@ public class GoCmdLayer extends GoCmd implements CommandOutputLayer {
 			onFail();
 		}
 	}
+	// TODO: Game logic outside of base 
 	public void onSuccess() {
 		IOHandler.output.println("You go " + direction);
-		RoomController.getNewRoom(nextRoom);
+		IOHandler.output.println(GameController.getRoomController().getDescription());
 	}
 	public void onFail() {
 		IOHandler.output.println("You can't go that way.");

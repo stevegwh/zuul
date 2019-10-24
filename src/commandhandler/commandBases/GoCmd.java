@@ -1,7 +1,7 @@
 package commandhandler.commandBases;
 
 import commandhandler.CommandBase;
-import zuul.RoomController;
+import zuul.GameController;
 
 public class GoCmd implements CommandBase {
 	protected String direction;
@@ -21,8 +21,10 @@ public class GoCmd implements CommandBase {
 	}
 	
 	public boolean execute(String[] args) {
-		nextRoom = RoomController.getExit(direction);
+		nextRoom = GameController.getRoomController().getExit(direction);
 		if(nextRoom != null) {
+			GameController.getRoomController().setNewRoom(nextRoom);
+			GameController.getCurrentPlayer().setLocation(nextRoom);
 			return true;
 		} else {
 			return false;
