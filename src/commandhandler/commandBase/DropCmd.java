@@ -4,23 +4,20 @@ import commandhandler.Command;
 import zuul.GameController;
 import zuul.TakeableItem;
 
-public abstract class DropCmd extends Command {
+public class DropCmd extends Command {
 	protected String toDrop;
-	@Override
-	protected boolean execute(String[] args) {
-		toDrop = args[1];
+	protected String validateUserInput(String[] args) {
+		toDrop = args[1].toLowerCase();
 		if(!GameController.getCurrentPlayer().getInvController().checkIfExists(toDrop)) {
-			return false;
+			return "You do not have a " + toDrop + " in your inventory";
 		}
+		return null;
+	}
+	protected boolean execute(String[] args) {
 		TakeableItem item = GameController.getCurrentPlayer().getInvController().getItem(toDrop);
 		GameController.getCurrentPlayer().getInvController().setWeight(-item.getWeight());
 		GameController.getCurrentPlayer().getInvController().removeItem(item);
 		GameController.getRoomController().addTakeableItem(item);
 		return true;
-	}
-	@Override
-	protected String validateUserInput(String[] inputArray) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

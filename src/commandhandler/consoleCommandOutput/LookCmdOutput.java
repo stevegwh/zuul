@@ -1,5 +1,7 @@
 package commandhandler.consoleCommandOutput;
 
+import com.github.cliftonlabs.json_simple.JsonObject;
+
 import IO.IOHandler;
 import commandhandler.CommandOutput;
 import commandhandler.commandBase.LookCmd;
@@ -15,7 +17,11 @@ public class LookCmdOutput extends LookCmd implements CommandOutput {
 			// TODO: Need to print weights as well as item name
 			if(items != null) {
 				IOHandler.output.printf("Items in room: ");
-				items.forEach(e -> IOHandler.output.printf(ZuulTools.capitalize(e) + ", "));
+				items.forEach(e -> 
+				IOHandler.output.printf(
+						ZuulTools.capitalize(((JsonObject) e).get("name").toString()) 
+						+ " (" + ((JsonObject) e).get("weight").toString()
+						+ "), "));
 			} else {
 				IOHandler.output.printf("No items in room");
 			}

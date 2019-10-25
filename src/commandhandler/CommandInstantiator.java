@@ -13,8 +13,8 @@ import java.io.File;
 public class CommandInstantiator {
 	private ArrayList<String> commands = new ArrayList<>();
 	// TODO: Make dynamic depending on IO mode
-	private String dir = "consoleOutputLayer";
-	private String fileSuffix = "CmdOutput";
+	private final String dir = "consoleCommandOutput";
+	private final String fileSuffix = "CmdOutput";
 	
 	/**
 	 * @return A list of the command names
@@ -37,20 +37,20 @@ public class CommandInstantiator {
 	 * @param commandName command requested
 	 * @return
 	 */
-	private boolean isValid(String commandName) {
-		return commands.indexOf(commandName) < 0;
+	private boolean checkCommandValidity(String commandName) {
+		return commands.indexOf(commandName) >= 0;
 	}
 	
 
 	/**
-	 * Attempts to create an instance of the class that the user has specified as a command.
+	 * Attempts to create an instance of the class passed in as parameter.
 	 * 
-	 * @param commandName The command the user has entered
-	 * @return A CommandOutputLayer object or Null.
+	 * @param commandName The command to be instantiated.
+	 * @return A CommandOutput object or null.
 	 */
 	public CommandOutput createInstance(String commandName) {
 		commandName = buildFileName(commandName);
-		if(isValid(commandName)) {
+		if(!checkCommandValidity(commandName)) {
 			IOHandler.output.printError("Invalid Command");
 			return null;
 		}

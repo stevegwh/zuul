@@ -1,17 +1,15 @@
 package commandhandler.commandBase;
 
-import java.util.ArrayList;
-
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import commandhandler.Command;
 import zuul.GameController;
 
-public abstract class LookCmd extends Command {
+public class LookCmd extends Command {
 	protected String description;
 	protected JsonArray actors;
-	protected ArrayList<String> items = new ArrayList<>();
+	protected JsonArray items;
 	protected JsonObject exits;
 	public boolean execute(String[] args) {
 		description = GameController.getRoomController().getDescription();

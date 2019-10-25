@@ -6,7 +6,7 @@ import java.util.List;
 import commandhandler.Command;
 import commandhandler.CommandInstantiator;
 
-public abstract class HelpCmd extends Command {
+public class HelpCmd extends Command {
 	protected List<String> commands = new ArrayList<>();
 
 	@Override

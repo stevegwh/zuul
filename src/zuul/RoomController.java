@@ -1,6 +1,7 @@
 package zuul;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
@@ -56,7 +57,6 @@ public final class RoomController {
 		JsonObject itemJSON = new JsonObject();
 		itemJSON.put("name", toAdd.getName());
 		itemJSON.put("weight",String.valueOf(toAdd.getWeight()));
-		//TODO: Maybe you should always initalize takeableItems/interactableItems instead of doing it here if needed
 		if(!hasTakeableItems()) {currentRoomJSON.put("takeableItems", new JsonArray());}
 		((JsonArray) currentRoomJSON.get("takeableItems")).add(itemJSON);
 	}
@@ -98,16 +98,9 @@ public final class RoomController {
 		return currentRoomJSON.get("takeableItems") != null;
 	}
 
-	public ArrayList<String> getTakeableItems() {
+	public JsonArray getTakeableItems() {
 		if(hasTakeableItems()) {
-			JsonArray takeableItems = (JsonArray) currentRoomJSON.get("takeableItems");
-			ArrayList<String> arr = new ArrayList<>();
-			for(Object item : takeableItems) {
-				JsonObject obj = (JsonObject) item;
-				String name = (String) obj.get("name");
-				arr.add(name);
-			}
-			return arr;
+			return (JsonArray) currentRoomJSON.get("takeableItems");
 		}
 		return null;
 	}

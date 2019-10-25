@@ -6,7 +6,7 @@ import commandhandler.Command;
 import npc.NPC;
 
 
-public abstract class TalkCmd extends Command {
+public class TalkCmd extends Command {
 	protected NPC actor;
 	protected String toTalk;
 	// TODO: Validate prepositions etc
@@ -14,16 +14,19 @@ public abstract class TalkCmd extends Command {
 	public boolean execute(String[] args) {
 		String toTalk = args[2]; // talk[0] to[1] Barry[2]
 		toTalk = ZuulTools.capitalize(toTalk);
-		if(GameController.getRoomController().hasActor(toTalk)) {
-			actor = GameController.getActor(toTalk);
-			return true;
-		} else {
-			return false;
-		}
+		actor = GameController.getActor(toTalk);
+		return true;
 	}
 	@Override
-	protected String validateUserInput(String[] inputArray) {
-		// TODO Auto-generated method stub
+	protected String validateUserInput(String[] args) {
+		if(args.length < 2) {
+			return "Talk to who?";
+		}
+		String toTalk = args[2]; // talk[0] to[1] Barry[2]
+		toTalk = ZuulTools.capitalize(toTalk);
+		if(!GameController.getRoomController().hasActor(toTalk)) {
+			return toTalk + " not in room.";
+		}
 		return null;
 	}
 }
