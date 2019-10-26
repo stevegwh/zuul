@@ -11,7 +11,7 @@ public class LookCmd extends Command {
 	protected JsonArray actors;
 	protected JsonArray items;
 	protected JsonObject exits;
-	public boolean execute(String[] args) {
+	public boolean execute(String[] inputArray) {
 		description = GameController.getRoomController().getDescription();
 		actors = GameController.getRoomController().getActorsInRoom(GameController.getCurrentPlayer().getLocation());
 		items = GameController.getRoomController().getTakeableItems();

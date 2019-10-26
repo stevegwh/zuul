@@ -11,7 +11,7 @@ public class TakeCmd extends Command {
 	protected String toTake;
 	protected JsonObject obj;
 	@Override
-	public boolean execute(String[] args) {
+	public boolean execute(String[] inputArray) {
 		String name = (String) obj.get("name");
 		int weight = Integer.parseInt((String) obj.get("weight"));
 		boolean perishable = obj.containsKey("perishable");
@@ -32,11 +32,11 @@ public class TakeCmd extends Command {
 
 	}
 	@Override
-	protected String validateUserInput(String[] args) {
-		if(args.length == 1) {
+	protected String validateUserInput(String[] inputArray) {
+		if(inputArray.length == 1) {
 			return "Take what?";
 		}
-		toTake = args[1];
+		toTake = inputArray[1];
 		if(!GameController.getRoomController().hasTakeableItems()) {
 			return toTake + " not in room";
 		}

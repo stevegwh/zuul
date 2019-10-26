@@ -8,8 +8,8 @@ import commandhandler.commandBase.LookCmd;
 import zuulutils.ZuulTools;
 
 public class LookCmdOutput extends LookCmd implements CommandOutput {
-	public void init(String[] args) {
-		if(super.execute(args)) {
+	public void init(String[] inputArray) {
+		if(super.execute(inputArray)) {
 			IOHandler.output.println("---------");
 			IOHandler.output.println(description);
 			IOHandler.output.printf("People in room: ");

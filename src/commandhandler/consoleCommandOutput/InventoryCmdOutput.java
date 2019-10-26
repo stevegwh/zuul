@@ -7,8 +7,8 @@ import zuulutils.ZuulTools;
 
 public class InventoryCmdOutput extends InventoryCmd implements CommandOutput {
 
-	public void init(String[] args) {
-		String error = super.validateUserInput(args);
+	public void init(String[] inputArray) {
+		String error = super.validateUserInput(inputArray);
 		if(error != null) {
 			IOHandler.output.printError(error);
 			return;

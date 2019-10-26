@@ -32,7 +32,7 @@ public class GoCmd extends Command {
 		return null;
 	}
 
-	public boolean execute(String[] args) {
+	public boolean execute(String[] inputArray) {
 		GameController.getRoomController().setNewRoom(nextRoom);
 		GameController.getCurrentPlayer().setLocation(nextRoom);
 		return true;
