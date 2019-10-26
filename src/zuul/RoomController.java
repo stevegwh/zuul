@@ -1,19 +1,18 @@
 package zuul;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import jsonDataHandler.JSONDataHandler;
-import npc.NPC;
 
 // TODO: Singleton or not?
 public final class RoomController {
 	private static JSONDataHandler jsonHandler;
 	private JsonObject currentRoomJSON;
 
+	public JsonObject getRoom(String room) {
+		return jsonHandler.getField(room);
+	}
 	public void setNewRoom(String nextRoom) {
 		currentRoomJSON = jsonHandler.getField(nextRoom);
 	}
@@ -24,6 +23,7 @@ public final class RoomController {
 	}
 
 	public String getExit(String exit) {
+		// TODO: Throw an exception if room exit isn't a key in the json.
 		return (String) ((JsonObject) currentRoomJSON.get("exits")).get(exit);
 	}
 	
@@ -67,6 +67,7 @@ public final class RoomController {
 	 * @return JsonObject of key roomName.
 	 */
 	public JsonArray getActorsInRoom(String roomName) {
+		// TODO: Throw an exception if room name is bad.
 		JsonArray room = (JsonArray) jsonHandler.getField(roomName).get("actorsInRoom");
 		if(room == null) {
 			jsonHandler.getField(roomName).put("actorsInRoom", new JsonArray());
@@ -75,20 +76,6 @@ public final class RoomController {
 		return room;
 	}
 	
-	// TODO: Need to make the NPC call this at random
-	/** 
-	 * Updates the actorsInRoom field of the destination room and the room specified in the NPC's
-	 * currentLocation field.
-	 * @actor The NPC object.
-	 * @destination The actorsInRoom array of the destination room.
-	 */
-	public void moveActorToRoom(NPC actor, JsonArray destination) {
-		if(destination.indexOf(actor.getName()) < 0) {
-			destination.add(actor.getName());
-			JsonArray npcCurrentRoom = (JsonArray) jsonHandler.getField(actor.getCurrentLocation()).get("actorsInRoom");
-			npcCurrentRoom.remove(actor.getName());
-		}
-	}
 
 	/**
 	 * Checks if the current room's JsonObject has a 'takeableItems' field.

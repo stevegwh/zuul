@@ -20,6 +20,7 @@ public class NPCFactory {
 				| NoSuchMethodException | SecurityException | java.lang.ClassNotFoundException | java.lang.ClassCastException e) {
 			System.err.println("Cannot instantiate " + className + " as NPC class.");
 			System.err.println("Please check " + className + " for errors and that it implements the NPC interface");
+			System.err.println("Please ensure that the class name matches the name of the NPC.");
 			e.printStackTrace();
 		}
 		return null;

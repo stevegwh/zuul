@@ -43,18 +43,25 @@ public abstract class NPC {
 
 	public void update() {
 		//RoomController.moveActor(this, "room2"); TODO: Should moveActor be part of this class or RoomLoader?
+		move("pub");
 	}
+
 	/** 
-	 * Selects a location from the NPC's path field and calls RoomController's moveActorToRoom method
-	 * Updates NPC's currentLocation field to destinationRoomName
-	 * @destinationRoomName The name of the room you wish to move the NPC to.
+	 * Updates the actorsInRoom field of the destination room and the room specified in the NPC's
+	 * currentLocation field.
+	 * 
+	 * @destination The name of the destination room.
 	 */
 	public void move(String destinationRoomName) {
-		// TODO: Eventually needs to be randomized by the movePath
 		JsonArray destinationRoom = GameController.getRoomController().getActorsInRoom(destinationRoomName);
-		GameController.getRoomController().moveActorToRoom(this, destinationRoom);
-		currentLocation = destinationRoomName;
+		JsonArray currentRoom = GameController.getRoomController().getActorsInRoom(currentLocation);
+		if(destinationRoom.indexOf(name) < 0) {
+			destinationRoom.add(name);
+			currentRoom.remove(name);
+			currentLocation = destinationRoomName;
+		}
 	}
+
 	/**
 	 * validItem is the name TakeableItem that this NPC accepts.
 	 * For example, the NPC 'John' could accept the TakeableItem 'Gum'
@@ -87,18 +94,18 @@ public abstract class NPC {
 		currentLocation = newLocation;
 	}
 	
+	// TODO: Scan the json file and see if the actor already exists
 	private void loadJSON(String name) {
 		JSONDataHandler jsonHandler = new JSONDataHandler("res/npcData.json");
 		json = jsonHandler.getField(name);
+		String initialRoom = (String) json.get("location");
+		JsonArray destinationRoomJson = GameController.getRoomController().getActorsInRoom(initialRoom);
+		destinationRoomJson.add(name);
+		currentLocation = initialRoom;
 	}
 
-	public NPC(String name, String currentLocation) {
+	public NPC(String name) {
 		this.name = name;
-		this.setCurrentLocation(currentLocation);
 		loadJSON(name);
 	}
-
-
-
-
 }

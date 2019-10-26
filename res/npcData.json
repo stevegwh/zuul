@@ -1,6 +1,6 @@
 {
 	"Barry" : {
-		"location" : "room2",
+		"location" : "lecture",
 		"validItem" : "gum",
 		"dialogOptions" : ["Hi Barry, how are you?", "Would you like some gum?", "What's the meaning of life?"],
 		"dialogResponses" : ["I'm great, thanks for asking!", "I would love some!", "42"],

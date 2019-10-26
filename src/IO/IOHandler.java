@@ -25,9 +25,12 @@ public class IOHandler {
 			input = (Input) Class.forName(IOHandler.class.getPackageName() + "." + mode + "Input").getConstructor().newInstance();
 			output = (Output) Class.forName(IOHandler.class.getPackageName() + "." + mode + "Output").getConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+				| NoSuchMethodException | SecurityException | java.lang.ClassNotFoundException | java.lang.ClassCastException e) {
+			System.err.println("Cannot instantiate " + mode + " as an I/O mode.");
+			System.err.println("Please check " + mode + " for errors and that it implements the correct interface");
+			System.err.println("Please name the file with the mode capitalised followed by 'Input' and another followed by 'Output'. e,g, ConsoleInput/ConsoleOutput");
 			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 }

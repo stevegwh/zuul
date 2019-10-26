@@ -57,12 +57,14 @@ public class CommandInstantiator {
 		Object command = null;
 		try {
 			command = Class.forName(CommandInstantiator.class.getPackageName() + "." + dir + "." + commandName).getConstructor().newInstance();
+			return (CommandOutput) command;
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+				| NoSuchMethodException | SecurityException | java.lang.ClassNotFoundException | java.lang.ClassCastException e) {
+			System.err.println("Cannot instantiate " + commandName + " as a command.");
+			System.err.println("Please check " + commandName + " for errors and that it implements the correct interface");
 			e.printStackTrace();
 		}
-		return (CommandOutput) command;
+		return null;
 	}
 
 	/**

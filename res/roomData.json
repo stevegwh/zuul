@@ -1,7 +1,6 @@
 {
-    "room1" : {
-        "description" : "You enter room1. You feel a great sense of adventure.",
-        "actorsInRoom" : [],
+    "entrance" : {
+        "description" : "You are outside the main entrance of the university.",
         "takeableItems" :  [
         	{
 				"name" : "key",
@@ -15,27 +14,32 @@
         	}
         ],
         "exits": {
-            "east" : "room2"
+            "east" : "lecture"
        } 
     },
-    "room2" : {
-        "description" : "You enter room2",
-		"actorsInRoom" : [],
+    "lecture" : {
+        "description" : "You are in a lecture theatre",
         "exits": {
-            "north" : "room3",
-            "west" : "room1"
+            "north" : "pub",
+            "west" : "entrance"
        } 
     },
-    "room3" : {
-        "description" : "You enter room3",
+    "pub" : {
+        "description" : "You are in the campus pub",
         "exits": {
-            "south" : "room2"
+            "south" : "lecture"
        } 
     },
-    "room4" : {
-        "description" : "You enter room4",
+    "lab" : {
+        "description" : "You are in a computing lab.",
         "exits": {
-        	"south" : "room1"
+        	"south" : "pub"
+       } 
+    },
+    "admin" : {
+        "description" : "You are in the computing admin office.",
+        "exits": {
+        	"south" : "pub"
        } 
     }
 }

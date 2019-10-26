@@ -14,7 +14,7 @@ public class GameController {
 	private static RoomController roomController;
 	private static boolean isRunning = true;
 	private static Player currentPlayer;
-	private final String START_LOCATION = "room1";
+	private final String START_LOCATION = "lecture";
 	
 	public static RoomController getRoomController() {
 		return roomController;
@@ -43,10 +43,7 @@ public class GameController {
         return SINGLE_INSTANCE;
     }
     private void updateActors() {
-//		for(String actor : actors.keySet()) {
-//			actors.get(actor).update();
-//		}
-    	actors.get("Barry").move("room3");
+    	actors.keySet().forEach(a->actors.get(a).update());
     }
     public static NPC getActor(String actorName) {
     	return actors.get(actorName);
@@ -60,10 +57,10 @@ public class GameController {
 	}
 	GameController() {
 		commandHandler = new CommandHandler();
+		roomController = new RoomController(START_LOCATION);
+		currentPlayer = new Player(START_LOCATION);
 		NPCFactory npcFactory = new NPCFactory();
 		actors = npcFactory.getNPCCollection();
-		currentPlayer = new Player(START_LOCATION);
-		roomController = new RoomController(START_LOCATION);
 		// TODO: Game onStart method
 	}
 }
