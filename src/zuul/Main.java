@@ -4,15 +4,14 @@ import IO.IOHandler;
 //import jsonDataHandler.ErrorCheckGameJSON;
 
 public class Main {
+	// TODO: Print all possible flags
 	private static void printUsage() {
 		System.out.println("Usage: --io <IO Mode>");
-		
 	}
 
 	public static void main(String[] args) {		
 		boolean defaultUsed = false;
 		boolean DEVELOPER_MODE = false;
-		// TODO: Tidy
 		if(args.length != 0) {
 			for(int i = 0, len = args.length; i < len ; i++) {
 				if(args[i].equals("--io")) {
@@ -33,7 +32,6 @@ public class Main {
 			IOHandler.setIOMode("Console");
 			defaultUsed = true;
 		}
-
 
 		if(DEVELOPER_MODE) {
 			if(defaultUsed) {
