@@ -7,6 +7,11 @@ import commandhandler.commandBase.HelpCmd;
 // TODO: End list in full stop, not comma
 public class HelpCmdOutput extends HelpCmd implements CommandOutput {
 	public void init(String[] args) {
+		String error = super.validateUserInput(args);
+		if(error != null) {
+			IOHandler.output.printError(error);
+			return;
+		}
 		if(super.execute(args)) {
 			IOHandler.output.println("You are lost. You are alone. You wander around at the university");
 			IOHandler.output.println(" ");

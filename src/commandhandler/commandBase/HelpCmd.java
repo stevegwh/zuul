@@ -7,6 +7,7 @@ import commandhandler.Command;
 import commandhandler.CommandInstantiator;
 
 public class HelpCmd extends Command {
+	private int COMMAND_LENGTH = 1;
 	protected List<String> commands = new ArrayList<>();
 
 	@Override
@@ -17,7 +18,9 @@ public class HelpCmd extends Command {
 	}
 	@Override
 	protected String validateUserInput(String[] inputArray) {
-		// TODO Auto-generated method stub
+		if(inputArray.length > COMMAND_LENGTH) {
+			return "To get help please just type 'help'";
+		}
 		return null;
 	}
 }

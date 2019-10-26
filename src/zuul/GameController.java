@@ -10,7 +10,7 @@ import npc.NPCFactory;
 public class GameController {
 	private static HashMap<String, NPC> actors = new HashMap<>();
 	private static GameController SINGLE_INSTANCE = null;
-	private CommandHandler commandHandler;
+	private static CommandHandler commandHandler;
 	private static RoomController roomController;
 	private static boolean isRunning = true;
 	private static Player currentPlayer;
@@ -19,6 +19,11 @@ public class GameController {
 	public static RoomController getRoomController() {
 		return roomController;
 	}
+	
+//	public static void callCommand(String command) {
+//		String[] wrapper = {command};
+//		commandHandler.handleCommand(wrapper);
+//	}
 	
 	public static Player getCurrentPlayer() {
 		return currentPlayer;
@@ -50,6 +55,8 @@ public class GameController {
     }
 	public void start() {
 		while(isRunning) {
+			String[] wrapper = {"look"};
+			commandHandler.handleCommand(wrapper);
 			updateActors();
 			String[] inputArray = IOHandler.input.getUserInput();
 			commandHandler.handleCommand(inputArray);

@@ -13,7 +13,6 @@ public abstract class NPC {
 	private String name;
 	private String currentLocation;
 
-	// TODO: Coupled with text input. Possibly.
 	private String getUserDialogChoice() {
 		String[] inputArray = IOHandler.input.getUserInput();
 		return inputArray[0];

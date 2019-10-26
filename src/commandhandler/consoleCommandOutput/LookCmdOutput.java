@@ -10,6 +10,7 @@ import zuulutils.ZuulTools;
 public class LookCmdOutput extends LookCmd implements CommandOutput {
 	public void init(String[] args) {
 		if(super.execute(args)) {
+			IOHandler.output.println("---------");
 			IOHandler.output.println(description);
 			IOHandler.output.printf("People in room: ");
 			actors.forEach((e) -> IOHandler.output.printf((String) e + ", "));
@@ -28,6 +29,7 @@ public class LookCmdOutput extends LookCmd implements CommandOutput {
 			IOHandler.output.printf("Exits: ");
 			exits.forEach((k, v) -> IOHandler.output.printf(ZuulTools.capitalize((String) k) + ", "));
 			IOHandler.output.println(" ");
+			IOHandler.output.println("---------");
 		}
 	}
 	

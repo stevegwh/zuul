@@ -33,5 +33,8 @@ public class CommandHandler {
 		}
 	}
 	CommandHandler() {
+//		CommandInstantiator instantiator = new CommandInstantiator();
+//		CommandOutput look = instantiator.createInstance("look");
+//		commands.put("look", look);
 	}
 }

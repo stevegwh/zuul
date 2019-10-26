@@ -25,17 +25,16 @@ public class GoCmd extends Command {
 		if(!isValidDirection(direction.toUpperCase())) {
 			return "Invalid Direction";
 		}
+		nextRoom = GameController.getRoomController().getExit(direction);
+		if(nextRoom == null) {
+			return "You can't go that way.";
+		}
 		return null;
 	}
 
 	public boolean execute(String[] args) {
-		nextRoom = GameController.getRoomController().getExit(direction);
-		if(nextRoom != null) {
-			GameController.getRoomController().setNewRoom(nextRoom);
-			GameController.getCurrentPlayer().setLocation(nextRoom);
-			return true;
-		} else {
-			return false;
-		}
+		GameController.getRoomController().setNewRoom(nextRoom);
+		GameController.getCurrentPlayer().setLocation(nextRoom);
+		return true;
 	}
 }
