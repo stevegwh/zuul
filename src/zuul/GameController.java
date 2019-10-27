@@ -10,7 +10,6 @@ import npc.NPCFactory;
 
 public class GameController {
 	private static HashMap<String, NPC> actors = new HashMap<>();
-	private static GameController SINGLE_INSTANCE = null;
 	private static CommandHandler commandHandler;
 	private static RoomModel roomModel;
 	private static boolean isRunning = true;
@@ -31,21 +30,6 @@ public class GameController {
 
 	public static void quit() {
 		isRunning = false;
-	}
-
-	public static void restart() {
-		SINGLE_INSTANCE = new GameController();
-	}
-
-	public static GameController getInstance() {
-		if (SINGLE_INSTANCE == null) {
-			synchronized (GameController.class) {
-				if (SINGLE_INSTANCE == null) {
-					SINGLE_INSTANCE = new GameController();
-				}
-			}
-		}
-		return SINGLE_INSTANCE;
 	}
 
 	private void updateActors() {
