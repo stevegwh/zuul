@@ -2,11 +2,11 @@ package command;
 
 /**
  * Interface for handling the output to the user when a command succeeds or not.
- * Could output text, play an animation, play a sound etc.
- * Any new command output must be placed in a sub-directory of command called "viewName + CommandView"
- * The default view is 'Console' (std out) therefore: consoleCommandView.
- * The class must have the suffix "Output", e.g. LookOutput.
- * Specify the desired view with the --view flag when executing game.
+ * Could output text, play an animation, play a sound etc. The class must have
+ * the suffix "Output", e.g. LookOutput. Commands available to user should be
+ * placed in commandController/commandOutput. Commands reserved for the game to
+ * run directly should be placed in
+ * gameCommand.commandController/gameCommand.commandOutput.
  * 
  * @author Steve
  *

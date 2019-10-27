@@ -1,4 +1,4 @@
-package command.consoleCommandView;
+package command.gameCommand.commandView;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
@@ -7,13 +7,16 @@ import command.CommandOutput;
 import command.commandController.LookController;
 import zuulutils.ZuulTools;
 
+/**
+ * Called at the beginning of every game loop by GameController.
+ * Outputs contents of the room and the room description.
+ * 
+ * @author Steve
+ *
+ */
 public class LookOutput extends LookController implements CommandOutput {
+
 	public void init(String[] inputArray) {
-		String error = validateUserInput(inputArray);
-		if (error != null) {
-			IOHandler.output.printError(error);
-			return;
-		}
 		if (super.execute(inputArray)) {
 			IOHandler.output.println("---------");
 			IOHandler.output.println(description);
@@ -34,5 +37,4 @@ public class LookOutput extends LookController implements CommandOutput {
 			IOHandler.output.println("---------");
 		}
 	}
-
 }

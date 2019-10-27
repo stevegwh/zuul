@@ -6,20 +6,18 @@ import IO.IOHandler;
 public class Main {
 	private static void printUsage() {
 		System.out.println("Help:");
-		System.out.println("--view sets the view (output) of the game. E.g. --io Console");
+		System.out.println("--view sets the view (output) of the game. E.g. --view Console");
 		System.out.println("--dev see developer warnings");
 	}
 
 	public static void main(String[] args) {
-		String view = null;
 		boolean defaultUsed = false;
 		boolean DEVELOPER_MODE = false;
 		if (args.length != 0) {
 			for (int i = 0, len = args.length; i < len; i++) {
 				if (args[i].equals("--view")) {
 					if (i != len - 1) {
-						view = args[i + 1];
-						IOHandler.setIOMode(view);
+						IOHandler.setIOMode(args[i+1]);
 					} else {
 						printUsage();
 						return;
@@ -33,7 +31,6 @@ public class Main {
 		// Set default output mode if none specified.
 		if (IOHandler.output == null) {
 			IOHandler.setIOMode("Console");
-			view = "console";
 			defaultUsed = true;
 		}
 
@@ -45,6 +42,6 @@ public class Main {
 //			errorChecker.startCheck();
 		}
 		GameController game = new GameController();
-		game.start(view);
+		game.start();
 	}
 }

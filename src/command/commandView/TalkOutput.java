@@ -1,4 +1,4 @@
-package command.consoleCommandView;
+package command.commandView;
 
 import IO.IOHandler;
 import command.CommandOutput;

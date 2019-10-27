@@ -6,8 +6,8 @@ import java.lang.reflect.InvocationTargetException;
  * Class that routes I/O in the game. Defaults to 'Console' mode
  * (System.out/in). Assigns the input/output variables to the specified
  * implementation of Input/Output found in this package. I/O route is specified
- * by using the '--io' flag while executing the game. E.g. --io console or --io
- * gui.
+ * by using the '--view' flag while executing the game. E.g. --view console or
+ * --view gui.
  * 
  * @author Steve
  *
@@ -20,9 +20,9 @@ public class IOHandler {
 	 * Sets input/output to the mode specified. If "console" is passed in then this
 	 * class will attempt to assign the input/output variables to a class called
 	 * ConsoleInput and ConsoleOutput. If "gui" is passed in then this class will
-	 * attempt to find "GuiInput" and "GuiOutput" in the package etc. All I/O
-	 * (textual output) in the game is routed to the implementation assigned to
-	 * IOHandler.input and IOHandler.output.
+	 * attempt to find "GuiInput" and "GuiOutput" in the package etc. All I/O in the
+	 * game is routed to the implementation assigned to IOHandler.input and
+	 * IOHandler.output.
 	 * 
 	 * @param mode the name of the Input/Output implementation to request. e.g.
 	 *             console, gui etc.

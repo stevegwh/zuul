@@ -13,7 +13,7 @@ import java.io.File;
 
 public class CommandInstantiator {
 	private ArrayList<String> commands = new ArrayList<>();
-	private String dir = "CommandView"; // populateCommandArr() prefixes this with the desired view (E.g. Console, GUI...)
+	private String dir = "commandView";
 	private final String fileSuffix = "Output";
 
 	/**
@@ -76,7 +76,6 @@ public class CommandInstantiator {
 	 * ArrayList
 	 */
 	private void populateCommandArr() {
-		dir = GameController.getView() + dir;
 		File file = new File("src/" + CommandInstantiator.class.getPackageName() + "/" + dir + "/");
 		String[] list = file.list();
 		for (String item : list) {

@@ -3,11 +3,12 @@ package zuul;
 import java.util.HashMap;
 
 import IO.IOHandler;
+import command.gameCommand.commandView.GameStartOutput;
+import command.gameCommand.commandView.LookOutput;
 import npc.NPC;
 import npc.NPCFactory;
 
 public class GameController {
-	private static String viewName;
 	private static HashMap<String, NPC> actors = new HashMap<>();
 	private static GameController SINGLE_INSTANCE = null;
 	private static CommandHandler commandHandler;
@@ -18,10 +19,6 @@ public class GameController {
 
 	public static RoomModel getRoomModel() {
 		return roomModel;
-	}
-
-	public static String getView() {
-		return viewName;
 	}
 
 	public static Player getCurrentPlayer() {
@@ -59,11 +56,12 @@ public class GameController {
 		return actors.get(actorName);
 	}
 	
-	public void start(String viewName) {
-		GameController.viewName = viewName.toLowerCase();
+	public void start() {
+		GameStartOutput welcome = new GameStartOutput();
+		LookOutput look = new LookOutput();
+		welcome.init(new String[] {});
 		while (isRunning) {
-			String[] wrapper = { "look" };
-			commandHandler.handleCommand(wrapper);
+			look.init(new String[] {"look"});
 			updateActors();
 			String[] inputArray = IOHandler.input.getUserInput();
 			commandHandler.handleCommand(inputArray);
