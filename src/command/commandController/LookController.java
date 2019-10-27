@@ -22,6 +22,9 @@ public class LookController extends CommandController {
 
 	@Override
 	public String validateUserInput(String[] inputArray) {
+		if(inputArray.length > 1) {
+			return "Look what?";
+		}
 		return null;
 	}
 }

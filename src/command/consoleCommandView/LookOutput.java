@@ -9,6 +9,11 @@ import zuulutils.ZuulTools;
 
 public class LookOutput extends LookController implements CommandOutput {
 	public void init(String[] inputArray) {
+		String error = validateUserInput(inputArray);
+		if (error != null) {
+			IOHandler.output.printError(error);
+			return;
+		}
 		if (super.execute(inputArray)) {
 			IOHandler.output.println("---------");
 			IOHandler.output.println(description);

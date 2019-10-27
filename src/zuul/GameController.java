@@ -58,7 +58,7 @@ public class GameController {
 	public static NPC getActor(String actorName) {
 		return actors.get(actorName);
 	}
-
+	
 	public void start(String viewName) {
 		GameController.viewName = viewName.toLowerCase();
 		while (isRunning) {
