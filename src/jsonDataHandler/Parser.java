@@ -7,7 +7,11 @@ import java.io.FileReader;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 
-// Solely responsible for importing JSON from a file and returning it
+/**
+ * Responsible for deserializing a JSON file and returning it.
+ * @author Steve
+ *
+ */
 public final class Parser {
 	private Object obj = new Object();
 
@@ -16,7 +20,7 @@ public final class Parser {
 	 * @param file Path of the JSON file
 	 * @return The deserialized JSON object
 	 */
-    public Object generateData(String file) { //TODO: hacky
+    public Object generateData(String file) {
         try {
             obj = Jsoner.deserialize(new FileReader(file));
             return (JsonObject) obj;

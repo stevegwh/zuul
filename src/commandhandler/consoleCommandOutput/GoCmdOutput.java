@@ -11,8 +11,6 @@ public class GoCmdOutput extends GoCmd implements CommandOutput {
 			IOHandler.output.printError(error);
 			return;
 		}
-		if(super.execute(inputArray)) {
-//			GameController.callCommand("look");
-		}
+		super.execute(inputArray);
 	}
 }

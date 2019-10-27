@@ -4,7 +4,6 @@ import IO.IOHandler;
 import commandhandler.CommandOutput;
 import commandhandler.commandBase.HelpCmd;
 
-// TODO: End list in full stop, not comma
 public class HelpCmdOutput extends HelpCmd implements CommandOutput {
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
@@ -16,7 +15,10 @@ public class HelpCmdOutput extends HelpCmd implements CommandOutput {
 			IOHandler.output.println("You are lost. You are alone. You wander around at the university");
 			IOHandler.output.println(" ");
 			IOHandler.output.println("Your command words are: ");
+			String end = commands.get(commands.size() - 1);
+			commands.remove(end);
 			commands.forEach(e->IOHandler.output.printf(e + ", "));
+			IOHandler.output.printf(end + ".");
 			IOHandler.output.println(" ");
 		}
 	}

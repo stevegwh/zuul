@@ -7,7 +7,10 @@ import zuul.TakeableItem;
 public class DropCmd extends Command {
 	protected String toDrop;
 	protected String validateUserInput(String[] inputArray) {
-		toDrop = inputArray[1].toLowerCase();
+		if(inputArray.length < 2) {
+			return "Drop what?";
+		}
+		toDrop = inputArray[1];
 		if(!GameController.getCurrentPlayer().getInvController().checkIfExists(toDrop)) {
 			return "You do not have a " + toDrop + " in your inventory";
 		}

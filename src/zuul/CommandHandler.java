@@ -1,5 +1,6 @@
 package zuul;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import commandhandler.*;
@@ -20,6 +21,7 @@ public class CommandHandler {
 	 * @param inputArray the input produced by the user
 	 */
 	public void handleCommand(String[] inputArray) {
+		inputArray = Arrays.stream(inputArray).map(e -> e.toLowerCase()).toArray(String[]::new);
 		String commandName = inputArray[0];
 		if(!commands.containsKey(commandName)) {
 			CommandInstantiator instantiator = new CommandInstantiator();
@@ -33,8 +35,5 @@ public class CommandHandler {
 		}
 	}
 	CommandHandler() {
-//		CommandInstantiator instantiator = new CommandInstantiator();
-//		CommandOutput look = instantiator.createInstance("look");
-//		commands.put("look", look);
 	}
 }

@@ -5,12 +5,9 @@ import npc.NPC;
 
 public class Barry extends NPC {
 	public Barry() {
-		// TODO: Would be nice to read the json file for the location of the NPC, rather than setting it
-		// here and also in the roomData json
 		// TODO: If this name doesn't match the class name it causes the game to crash.
 		super(new Object(){}.getClass().getEnclosingClass().getSimpleName());
 	}
-
 
 	@Override
 	public boolean onGive(String toCompare) {

@@ -2,17 +2,21 @@ package jsonDataHandler;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-// Important class that holds JSON data
+// Important class that holds JSON jsonData
 public class JSONDataHandler {
-	private JsonObject data;
-    
+	private JsonObject jsonData;
+	
+	public JsonObject getAllData() {
+		return jsonData;
+	}
+	
 	/** 
 	 * Queries the JsonObject for a certain field.
 	 * @param key The key of the JsonObject you wish to return
 	 * @return
 	 */
     public JsonObject getField(String key) {
-		JsonObject fieldData = (JsonObject) data.get(key);
+		JsonObject fieldData = (JsonObject) jsonData.get(key);
     	return fieldData;
     }
 
@@ -23,6 +27,6 @@ public class JSONDataHandler {
      */
     public JSONDataHandler(String path) {
     	Parser parser = new Parser();
-    	data = (JsonObject) parser.generateData(path); 
+    	jsonData = (JsonObject) parser.generateData(path); 
     }
 }

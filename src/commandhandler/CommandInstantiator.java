@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import IO.IOHandler;
+import zuul.GameController;
 //import eventHandler.ZuulEventRouter;
 import zuulutils.ZuulTools;
 
 import java.io.File;
 public class CommandInstantiator {
 	private ArrayList<String> commands = new ArrayList<>();
-	// TODO: Make dynamic depending on IO mode
-	private final String dir = "consoleCommandOutput";
+	private String dir = "CommandOutput";
 	private final String fileSuffix = "CmdOutput";
 	
 	/**
@@ -26,6 +26,9 @@ public class CommandInstantiator {
 	}
 	
 	private String buildFileName(String commandName) {
+		if(commandName.isEmpty()) { 
+			return null;
+		}
 		commandName = ZuulTools.capitalize(commandName);
 		commandName += fileSuffix;
 		return commandName;
@@ -71,6 +74,7 @@ public class CommandInstantiator {
 	 * Scans the OutputLayer directory and stores all file names in the commands ArrayList
 	 */
 	private void populateCommandArr() {
+		dir = GameController.getMode() + dir;
 		File file = new File("src/" + CommandInstantiator.class.getPackageName() + "/" + dir + "/");
 		String[] list = file.list();
 		for(String item : list) {
@@ -80,7 +84,6 @@ public class CommandInstantiator {
 		}
 	}
 	
-	// TODO: Maybe pass in IO mode here?
 	public CommandInstantiator() {
 		populateCommandArr();
 	}

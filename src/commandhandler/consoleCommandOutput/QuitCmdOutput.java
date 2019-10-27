@@ -15,7 +15,6 @@ public class QuitCmdOutput extends QuitCmd implements CommandOutput {
 		if(super.execute(inputArray)) {
 			IOHandler.output.println("Thanks for playing!");
 			GameController.quit();
-		} else {
 		}
 	}
 
