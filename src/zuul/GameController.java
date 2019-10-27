@@ -1,23 +1,24 @@
 package zuul;
 
-import java.util.HashMap;
-
 import IO.IOHandler;
 import command.gameCommand.commandView.GameStartOutput;
 import command.gameCommand.commandView.LookOutput;
-import npc.NPC;
-import npc.NPCFactory;
+import npc.NPCController;
 
 public class GameController {
-	private static HashMap<String, NPC> actors = new HashMap<>();
-	private static CommandHandler commandHandler;
+	private CommandHandler commandHandler;
 	private static RoomModel roomModel;
+	private static NPCController npcController;
 	private static boolean isRunning = true;
 	private static Player currentPlayer;
 	private final String START_LOCATION = "entrance";
 
 	public static RoomModel getRoomModel() {
 		return roomModel;
+	}
+	
+	public static NPCController getNPCContoller() {
+		return npcController;
 	}
 
 	public static Player getCurrentPlayer() {
@@ -31,14 +32,6 @@ public class GameController {
 	public static void quit() {
 		isRunning = false;
 	}
-
-	private void updateActors() {
-		actors.keySet().forEach(a -> actors.get(a).update());
-	}
-
-	public static NPC getActor(String actorName) {
-		return actors.get(actorName);
-	}
 	
 	public void start() {
 		GameStartOutput welcome = new GameStartOutput();
@@ -46,17 +39,19 @@ public class GameController {
 		welcome.init(new String[] {});
 		while (isRunning) {
 			look.init(new String[] {"look"});
-			updateActors();
 			String[] inputArray = IOHandler.input.getUserInput();
 			commandHandler.handleCommand(inputArray);
 		}
 	}
 
 	GameController() {
-		commandHandler = new CommandHandler();
 		roomModel = new RoomModel(START_LOCATION);
 		currentPlayer = new Player(START_LOCATION);
-		NPCFactory npcFactory = new NPCFactory();
-		actors = npcFactory.getNPCCollection();
+		commandHandler = new CommandHandler();
+		npcController = new NPCController();
+	}
+
+	public static boolean isRunning() {
+		return isRunning;
 	}
 }

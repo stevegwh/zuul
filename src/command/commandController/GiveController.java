@@ -32,7 +32,7 @@ public class GiveController extends CommandController {
 		}
 		String actorName = inputArray[2];
 		actorName = ZuulTools.capitalize(actorName);
-		NPC npc = GameController.getActor(actorName);
+		NPC npc = GameController.getNPCContoller().getActor(actorName);
 		if (npc == null) {
 			return actorName + " is not in the room";
 		} else {

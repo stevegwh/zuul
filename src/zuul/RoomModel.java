@@ -1,5 +1,8 @@
 package zuul;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
@@ -18,6 +21,7 @@ public class RoomModel {
 	public JsonObject getRoom(String room) {
 		return jsonHandler.getField(room);
 	}
+
 	/**
 	 * Assigns the currentRoomJSON field the JsonObject of the nextRoom parameter.
 	 * 
@@ -33,19 +37,25 @@ public class RoomModel {
 	}
 
 	/**
-	 * @return A clone of the exits JsonObject of the current room.
+	 * @return An ArrayList of the exit names of the specified room.
 	 */
-	public JsonObject getAllExits() {
-		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
-		return (JsonObject) exits.clone();
+	public ArrayList<String> getAllExits(String room) {
+		// TODO: Tidy.
+		JsonObject roomJson = (JsonObject) getRoom(room);
+		JsonObject tmp = (JsonObject) roomJson.get("exits");
+		Set<String> exits = tmp.keySet();
+		ArrayList<String> exitList = new ArrayList<>();
+		exits.forEach(e -> exitList.add(e));
+		return exitList;
 	}
 
 	/**
 	 * @param direction North, South, East, West
 	 * @return The key (name of the room) in the JsonObject that the exit points to.
 	 */
-	public String getExit(String direction) {
-		return (String) ((JsonObject) currentRoomJSON.get("exits")).get(direction);
+	public String getExit(String direction, String currentLocation) {
+		JsonObject roomToQuery = getRoom(currentLocation);
+		return (String) ((JsonObject) roomToQuery.get("exits")).get(direction);
 	}
 
 	public void addExit(String direction, String destination) {

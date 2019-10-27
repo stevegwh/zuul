@@ -2,18 +2,20 @@ package npc;
 
 import zuul.GameController;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Random;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
+import command.gameCommand.commandView.AnnounceEntranceOutput;
 import jsonDataHandler.JSONDataHandler;
 
 public abstract class NPC {
 	private JsonObject json;
-	private String name;
-	private String currentLocation;
+	protected String name;
+	protected String currentLocation;
 
 	private String getUserDialogChoice() {
 		String[] inputArray = IOHandler.input.getUserInput();
@@ -22,7 +24,11 @@ public abstract class NPC {
 
 	public abstract boolean onGive(String takeableItem);
 
-	public abstract void update();
+	public void update() {
+		if (!currentLocation.equals(GameController.getCurrentPlayer().getLocation())) {
+			move();
+		}
+	}
 
 	public void printDialog() {
 		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
@@ -43,30 +49,32 @@ public abstract class NPC {
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
 		IOHandler.output.printCharDialog(((String) dialogResponses.get(idx)));
 	}
-	
-	// TODO: Implement
-	public void getRandomRoom() {
-		JsonObject room = GameController.getRoomModel().getRoom(currentLocation);
-		Set<String> exits = GameController.getRoomModel().getAllExits().keySet();
-		String destination = null;
-		destination = (String) GameController.getRoomModel().getExit(destination);
-//		move(destination);
+
+	public String getRandomRoom() {
+		ArrayList<String> exits = GameController.getRoomModel().getAllExits(currentLocation);
+		Random generator = new Random();
+		int randomIndex = generator.nextInt(exits.size());
+		String direction = exits.get(randomIndex);
+		return GameController.getRoomModel().getExit(direction, currentLocation);
 	}
 
 	/**
 	 * Updates the actorsInRoom field of the destination room and the room specified
 	 * in the NPC's currentLocation field.
 	 * 
-	 * @destination The name of the destination room.
 	 */
-	public void move(String destinationRoomName) {
+	public void move() {
+		String destinationRoomName = getRandomRoom();
 		JsonArray destinationRoom = GameController.getRoomModel().getActorsInRoom(destinationRoomName);
 		JsonArray currentRoom = GameController.getRoomModel().getActorsInRoom(currentLocation);
-		if (destinationRoom.indexOf(name) < 0) {
-			destinationRoom.add(name);
-			currentRoom.remove(name);
-			currentLocation = destinationRoomName;
+		destinationRoom.add(name);
+		currentRoom.remove(name);
+		currentLocation = destinationRoomName;
+		if (destinationRoomName.equals(GameController.getCurrentPlayer().getLocation())) {
+			AnnounceEntranceOutput announcement = new AnnounceEntranceOutput();
+			announcement.init(new String[] { name });
 		}
+
 	}
 
 	/**

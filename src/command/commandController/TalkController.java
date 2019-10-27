@@ -12,7 +12,7 @@ public class TalkController extends CommandController {
 
 	@Override
 	public boolean execute(String[] args) {
-		actor = GameController.getActor(toTalk);
+		actor = GameController.getNPCContoller().getActor(toTalk);
 		return true;
 	}
 

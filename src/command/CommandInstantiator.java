@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import IO.IOHandler;
-import zuul.GameController;
 import zuulutils.ZuulTools;
 
 import java.io.File;

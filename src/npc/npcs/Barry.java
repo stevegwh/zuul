@@ -18,10 +18,4 @@ public class Barry extends NPC {
 		}
 		return false;
 	}
-
-	@Override
-	public void update() {
-		getRandomRoom();
-	}
-
 }

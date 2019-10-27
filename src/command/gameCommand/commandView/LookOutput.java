@@ -32,7 +32,7 @@ public class LookOutput extends LookController implements CommandOutput {
 			}
 			IOHandler.output.println(" ");
 			IOHandler.output.printf("Exits: ");
-			exits.forEach((k, v) -> IOHandler.output.printf(ZuulTools.capitalize((String) k) + ", "));
+			exits.forEach((k) -> IOHandler.output.printf(ZuulTools.capitalize((String) k) + ", "));
 			IOHandler.output.println(" ");
 			IOHandler.output.println("---------");
 		}

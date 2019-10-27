@@ -26,7 +26,7 @@ public class GoController extends CommandController {
 		if (!isValidDirection(direction.toUpperCase())) {
 			return "Invalid Direction";
 		}
-		nextRoom = GameController.getRoomModel().getExit(direction);
+		nextRoom = GameController.getRoomModel().getExit(direction, GameController.getCurrentPlayer().getLocation());
 		if (nextRoom == null) {
 			return "You can't go that way.";
 		}

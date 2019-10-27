@@ -8,26 +8,30 @@
 				"perishable": true
         	}
         ],
+        "actorsInRoom" : [],
         "exits": {
             "east" : "lecture",
-            "west" : "pub",
-            "south" : "lab"
+            "south" : "lab",
+            "west" : "pub"
        } 
     },
     "lecture" : {
         "description" : "You are in a lecture theatre",
+        "actorsInRoom" : [],
         "exits": {
             "west" : "entrance"
        } 
     },
     "pub" : {
         "description" : "You are in the campus pub",
+        "actorsInRoom" : [],
         "exits": {
             "east" : "entrance"
        } 
     },
     "lab" : {
         "description" : "You are in a computing lab.",
+        "actorsInRoom" : [],
         "exits": {
         	"north" : "entrance",
         	"east" : "admin"
@@ -35,6 +39,7 @@
     },
     "admin" : {
         "description" : "You are in the computing admin office.",
+        "actorsInRoom" : [],
         "exits": {
         	"west" : "lab"
        } 
