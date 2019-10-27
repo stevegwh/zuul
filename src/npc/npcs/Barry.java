@@ -21,6 +21,7 @@ public class Barry extends NPC {
 
 	@Override
 	public void update() {
+		getRandomRoom();
 	}
 
 }

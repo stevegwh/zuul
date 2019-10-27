@@ -15,7 +15,12 @@ public class ConsoleInput implements Input {
 		IOHandler.output.printf(">> ");
 		@SuppressWarnings("resource")
 		Scanner scanInput = new Scanner(System.in);
-		data = scanInput.nextLine();
+		try {
+			data = scanInput.nextLine();
+		} catch(java.util.NoSuchElementException e) { // Catches Ctrl+D
+			System.err.println("Program terminated due to user.");
+			System.exit(0);
+		}
 		scanInput.reset();
 		return parseInput(data);
 	}

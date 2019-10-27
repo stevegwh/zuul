@@ -4,7 +4,7 @@ public class Player {
 	private InventoryModel inventory = new InventoryModel();
 	private String currentLocation;
 
-	public InventoryModel getInvController() {
+	public InventoryModel getInvModel() {
 		return inventory;
 	}
 

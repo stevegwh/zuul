@@ -7,21 +7,21 @@ import npc.NPC;
 import npc.NPCFactory;
 
 public class GameController {
-	private static String ioMode;
+	private static String viewName;
 	private static HashMap<String, NPC> actors = new HashMap<>();
 	private static GameController SINGLE_INSTANCE = null;
 	private static CommandHandler commandHandler;
-	private static RoomModel roomController;
+	private static RoomModel roomModel;
 	private static boolean isRunning = true;
 	private static Player currentPlayer;
-	private final String START_LOCATION = "lecture";
+	private final String START_LOCATION = "entrance";
 
-	public static RoomModel getRoomController() {
-		return roomController;
+	public static RoomModel getRoomModel() {
+		return roomModel;
 	}
 
-	public static String getIoMode() {
-		return ioMode;
+	public static String getView() {
+		return viewName;
 	}
 
 	public static Player getCurrentPlayer() {
@@ -59,8 +59,8 @@ public class GameController {
 		return actors.get(actorName);
 	}
 
-	public void start(String ioMode) {
-		GameController.ioMode = ioMode.toLowerCase();
+	public void start(String viewName) {
+		GameController.viewName = viewName.toLowerCase();
 		while (isRunning) {
 			String[] wrapper = { "look" };
 			commandHandler.handleCommand(wrapper);
@@ -72,7 +72,7 @@ public class GameController {
 
 	GameController() {
 		commandHandler = new CommandHandler();
-		roomController = new RoomModel(START_LOCATION);
+		roomModel = new RoomModel(START_LOCATION);
 		currentPlayer = new Player(START_LOCATION);
 		NPCFactory npcFactory = new NPCFactory();
 		actors = npcFactory.getNPCCollection();

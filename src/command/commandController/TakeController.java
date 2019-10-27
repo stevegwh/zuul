@@ -23,9 +23,9 @@ public class TakeController extends CommandController {
 		} else {
 			item = new TakeableItem(name, weight);
 		}
-		GameController.getCurrentPlayer().getInvController().addItem(item);
-		GameController.getCurrentPlayer().getInvController().setWeight(weight);
-		GameController.getRoomController().removeTakeableItem(obj);
+		GameController.getCurrentPlayer().getInvModel().addItem(item);
+		GameController.getCurrentPlayer().getInvModel().setWeight(weight);
+		GameController.getRoomModel().removeTakeableItem(obj);
 		return true;
 
 	}
@@ -36,15 +36,15 @@ public class TakeController extends CommandController {
 			return "Take what?";
 		}
 		toTake = inputArray[1];
-		if (!GameController.getRoomController().hasTakeableItems()) {
+		if (!GameController.getRoomModel().hasTakeableItems()) {
 			return toTake + " not in room";
 		}
-		obj = GameController.getRoomController().ifItemExistsReturnIt(toTake);
+		obj = GameController.getRoomModel().ifItemExistsReturnIt(toTake);
 		if (obj == null) {
 			return toTake + " not in room";
 		}
 		weight = Integer.parseInt((String) obj.get("weight"));
-		if (GameController.getCurrentPlayer().getInvController().overWeightLimit(weight)) {
+		if (GameController.getCurrentPlayer().getInvModel().overWeightLimit(weight)) {
 			return "Sorry, this item is too heavy for you to carry. Try dropping something first";
 		}
 		return null;

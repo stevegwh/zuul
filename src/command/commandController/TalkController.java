@@ -27,7 +27,7 @@ public class TalkController extends CommandController {
 		}
 		toTalk = inputArray[1]; // talk[0] to[1] Barry[2]
 		toTalk = ZuulTools.capitalize(toTalk);
-		if (!GameController.getRoomController().hasActor(toTalk)) {
+		if (!GameController.getRoomModel().hasActor(toTalk)) {
 			return toTalk + " not in room.";
 		}
 		return null;

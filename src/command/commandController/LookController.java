@@ -13,10 +13,10 @@ public class LookController extends CommandController {
 	protected JsonObject exits;
 
 	public boolean execute(String[] inputArray) {
-		description = GameController.getRoomController().getDescription();
-		actors = GameController.getRoomController().getActorsInRoom(GameController.getCurrentPlayer().getLocation());
-		items = GameController.getRoomController().getTakeableItems();
-		exits = (JsonObject) GameController.getRoomController().getAllExits();
+		description = GameController.getRoomModel().getDescription();
+		actors = GameController.getRoomModel().getActorsInRoom(GameController.getCurrentPlayer().getLocation());
+		items = GameController.getRoomModel().getTakeableItems();
+		exits = (JsonObject) GameController.getRoomModel().getAllExits();
 		return true;
 	}
 

@@ -2,6 +2,8 @@ package npc;
 
 import zuul.GameController;
 
+import java.util.Set;
+
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
@@ -34,12 +36,21 @@ public abstract class NPC {
 		printDialog();
 		String userChoice = getUserDialogChoice();
 		if (userChoice.length() > 1 || userChoice.matches("d")) {
-			IOHandler.output.printError("Invalid CommandController");
+			IOHandler.output.printError("Invalid Command");
 			return;
 		}
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
 		IOHandler.output.printCharDialog(((String) dialogResponses.get(idx)));
+	}
+	
+	// TODO: Implement
+	public void getRandomRoom() {
+		JsonObject room = GameController.getRoomModel().getRoom(currentLocation);
+		Set<String> exits = GameController.getRoomModel().getAllExits().keySet();
+		String destination = null;
+		destination = (String) GameController.getRoomModel().getExit(destination);
+//		move(destination);
 	}
 
 	/**
@@ -49,8 +60,8 @@ public abstract class NPC {
 	 * @destination The name of the destination room.
 	 */
 	public void move(String destinationRoomName) {
-		JsonArray destinationRoom = GameController.getRoomController().getActorsInRoom(destinationRoomName);
-		JsonArray currentRoom = GameController.getRoomController().getActorsInRoom(currentLocation);
+		JsonArray destinationRoom = GameController.getRoomModel().getActorsInRoom(destinationRoomName);
+		JsonArray currentRoom = GameController.getRoomModel().getActorsInRoom(currentLocation);
 		if (destinationRoom.indexOf(name) < 0) {
 			destinationRoom.add(name);
 			currentRoom.remove(name);
@@ -96,7 +107,7 @@ public abstract class NPC {
 		JSONDataHandler jsonHandler = new JSONDataHandler("res/npcData.json");
 		json = jsonHandler.getField(name);
 		String initialRoom = (String) json.get("location");
-		JsonArray destinationRoomJson = GameController.getRoomController().getActorsInRoom(initialRoom);
+		JsonArray destinationRoomJson = GameController.getRoomModel().getActorsInRoom(initialRoom);
 		destinationRoomJson.add(name);
 		currentLocation = initialRoom;
 	}

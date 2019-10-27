@@ -15,9 +15,9 @@ public class RoomModel {
 	private static JSONDataHandler jsonHandler;
 	private JsonObject currentRoomJSON;
 
-//	public JsonObject getRoom(String room) {
-//		return jsonHandler.getField(room);
-//	}
+	public JsonObject getRoom(String room) {
+		return jsonHandler.getField(room);
+	}
 	/**
 	 * Assigns the currentRoomJSON field the JsonObject of the nextRoom parameter.
 	 * 
@@ -41,11 +41,11 @@ public class RoomModel {
 	}
 
 	/**
-	 * @param exit The name of the required exit.
+	 * @param direction North, South, East, West
 	 * @return The key (name of the room) in the JsonObject that the exit points to.
 	 */
-	public String getExit(String exit) {
-		return (String) ((JsonObject) currentRoomJSON.get("exits")).get(exit);
+	public String getExit(String direction) {
+		return (String) ((JsonObject) currentRoomJSON.get("exits")).get(direction);
 	}
 
 	public void addExit(String direction, String destination) {

@@ -22,8 +22,8 @@ public class GiveController extends CommandController {
 			return "Give what?";
 		}
 		itemName = inputArray[1];
-		takeableItem = GameController.getCurrentPlayer().getInvController().getItem(itemName);
-		boolean itemInInv = GameController.getCurrentPlayer().getInvController().checkIfExists(itemName);
+		takeableItem = GameController.getCurrentPlayer().getInvModel().getItem(itemName);
+		boolean itemInInv = GameController.getCurrentPlayer().getInvModel().checkIfExists(itemName);
 		if (!itemInInv) {
 			return "You don't have the " + itemName;
 		}
@@ -51,8 +51,8 @@ public class GiveController extends CommandController {
 			return false;
 		} else {
 			if (takeableItem.isPerishable()) {
-				GameController.getCurrentPlayer().getInvController().setWeight(takeableItem.getWeight());
-				GameController.getCurrentPlayer().getInvController().removeItem(takeableItem);
+				GameController.getCurrentPlayer().getInvModel().setWeight(takeableItem.getWeight());
+				GameController.getCurrentPlayer().getInvModel().removeItem(takeableItem);
 			}
 			return true;
 		}

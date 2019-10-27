@@ -10,7 +10,7 @@ public class InventoryController extends CommandController {
 	protected ArrayList<TakeableItem> inventory = new ArrayList<>();
 
 	protected String validateUserInput(String[] inputArray) {
-		inventory = GameController.getCurrentPlayer().getInvController().getInventory();
+		inventory = GameController.getCurrentPlayer().getInvModel().getInventory();
 		if (inventory.size() == 0) {
 			return "You do not currently have anything in your inventory";
 		}

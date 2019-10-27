@@ -13,7 +13,7 @@ public class QuitView extends QuitController implements CommandView {
 			return;
 		}
 		if (super.execute(inputArray)) {
-			IOHandler.output.println("Thanks for playing!");
+			IOHandler.output.println("Thank you for playing. Good bye");
 			GameController.quit();
 		}
 	}

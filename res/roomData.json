@@ -3,43 +3,40 @@
         "description" : "You are outside the main entrance of the university.",
         "takeableItems" :  [
         	{
-				"name" : "key",
-				"weight" : "1",
+				"name" : "notebook",
+				"weight" : "2",
 				"perishable": true
-        	},
-        	{
-				"name" : "gum",
-				"weight" : "3",
-				"perishable" : true
         	}
         ],
         "exits": {
-            "east" : "lecture"
+            "east" : "lecture",
+            "west" : "pub",
+            "south" : "lab"
        } 
     },
     "lecture" : {
         "description" : "You are in a lecture theatre",
         "exits": {
-            "north" : "pub",
             "west" : "entrance"
        } 
     },
     "pub" : {
         "description" : "You are in the campus pub",
         "exits": {
-            "south" : "lecture"
+            "east" : "entrance"
        } 
     },
     "lab" : {
         "description" : "You are in a computing lab.",
         "exits": {
-        	"south" : "pub"
+        	"north" : "entrance",
+        	"east" : "admin"
        } 
     },
     "admin" : {
         "description" : "You are in the computing admin office.",
         "exits": {
-        	"south" : "pub"
+        	"west" : "lab"
        } 
     }
 }
