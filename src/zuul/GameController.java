@@ -11,12 +11,12 @@ public class GameController {
 	private static HashMap<String, NPC> actors = new HashMap<>();
 	private static GameController SINGLE_INSTANCE = null;
 	private static CommandHandler commandHandler;
-	private static RoomController roomController;
+	private static RoomModel roomController;
 	private static boolean isRunning = true;
 	private static Player currentPlayer;
 	private final String START_LOCATION = "lecture";
 	
-	public static RoomController getRoomController() {
+	public static RoomModel getRoomController() {
 		return roomController;
 	}
 	
@@ -64,10 +64,9 @@ public class GameController {
 	}
 	GameController() {
 		commandHandler = new CommandHandler();
-		roomController = new RoomController(START_LOCATION);
+		roomController = new RoomModel(START_LOCATION);
 		currentPlayer = new Player(START_LOCATION);
 		NPCFactory npcFactory = new NPCFactory();
 		actors = npcFactory.getNPCCollection();
-		// TODO: Game onStart method
 	}
 }

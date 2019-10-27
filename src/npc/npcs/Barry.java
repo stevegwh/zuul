@@ -5,7 +5,6 @@ import npc.NPC;
 
 public class Barry extends NPC {
 	public Barry() {
-		// TODO: If this name doesn't match the class name it causes the game to crash.
 		super(new Object(){}.getClass().getEnclosingClass().getSimpleName());
 	}
 
@@ -17,6 +16,10 @@ public class Barry extends NPC {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void update() {
 	}
 
 }

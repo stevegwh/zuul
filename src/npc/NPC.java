@@ -19,6 +19,7 @@ public abstract class NPC {
 	}
 
 	public abstract boolean onGive(String takeableItem);
+	public abstract void update();
 
 	public void printDialog() {
 		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
@@ -32,17 +33,12 @@ public abstract class NPC {
 		printDialog();
 		String userChoice = getUserDialogChoice();
 		if(userChoice.length() > 1 || userChoice.matches("d")) {
-			IOHandler.output.printError("Invalid Command");
+			IOHandler.output.printError("Invalid CommandController");
 			return;
 		}
 		int idx = Integer.parseInt(userChoice) - 1;
 		JsonArray dialogResponses = (JsonArray) json.get("dialogResponses");
 		IOHandler.output.printCharDialog(((String) dialogResponses.get(idx)));
-	}
-
-	public void update() {
-		//RoomController.moveActor(this, "room2"); TODO: Should moveActor be part of this class or RoomLoader?
-		move("pub");
 	}
 
 	/** 
