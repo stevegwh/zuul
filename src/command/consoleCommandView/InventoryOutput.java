@@ -1,11 +1,11 @@
 package command.consoleCommandView;
 
 import IO.IOHandler;
-import command.CommandView;
+import command.CommandOutput;
 import command.commandController.InventoryController;
 import zuulutils.ZuulTools;
 
-public class InventoryView extends InventoryController implements CommandView {
+public class InventoryOutput extends InventoryController implements CommandOutput {
 
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);

@@ -1,10 +1,11 @@
 package command.consoleCommandView;
 
 import IO.IOHandler;
-import command.CommandView;
-import command.commandController.TakeController;
+import command.CommandOutput;
+import command.commandController.GiveController;
 
-public class TakeView extends TakeController implements CommandView {
+public class GiveOutput extends GiveController implements CommandOutput {
+
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
 		if (error != null) {
@@ -12,7 +13,9 @@ public class TakeView extends TakeController implements CommandView {
 			return;
 		}
 		if (super.execute(inputArray)) {
-			IOHandler.output.println("You picked up " + toTake);
+			return;
+		} else {
+			IOHandler.output.println(npc.getName() + " didn't seem to want the " + itemName);
 		}
 	}
 }

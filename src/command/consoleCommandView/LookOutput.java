@@ -3,11 +3,11 @@ package command.consoleCommandView;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
-import command.CommandView;
+import command.CommandOutput;
 import command.commandController.LookController;
 import zuulutils.ZuulTools;
 
-public class LookView extends LookController implements CommandView {
+public class LookOutput extends LookController implements CommandOutput {
 	public void init(String[] inputArray) {
 		if (super.execute(inputArray)) {
 			IOHandler.output.println("---------");

@@ -15,7 +15,7 @@ import java.io.File;
 public class CommandInstantiator {
 	private ArrayList<String> commands = new ArrayList<>();
 	private String dir = "CommandView"; // populateCommandArr() prefixes this with the desired view (E.g. Console, GUI...)
-	private final String fileSuffix = "View";
+	private final String fileSuffix = "Output";
 
 	/**
 	 * @return A list of the command names
@@ -48,19 +48,19 @@ public class CommandInstantiator {
 	 * Attempts to create an instance of the class passed in as parameter.
 	 * 
 	 * @param commandName The command to be instantiated.
-	 * @return A CommandView object or null.
+	 * @return A CommandOutput object or null.
 	 */
-	public CommandView createInstance(String commandName) {
+	public CommandOutput createInstance(String commandName) {
 		commandName = buildFileName(commandName);
 		if (!checkCommandValidity(commandName)) {
-			IOHandler.output.printError("Invalid CommandController");
+			IOHandler.output.printError("Invalid Command");
 			return null;
 		}
 		Object command = null;
 		try {
 			command = Class.forName(CommandInstantiator.class.getPackageName() + "." + dir + "." + commandName)
 					.getConstructor().newInstance();
-			return (CommandView) command;
+			return (CommandOutput) command;
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | java.lang.ClassNotFoundException
 				| java.lang.ClassCastException e) {

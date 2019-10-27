@@ -1,10 +1,10 @@
 package command.consoleCommandView;
 
 import IO.IOHandler;
-import command.CommandView;
+import command.CommandOutput;
 import command.commandController.TalkController;
 
-public class TalkView extends TalkController implements CommandView {
+public class TalkOutput extends TalkController implements CommandOutput {
 	public void init(String[] inputArray) {
 		String error = validateUserInput(inputArray);
 		if (error != null) {

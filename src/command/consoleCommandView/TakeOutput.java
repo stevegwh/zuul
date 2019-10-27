@@ -1,11 +1,10 @@
 package command.consoleCommandView;
 
 import IO.IOHandler;
-import command.CommandView;
-import command.commandController.QuitController;
-import zuul.GameController;
+import command.CommandOutput;
+import command.commandController.TakeController;
 
-public class QuitView extends QuitController implements CommandView {
+public class TakeOutput extends TakeController implements CommandOutput {
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
 		if (error != null) {
@@ -13,9 +12,7 @@ public class QuitView extends QuitController implements CommandView {
 			return;
 		}
 		if (super.execute(inputArray)) {
-			IOHandler.output.println("Thank you for playing. Good bye");
-			GameController.quit();
+			IOHandler.output.println("You picked up " + toTake);
 		}
 	}
-
 }

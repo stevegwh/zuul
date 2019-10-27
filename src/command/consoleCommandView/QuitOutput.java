@@ -1,11 +1,11 @@
 package command.consoleCommandView;
 
 import IO.IOHandler;
-import command.CommandView;
-import command.commandController.GiveController;
+import command.CommandOutput;
+import command.commandController.QuitController;
+import zuul.GameController;
 
-public class GiveView extends GiveController implements CommandView {
-
+public class QuitOutput extends QuitController implements CommandOutput {
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
 		if (error != null) {
@@ -13,9 +13,9 @@ public class GiveView extends GiveController implements CommandView {
 			return;
 		}
 		if (super.execute(inputArray)) {
-			return;
-		} else {
-			IOHandler.output.println(npc.getName() + " didn't seem to want the " + itemName);
+			IOHandler.output.println("Thank you for playing. Good bye");
+			GameController.quit();
 		}
 	}
+
 }
