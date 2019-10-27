@@ -3,7 +3,7 @@ package zuul;
 public class TakeableItem {
 	private String name;
 	private int weight;
-	boolean perishable = false; //Decides if object should be deleted after use
+	boolean perishable = false; // Decides if object should be deleted after use
 
 	public TakeableItem(String name, int weight) {
 		this.name = name;
@@ -19,7 +19,7 @@ public class TakeableItem {
 	public int getWeight() {
 		return weight;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

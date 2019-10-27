@@ -6,11 +6,12 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 import command.CommandController;
 import zuul.GameController;
 
-public class LookCmd extends CommandController {
+public class LookController extends CommandController {
 	protected String description;
 	protected JsonArray actors;
 	protected JsonArray items;
 	protected JsonObject exits;
+
 	public boolean execute(String[] inputArray) {
 		description = GameController.getRoomController().getDescription();
 		actors = GameController.getRoomController().getActorsInRoom(GameController.getCurrentPlayer().getLocation());
@@ -18,6 +19,7 @@ public class LookCmd extends CommandController {
 		exits = (JsonObject) GameController.getRoomController().getAllExits();
 		return true;
 	}
+
 	@Override
 	public String validateUserInput(String[] inputArray) {
 		return null;

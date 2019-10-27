@@ -20,16 +20,18 @@ public class RoomModel {
 //	}
 	/**
 	 * Assigns the currentRoomJSON field the JsonObject of the nextRoom parameter.
+	 * 
 	 * @param nextRoom the key of the next room's JsonObject.
 	 */
 	public void setNewRoom(String nextRoom) {
 		JsonObject nextRoomJson = jsonHandler.getField(nextRoom);
-		if(nextRoomJson != null) {
+		if (nextRoomJson != null) {
 			currentRoomJSON = nextRoomJson;
 		} else {
 			System.err.println(nextRoom + " not found in JSON file.");
 		}
 	}
+
 	/**
 	 * @return A clone of the exits JsonObject of the current room.
 	 */
@@ -37,6 +39,7 @@ public class RoomModel {
 		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
 		return (JsonObject) exits.clone();
 	}
+
 	/**
 	 * @param exit The name of the required exit.
 	 * @return The key (name of the room) in the JsonObject that the exit points to.
@@ -44,7 +47,7 @@ public class RoomModel {
 	public String getExit(String exit) {
 		return (String) ((JsonObject) currentRoomJSON.get("exits")).get(exit);
 	}
-	
+
 	public void addExit(String direction, String destination) {
 		JsonObject exits = (JsonObject) currentRoomJSON.get("exits");
 		exits.put(direction, destination);
@@ -52,9 +55,10 @@ public class RoomModel {
 
 	public JsonObject ifItemExistsReturnIt(String toCheck) {
 		JsonArray arr = (JsonArray) currentRoomJSON.get("takeableItems");
-		return (JsonObject) arr.stream().filter(o -> ((JsonObject) o).get("name").equals(toCheck)).findFirst().orElse(null);
+		return (JsonObject) arr.stream().filter(o -> ((JsonObject) o).get("name").equals(toCheck)).findFirst()
+				.orElse(null);
 	}
-	
+
 	public String getLookDescription() {
 		return (String) currentRoomJSON.get("lookDescription");
 	}
@@ -64,28 +68,31 @@ public class RoomModel {
 	}
 
 	/**
-	 * Converts TakeableItem to a JsonObject and adds it to the takeableItems JsonArray.
-	 * If the JsonObject for this room doesn't have the JsonArray takeableObjects then it
-	 * is initialised here and added to the main JsonObject
+	 * Converts TakeableItem to a JsonObject and adds it to the takeableItems
+	 * JsonArray. If the JsonObject for this room doesn't have the JsonArray
+	 * takeableObjects then it is initialised here and added to the main JsonObject
 	 * 
 	 * @param toAdd
 	 */
 	public void addTakeableItem(TakeableItem toAdd) {
 		JsonObject itemJSON = new JsonObject();
 		itemJSON.put("name", toAdd.getName());
-		itemJSON.put("weight",String.valueOf(toAdd.getWeight()));
-		if(!hasTakeableItems()) {currentRoomJSON.put("takeableItems", new JsonArray());}
+		itemJSON.put("weight", String.valueOf(toAdd.getWeight()));
+		if (!hasTakeableItems()) {
+			currentRoomJSON.put("takeableItems", new JsonArray());
+		}
 		((JsonArray) currentRoomJSON.get("takeableItems")).add(itemJSON);
 	}
-	
+
 	/**
 	 * Returns all Actors/NPCs in the requested room's JsonObject
+	 * 
 	 * @param roomName key of the JsonObject needed.
 	 * @return JsonObject of key roomName.
 	 */
 	public JsonArray getActorsInRoom(String roomName) {
 		JsonArray room = (JsonArray) jsonHandler.getField(roomName).get("actorsInRoom");
-		if(room == null) {
+		if (room == null) {
 			jsonHandler.getField(roomName).put("actorsInRoom", new JsonArray());
 			room = (JsonArray) jsonHandler.getField(roomName).get("actorsInRoom");
 		}
@@ -94,6 +101,7 @@ public class RoomModel {
 
 	/**
 	 * Checks if the current room's JsonObject has a 'takeableItems' field.
+	 * 
 	 * @return boolean
 	 */
 	public boolean hasTakeableItems() {
@@ -104,7 +112,7 @@ public class RoomModel {
 	 * @return JsonArray of takeableItems of current room or null.
 	 */
 	public JsonArray getTakeableItems() {
-		if(hasTakeableItems()) {
+		if (hasTakeableItems()) {
 			return (JsonArray) currentRoomJSON.get("takeableItems");
 		}
 		return null;
@@ -112,6 +120,7 @@ public class RoomModel {
 
 	/**
 	 * Checks if the current room's JsonObject has the specified NPC/Actor.
+	 * 
 	 * @param actorName the actor/NPC name
 	 * @return boolean
 	 */
@@ -128,7 +137,5 @@ public class RoomModel {
 		jsonHandler = new JSONDataHandler("res/roomData.json");
 		setNewRoom(room);
 	}
-
-
 
 }

@@ -7,12 +7,15 @@ public class Player {
 	public InventoryModel getInvController() {
 		return inventory;
 	}
+
 	public void setLocation(String location) {
 		currentLocation = location;
 	}
+
 	public String getLocation() {
 		return currentLocation;
 	}
+
 	public Player(String startingLocation) {
 		currentLocation = startingLocation;
 	}

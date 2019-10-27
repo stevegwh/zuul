@@ -19,11 +19,12 @@ public abstract class NPC {
 	}
 
 	public abstract boolean onGive(String takeableItem);
+
 	public abstract void update();
 
 	public void printDialog() {
 		JsonArray dialogOptions = (JsonArray) json.get("dialogOptions");
-		for(int i=0, len=dialogOptions.size(); i<len; i++) {
+		for (int i = 0, len = dialogOptions.size(); i < len; i++) {
 			String option = (String) dialogOptions.get(i);
 			IOHandler.output.printCharDialog(Integer.toString(i + 1) + ": " + option);
 		}
@@ -32,7 +33,7 @@ public abstract class NPC {
 	public void onTalk() {
 		printDialog();
 		String userChoice = getUserDialogChoice();
-		if(userChoice.length() > 1 || userChoice.matches("d")) {
+		if (userChoice.length() > 1 || userChoice.matches("d")) {
 			IOHandler.output.printError("Invalid CommandController");
 			return;
 		}
@@ -41,16 +42,16 @@ public abstract class NPC {
 		IOHandler.output.printCharDialog(((String) dialogResponses.get(idx)));
 	}
 
-	/** 
-	 * Updates the actorsInRoom field of the destination room and the room specified in the NPC's
-	 * currentLocation field.
+	/**
+	 * Updates the actorsInRoom field of the destination room and the room specified
+	 * in the NPC's currentLocation field.
 	 * 
 	 * @destination The name of the destination room.
 	 */
 	public void move(String destinationRoomName) {
 		JsonArray destinationRoom = GameController.getRoomController().getActorsInRoom(destinationRoomName);
 		JsonArray currentRoom = GameController.getRoomController().getActorsInRoom(currentLocation);
-		if(destinationRoom.indexOf(name) < 0) {
+		if (destinationRoom.indexOf(name) < 0) {
 			destinationRoom.add(name);
 			currentRoom.remove(name);
 			currentLocation = destinationRoomName;
@@ -58,10 +59,11 @@ public abstract class NPC {
 	}
 
 	/**
-	 * validItem is the name TakeableItem that this NPC accepts.
-	 * For example, the NPC 'John' could accept the TakeableItem 'Gum'
-	 * Can return null if the NPC doesn't accept any TakeableItems.
-	 * Returns the name only, not the object itself.
+	 * validItem is the name TakeableItem that this NPC accepts. For example, the
+	 * NPC 'John' could accept the TakeableItem 'Gum' Can return null if the NPC
+	 * doesn't accept any TakeableItems. Returns the name only, not the object
+	 * itself.
+	 * 
 	 * @return the name of the TakeableItem that this NPC accepts.
 	 */
 	public String getValidItem() {
@@ -88,7 +90,7 @@ public abstract class NPC {
 	public void setCurrentLocation(String newLocation) {
 		currentLocation = newLocation;
 	}
-	
+
 	// TODO: Scan the json file and see if the actor already exists
 	private void loadJSON(String name) {
 		JSONDataHandler jsonHandler = new JSONDataHandler("res/npcData.json");

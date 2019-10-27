@@ -6,7 +6,7 @@ import zuul.GameController;
 import zuul.TakeableItem;
 import zuulutils.ZuulTools;
 
-public class GiveCmd extends CommandController {
+public class GiveController extends CommandController {
 	protected String itemName;
 	protected String actorName;
 	protected TakeableItem takeableItem;
@@ -15,30 +15,30 @@ public class GiveCmd extends CommandController {
 	@Override
 	public String validateUserInput(String[] inputArray) {
 		final int COMMAND_LENGTH = 3;
-		if(inputArray.length > COMMAND_LENGTH) {
+		if (inputArray.length > COMMAND_LENGTH) {
 			return "Invalid CommandController";
 		}
-		if(inputArray.length == 1) {
+		if (inputArray.length == 1) {
 			return "Give what?";
 		}
 		itemName = inputArray[1];
 		takeableItem = GameController.getCurrentPlayer().getInvController().getItem(itemName);
-		boolean itemInInv = GameController.getCurrentPlayer().getInvController().checkIfExists(itemName); 
-		if(!itemInInv) {
+		boolean itemInInv = GameController.getCurrentPlayer().getInvController().checkIfExists(itemName);
+		if (!itemInInv) {
 			return "You don't have the " + itemName;
 		}
-		if(inputArray.length <= 2) {
+		if (inputArray.length <= 2) {
 			return "Give to who?";
 		}
 		String actorName = inputArray[2];
 		actorName = ZuulTools.capitalize(actorName);
 		NPC npc = GameController.getActor(actorName);
-		if(npc == null) {
+		if (npc == null) {
 			return actorName + " is not in the room";
 		} else {
 			this.npc = npc;
 		}
-		if(!npc.getCurrentLocation().equals(GameController.getCurrentPlayer().getLocation())) {
+		if (!npc.getCurrentLocation().equals(GameController.getCurrentPlayer().getLocation())) {
 			return actorName + " is not in the room";
 		}
 
@@ -47,16 +47,15 @@ public class GiveCmd extends CommandController {
 
 	@Override
 	public boolean execute(String[] inputArray) {
-		if(!npc.onGive(takeableItem.getName())) {
+		if (!npc.onGive(takeableItem.getName())) {
 			return false;
 		} else {
-			if(takeableItem.isPerishable()) {
+			if (takeableItem.isPerishable()) {
 				GameController.getCurrentPlayer().getInvController().setWeight(takeableItem.getWeight());
 				GameController.getCurrentPlayer().getInvController().removeItem(takeableItem);
 			}
 			return true;
 		}
 	}
-
 
 }

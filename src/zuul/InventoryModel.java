@@ -33,7 +33,9 @@ public class InventoryModel {
 	}
 
 	public boolean checkIfExists(String itemToCheck) {
-		if (inventory.size() == 0) {return false;}
+		if (inventory.size() == 0) {
+			return false;
+		}
 		TakeableItem item = inventory.stream().filter(o -> (o).getName().equals(itemToCheck)).findFirst().orElse(null);
 		return item != null;
 	}

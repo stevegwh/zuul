@@ -1,14 +1,13 @@
 package jsonDataHandler;
 
-
 import java.io.FileReader;
-
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 
 /**
  * Responsible for deserializing a JSON file and returning it.
+ * 
  * @author Steve
  *
  */
@@ -17,16 +16,17 @@ public final class Parser {
 
 	/**
 	 * Deserializes the JSON file
+	 * 
 	 * @param file Path of the JSON file
 	 * @return The deserialized JSON object
 	 */
-    public Object generateData(String file) {
-        try {
-            obj = Jsoner.deserialize(new FileReader(file));
-            return (JsonObject) obj;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return obj;
-    }
+	public Object generateData(String file) {
+		try {
+			obj = Jsoner.deserialize(new FileReader(file));
+			return (JsonObject) obj;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
 }

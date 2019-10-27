@@ -2,7 +2,6 @@ package IO;
 
 import java.util.Scanner;
 
-
 public class ConsoleInput implements Input {
 	private String[] parseInput(String input) {
 		input = input.trim().replaceAll(" +", " ");
@@ -11,7 +10,7 @@ public class ConsoleInput implements Input {
 	}
 
 	@Override
-	public String[] getUserInput() { 
+	public String[] getUserInput() {
 		String data = "";
 		IOHandler.output.printf(">> ");
 		@SuppressWarnings("resource")
@@ -20,6 +19,5 @@ public class ConsoleInput implements Input {
 		scanInput.reset();
 		return parseInput(data);
 	}
-
 
 }

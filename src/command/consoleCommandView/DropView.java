@@ -2,17 +2,18 @@ package command.consoleCommandView;
 
 import IO.IOHandler;
 import command.CommandView;
-import command.commandController.TalkCmd;
+import command.commandController.DropController;
 
-public class TalkCmdView extends TalkCmd implements CommandView {
+public class DropView extends DropController implements CommandView {
 	public void init(String[] inputArray) {
 		String error = validateUserInput(inputArray);
-		if(error != null) {
+		if (error != null) {
 			IOHandler.output.printError(error);
 			return;
 		}
-		if(super.execute(inputArray)) {
-			actor.onTalk();
+		if (execute(inputArray)) {
+			IOHandler.output.println("You dropped " + toDrop);
 		}
 	}
+
 }

@@ -9,8 +9,10 @@ package command;
  */
 public interface CommandView {
 	/**
-	 * Generally should call the super's validateUserInput() method and after checking no error has been returned
-	 * should call the super's execute() method. After this the desired result can be output to the user.
+	 * Generally should call the super's validateUserInput() method and after
+	 * checking no error has been returned should call the super's execute() method.
+	 * After this the desired result can be output to the user.
+	 * 
 	 * @param inputArray
 	 */
 	public void init(String[] inputArray);
