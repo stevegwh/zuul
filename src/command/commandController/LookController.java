@@ -17,7 +17,7 @@ public class LookController extends CommandController {
 		description = GameController.getRoomModel().getDescription();
 		actors = GameController.getRoomModel().getActorsInRoom(GameController.getCurrentPlayer().getLocation());
 		items = GameController.getRoomModel().getTakeableItems();
-		exits = GameController.getRoomModel().getAllExits(GameController.getCurrentPlayer().getLocation());
+		exits = GameController.getRoomModel().getAllDirections(GameController.getCurrentPlayer().getLocation());
 		return true;
 	}
 

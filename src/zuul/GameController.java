@@ -53,18 +53,15 @@ public class GameController {
 		currentPlayer = playerArr.get(0);
 		int idx = playerArr.indexOf(getCurrentPlayer());
 		IOHandler.output.println("Player " + (idx + 1) + "'s turn");
-																// 1
+		// 1
 	}
 
 	public static void nextPlayerTurn() {
 		int idx = playerArr.indexOf(getCurrentPlayer());
-		System.out.println(idx);
 		idx += 1;
-		System.out.println(idx);
 		if (idx >= playerArr.size()) {
 			idx = 0;
 		}
-		System.out.println(idx);
 		Player player = playerArr.get(idx);
 		setCurrentPlayer(player);
 		IOHandler.output.println("Player " + (idx + 1) + "'s turn");
@@ -84,7 +81,7 @@ public class GameController {
 		welcome.init(new String[] {});
 		while (isRunning) {
 			roomModel.setNewRoom(getCurrentPlayer().getLocation());
-			look.init(new String[] { "look" });
+			look.init(new String[] {});
 			String[] inputArray = IOHandler.input.getUserInput();
 			commandHandler.handleCommand(inputArray);
 		}

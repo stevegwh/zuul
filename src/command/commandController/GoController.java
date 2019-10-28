@@ -6,6 +6,7 @@ import zuul.GameController;
 public class GoController extends CommandController {
 	protected String direction;
 	protected String nextRoom;
+	protected int turnsLeft;
 
 	private enum Directions {
 		NORTH, SOUTH, EAST, WEST
@@ -37,7 +38,15 @@ public class GoController extends CommandController {
 		GameController.getRoomModel().setNewRoom(nextRoom);
 		GameController.getCurrentPlayer().setLocation(nextRoom);
 		if(!GameController.getSinglePlayer()) {
-			GameController.nextPlayerTurn();
+			if(GameController.getCurrentPlayer().getTurnCount() > 0) {
+				GameController.getCurrentPlayer().decTurnCount();
+				turnsLeft = GameController.getCurrentPlayer().getTurnCount();
+				return true;
+			} else {
+				GameController.getCurrentPlayer().resetTurnCount();
+				GameController.nextPlayerTurn();
+				return false;
+			}
 		}
 		return true;
 	}

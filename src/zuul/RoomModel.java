@@ -18,20 +18,6 @@ public class RoomModel {
 	private static JSONDataHandler jsonHandler;
 	private JsonObject currentRoomJSON;
 
-	/**
-	 * @return The room data JSON serialized.
-	 */
-	public String getJsonString() {
-		return jsonHandler.getJsonString();
-	}
-
-	/**
-	 * @return The room data JsonObject
-	 */
-	public JsonObject getAllData() {
-		return jsonHandler.getAllData();
-	}
-
 	public JsonObject getRoom(String room) {
 		return jsonHandler.getField(room);
 	}
@@ -51,10 +37,9 @@ public class RoomModel {
 	}
 
 	/**
-	 * @return An ArrayList of the exit names of the specified room.
+	 * @return An ArrayList of the possible directions of the specified room.
 	 */
-	public ArrayList<String> getAllExits(String room) {
-		// TODO: Tidy.
+	public ArrayList<String> getAllDirections(String room) {
 		JsonObject roomJson = (JsonObject) getRoom(room);
 		JsonObject tmp = (JsonObject) roomJson.get("exits");
 		Set<String> exits = tmp.keySet();

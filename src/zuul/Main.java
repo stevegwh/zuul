@@ -17,7 +17,7 @@ public class Main {
 			for (int i = 0, len = args.length; i < len; i++) {
 				if (args[i].equals("--view")) {
 					if (i != len - 1) {
-						IOHandler.setIOMode(args[i+1]);
+						IOHandler.setIOMode(args[i + 1]);
 					} else {
 						printUsage();
 						return;

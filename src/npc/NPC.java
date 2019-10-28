@@ -51,7 +51,7 @@ public abstract class NPC {
 	}
 
 	public String getRandomRoom() {
-		ArrayList<String> exits = GameController.getRoomModel().getAllExits(currentLocation);
+		ArrayList<String> exits = GameController.getRoomModel().getAllDirections(currentLocation);
 		Random generator = new Random();
 		int randomIndex = generator.nextInt(exits.size());
 		String direction = exits.get(randomIndex);

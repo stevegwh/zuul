@@ -3,7 +3,7 @@ package zuul;
 public class Player {
 	private InventoryModel inventory = new InventoryModel();
 	private String currentLocation;
-	private int maxTurns = 3;
+	private int maxTurns = 2;
 	private int turnCount = maxTurns;
 
 	public void decTurnCount() {
@@ -16,6 +16,10 @@ public class Player {
 
 	public void resetTurnCount() {
 		turnCount = maxTurns;
+	}
+
+	public int getMaxCount() {
+		return maxTurns;
 	}
 
 	public InventoryModel getInvModel() {
@@ -33,4 +37,5 @@ public class Player {
 	public Player(String startingLocation) {
 		currentLocation = startingLocation;
 	}
+
 }
