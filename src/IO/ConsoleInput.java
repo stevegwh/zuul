@@ -18,7 +18,7 @@ public class ConsoleInput implements Input {
 		try {
 			data = scanInput.nextLine();
 		} catch (java.util.NoSuchElementException e) { // Catches Ctrl+D
-			System.err.println("Program terminated due to user.");
+			System.err.println("Interrupted by user.");
 			System.exit(0);
 		}
 		scanInput.reset();

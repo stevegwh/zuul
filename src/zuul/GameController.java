@@ -26,36 +26,59 @@ public class GameController {
 		return npcController;
 	}
 
+	/**
+	 * @return the currently active player.
+	 */
 	public static Player getCurrentPlayer() {
 		return currentPlayer;
 	}
 
+	/**
+	 * @param player the next player to play.
+	 */
 	public static void setCurrentPlayer(Player player) {
 		currentPlayer = player;
 	}
 
+	/**
+	 * Breaks the main game loop.
+	 */
 	public static void quit() {
 		isRunning = false;
 	}
 
+	/**
+	 * Sets whether the game is single player.
+	 * 
+	 * @param b
+	 */
 	public static void setSingleplayer(boolean b) {
 		singlePlayer = b;
 	}
 
+	/**
+	 * @return true (single-player)/false (multi-player).
+	 */
 	public static boolean getSinglePlayer() {
 		return singlePlayer;
 	}
 
-	public static void initPlayers() {
+	/**
+	 * Instantiates n number of players for the game.
+	 */
+	private static void initPlayers() {
 		for (int i = 0; i < 2; i++) {
 			playerArr.add(new Player(START_LOCATION));
 		}
 		currentPlayer = playerArr.get(0);
 		int idx = playerArr.indexOf(getCurrentPlayer());
 		IOHandler.output.println("Player " + (idx + 1) + "'s turn");
-		// 1
 	}
 
+	/**
+	 * Sets the currentPlayer variable to the next Player object in the playerArr
+	 * array.
+	 */
 	public static void nextPlayerTurn() {
 		int idx = playerArr.indexOf(getCurrentPlayer());
 		idx += 1;
@@ -67,7 +90,10 @@ public class GameController {
 		IOHandler.output.println("Player " + (idx + 1) + "'s turn");
 	}
 
-	public void start() {
+	/**
+	 * Initialises the game as single or multi-player.
+	 */
+	private void setGameType() {
 		SingleOrMultiOutput setSingleplayer = new SingleOrMultiOutput();
 		setSingleplayer.init(new String[] {});
 		if (!singlePlayer) {
@@ -75,6 +101,10 @@ public class GameController {
 		} else {
 			currentPlayer = new Player(START_LOCATION);
 		}
+	}
+
+	public void start() {
+		setGameType();
 		npcController.init();
 		GameStartOutput welcome = new GameStartOutput();
 		LookOutput look = new LookOutput();
@@ -91,10 +121,6 @@ public class GameController {
 		roomModel = new RoomModel(START_LOCATION);
 		commandHandler = new CommandHandler();
 		npcController = new NPCController();
-	}
-
-	public static boolean isRunning() {
-		return isRunning;
 	}
 
 }

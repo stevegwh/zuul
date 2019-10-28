@@ -1,10 +1,10 @@
 package command.commandView;
 
 import IO.IOHandler;
-import command.CommandOutput;
+import command.ICommandOutput;
 import command.commandController.HelpController;
 
-public class HelpOutput extends HelpController implements CommandOutput {
+public class HelpOutput extends HelpController implements ICommandOutput {
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
 		if (error != null) {

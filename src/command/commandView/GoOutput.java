@@ -1,11 +1,11 @@
 package command.commandView;
 
 import IO.IOHandler;
-import command.CommandOutput;
+import command.ICommandOutput;
 import command.commandController.GoController;
 import zuul.GameController;
 
-public class GoOutput extends GoController implements CommandOutput {
+public class GoOutput extends GoController implements ICommandOutput {
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
 		if (error != null) {

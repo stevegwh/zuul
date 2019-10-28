@@ -3,7 +3,7 @@ package command.gameCommand.commandView;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import IO.IOHandler;
-import command.CommandOutput;
+import command.ICommandOutput;
 import command.commandController.LookController;
 import zuulutils.ZuulTools;
 
@@ -14,7 +14,7 @@ import zuulutils.ZuulTools;
  * @author Steve
  *
  */
-public class LookOutput extends LookController implements CommandOutput {
+public class LookOutput extends LookController implements ICommandOutput {
 
 	public void init(String[] inputArray) {
 		if (super.execute(inputArray)) {

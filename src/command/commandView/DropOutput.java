@@ -1,10 +1,10 @@
 package command.commandView;
 
 import IO.IOHandler;
-import command.CommandOutput;
+import command.ICommandOutput;
 import command.commandController.DropController;
 
-public class DropOutput extends DropController implements CommandOutput {
+public class DropOutput extends DropController implements ICommandOutput {
 	public void init(String[] inputArray) {
 		String error = validateUserInput(inputArray);
 		if (error != null) {

@@ -1,10 +1,10 @@
 package command.gameCommand.commandView;
 
 import IO.IOHandler;
-import command.CommandOutput;
+import command.ICommandOutput;
 import command.gameCommand.commandController.SingleOrMultiController;
 
-public class SingleOrMultiOutput extends SingleOrMultiController implements CommandOutput {
+public class SingleOrMultiOutput extends SingleOrMultiController implements ICommandOutput {
 
 
 	@Override

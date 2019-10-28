@@ -49,7 +49,8 @@ public class RoomModel {
 	}
 
 	/**
-	 * @param direction North, South, East, West
+	 * @param direction North, South, East, West.
+	 * @param currentLocation the current location of the actor in question.
 	 * @return The key (name of the room) in the JsonObject that the exit points to.
 	 */
 	public String getExit(String direction, String currentLocation) {

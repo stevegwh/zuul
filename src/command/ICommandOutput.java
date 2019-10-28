@@ -11,7 +11,7 @@ package command;
  * @author Steve
  *
  */
-public interface CommandOutput {
+public interface ICommandOutput {
 	/**
 	 * Generally should call the super's validateUserInput() method and after
 	 * checking no error has been returned should call the super's execute() method.

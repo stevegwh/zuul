@@ -1,7 +1,7 @@
 package command.gameCommand.commandView;
 
 import IO.IOHandler;
-import command.CommandOutput;
+import command.ICommandOutput;
 
 /**
  * Used to output to the user the beginning of the game.
@@ -9,7 +9,7 @@ import command.CommandOutput;
  * @author Steve
  *
  */
-public class GameStartOutput implements CommandOutput {
+public class GameStartOutput implements ICommandOutput {
 
 	@Override
 	public void init(String[] inputArray) {

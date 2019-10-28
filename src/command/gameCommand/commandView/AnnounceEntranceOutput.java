@@ -1,7 +1,7 @@
 package command.gameCommand.commandView;
 
 import IO.IOHandler;
-import command.CommandOutput;
+import command.ICommandOutput;
 
 /**
  * Used to output to the user that another player or NPC has entered the room.
@@ -9,7 +9,7 @@ import command.CommandOutput;
  * @author Steve
  *
  */
-public class AnnounceEntranceOutput implements CommandOutput {
+public class AnnounceEntranceOutput implements ICommandOutput {
 
 	@Override
 	public void init(String[] inputArray) {

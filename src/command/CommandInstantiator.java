@@ -46,9 +46,9 @@ public class CommandInstantiator {
 	 * Attempts to create an instance of the class passed in as parameter.
 	 * 
 	 * @param commandName The command to be instantiated.
-	 * @return A CommandOutput object or null.
+	 * @return A ICommandOutput object or null.
 	 */
-	public CommandOutput createInstance(String commandName) {
+	public ICommandOutput createInstance(String commandName) {
 		commandName = buildFileName(commandName);
 		if (!checkCommandValidity(commandName)) {
 			IOHandler.output.printError("Invalid Command");
@@ -58,7 +58,7 @@ public class CommandInstantiator {
 		try {
 			command = Class.forName(CommandInstantiator.class.getPackageName() + "." + dir + "." + commandName)
 					.getConstructor().newInstance();
-			return (CommandOutput) command;
+			return (ICommandOutput) command;
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | java.lang.ClassNotFoundException
 				| java.lang.ClassCastException e) {

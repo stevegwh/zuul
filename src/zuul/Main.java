@@ -1,7 +1,6 @@
 package zuul;
 
 import IO.IOHandler;
-//import jsonDataHandler.ErrorCheckGameJSON;
 
 public class Main {
 	private static void printUsage() {
@@ -38,8 +37,6 @@ public class Main {
 			if (defaultUsed) {
 				System.out.println("No output mode specified. Using the default 'Console'");
 			}
-//			ErrorCheckGameJSON errorChecker = new ErrorCheckGameJSON();
-//			errorChecker.startCheck();
 		}
 		GameController game = new GameController();
 		game.start();
