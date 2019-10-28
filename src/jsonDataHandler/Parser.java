@@ -29,4 +29,7 @@ public final class Parser {
 		}
 		return obj;
 	}
+	public String serializeData(JsonObject json) {
+		return Jsoner.serialize(json);
+	}
 }

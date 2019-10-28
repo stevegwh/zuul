@@ -21,8 +21,8 @@ public class NPCController {
 	public NPC getActor(String actorName) {
 		return actors.get(actorName);
 	}
-
-	public NPCController() {
+	
+	public void init() {
 		NPCFactory npcFactory = new NPCFactory();
 		actors = npcFactory.getNPCCollection();
 		timer.schedule(task, 100, 5000);

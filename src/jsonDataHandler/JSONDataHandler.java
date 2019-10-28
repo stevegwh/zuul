@@ -5,9 +5,14 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 // Important class that holds JSON jsonData
 public class JSONDataHandler {
 	private JsonObject jsonData;
+	private Parser parser;
 
 	public JsonObject getAllData() {
 		return jsonData;
+	}
+
+	public String getJsonString() {
+		return parser.serializeData(jsonData);
 	}
 
 	/**
@@ -28,7 +33,7 @@ public class JSONDataHandler {
 	 * @param path The path of the JSON file in the project.
 	 */
 	public JSONDataHandler(String path) {
-		Parser parser = new Parser();
+		parser = new Parser();
 		jsonData = (JsonObject) parser.generateData(path);
 	}
 }

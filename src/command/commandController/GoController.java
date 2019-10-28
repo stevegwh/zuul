@@ -36,6 +36,9 @@ public class GoController extends CommandController {
 	public boolean execute(String[] inputArray) {
 		GameController.getRoomModel().setNewRoom(nextRoom);
 		GameController.getCurrentPlayer().setLocation(nextRoom);
+		if(!GameController.getSinglePlayer()) {
+			GameController.nextPlayerTurn();
+		}
 		return true;
 	}
 }

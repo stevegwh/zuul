@@ -18,6 +18,20 @@ public class RoomModel {
 	private static JSONDataHandler jsonHandler;
 	private JsonObject currentRoomJSON;
 
+	/**
+	 * @return The room data JSON serialized.
+	 */
+	public String getJsonString() {
+		return jsonHandler.getJsonString();
+	}
+
+	/**
+	 * @return The room data JsonObject
+	 */
+	public JsonObject getAllData() {
+		return jsonHandler.getAllData();
+	}
+
 	public JsonObject getRoom(String room) {
 		return jsonHandler.getField(room);
 	}
