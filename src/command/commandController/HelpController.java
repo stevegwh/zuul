@@ -6,6 +6,12 @@ import java.util.List;
 import command.CommandController;
 import command.CommandInstantiator;
 
+/**
+ * Prints all valid commands in the game.
+ * 
+ * @author Steve
+ *
+ */
 public class HelpController extends CommandController {
 	private int COMMAND_LENGTH = 1;
 	protected List<String> commands = new ArrayList<>();

@@ -1,8 +1,8 @@
-package command.gameCommand.commandView;
+package command.game.eventOutput;
 
 import IO.IOHandler;
 import command.ICommandOutput;
-import command.gameCommand.commandController.SingleOrMultiController;
+import command.game.eventController.SingleOrMultiController;
 
 /**
  * Asks the user to specify single or multi-player.
@@ -18,11 +18,11 @@ public class SingleOrMultiOutput extends SingleOrMultiController implements ICom
 		IOHandler.output.println("2. Multiplayer");
 		String[] choiceArr = IOHandler.input.getUserInput();
 		String error = validateUserInput(choiceArr);
-		if(error != null) {
+		if (error != null) {
 			IOHandler.output.println(error);
-			init(new String[] {});
+			init(inputArray);
 		} else {
-			execute(new String[] {});
+			execute(inputArray);
 		}
 	}
 

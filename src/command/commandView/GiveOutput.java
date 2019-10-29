@@ -15,7 +15,7 @@ public class GiveOutput extends GiveController implements ICommandOutput {
 		if (super.execute(inputArray)) {
 			return;
 		} else {
-			IOHandler.output.println(npc.getName() + " didn't seem to want the " + itemName);
+			IOHandler.output.printError(npc.getName() + " didn't seem to want the " + itemName);
 		}
 	}
 }

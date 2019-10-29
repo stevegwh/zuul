@@ -5,16 +5,16 @@ import zuulutils.ZuulTools;
 import command.CommandController;
 import npc.NPC;
 
+/**
+ * Attempts to call the specified NPC's onTalk() if present.
+ * 
+ * @author Steve
+ *
+ */
 public class TalkController extends CommandController {
 	protected int COMMAND_LENGTH = 2;
 	protected NPC actor;
 	protected String toTalk;
-
-	@Override
-	public boolean execute(String[] args) {
-		actor = GameController.getNPCContoller().getActor(toTalk);
-		return true;
-	}
 
 	@Override
 	protected String validateUserInput(String[] inputArray) {
@@ -32,4 +32,11 @@ public class TalkController extends CommandController {
 		}
 		return null;
 	}
+
+	@Override
+	public boolean execute(String[] args) {
+		actor = GameController.getNPCContoller().getActor(toTalk);
+		return true;
+	}
+
 }

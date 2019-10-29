@@ -13,7 +13,7 @@ public class LookOutput extends LookController implements ICommandOutput {
 		}
 		/*
 		 * execute() called by GameController at the start of each game loop with
-		 * command.gameCommand.commandView.LookOutput. To avoid outputting LookOutput
+		 * command.game.eventOutput.LookOutput. To avoid outputting LookOutput
 		 * twice when the user inputs 'look' this class simply returns and allows the
 		 * beginning of the game loop to call 'LookOutput' instead.
 		 * 

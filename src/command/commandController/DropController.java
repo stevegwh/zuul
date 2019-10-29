@@ -4,10 +4,21 @@ import command.CommandController;
 import zuul.GameController;
 import zuul.TakeableItem;
 
+/**
+ * Drops the specified item in the current room of the active player. Removes
+ * item from active player's inventory.
+ * 
+ * @author Steve
+ *
+ */
 public class DropController extends CommandController {
 	protected String toDrop;
+	private int COMMAND_LENGTH = 2;
 
 	protected String validateUserInput(String[] inputArray) {
+		if (inputArray.length > COMMAND_LENGTH) {
+			return "Invalid Command";
+		}
 		if (inputArray.length < 2) {
 			return "Drop what?";
 		}

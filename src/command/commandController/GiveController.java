@@ -6,15 +6,22 @@ import zuul.GameController;
 import zuul.TakeableItem;
 import zuulutils.ZuulTools;
 
+/**
+ * Gives the specified NPC object the specified item. Removes item from active
+ * player's inventory.
+ * 
+ * @author Steve
+ *
+ */
 public class GiveController extends CommandController {
 	protected String itemName;
 	protected String actorName;
 	protected TakeableItem takeableItem;
 	protected NPC npc;
+	private int COMMAND_LENGTH = 3;
 
 	@Override
 	public String validateUserInput(String[] inputArray) {
-		final int COMMAND_LENGTH = 3;
 		if (inputArray.length > COMMAND_LENGTH) {
 			return "Invalid CommandController";
 		}

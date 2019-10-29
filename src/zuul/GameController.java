@@ -3,9 +3,9 @@ package zuul;
 import java.util.ArrayList;
 
 import IO.IOHandler;
-import command.gameCommand.commandView.GameStartOutput;
-import command.gameCommand.commandView.LookOutput;
-import command.gameCommand.commandView.SingleOrMultiOutput;
+import command.game.eventOutput.GameStartOutput;
+import command.game.eventOutput.LookOutput;
+import command.game.eventOutput.SingleOrMultiOutput;
 import npc.NPCController;
 
 public class GameController {
@@ -64,33 +64,8 @@ public class GameController {
 		return singlePlayer;
 	}
 
-	/**
-	 * Instantiates n number of players for the game.
-	 */
-	private static void initPlayers() {
-		// TODO: Ask the user for a number of players
-		for (int i = 0; i < 2; i++) {
-			playerArr.add(new Player(START_LOCATION));
-		}
-		currentPlayer = playerArr.get(0);
-		int idx = playerArr.indexOf(getCurrentPlayer());
-		IOHandler.output.println("Player " + (idx + 1) + "'s turn");
-	}
-
-	/**
-	 * Sets the currentPlayer variable to the next Player object in the playerArr
-	 * array.
-	 */
-	public static void nextPlayerTurn() {
-		int idx = playerArr.indexOf(getCurrentPlayer());
-		idx += 1;
-		if (idx >= playerArr.size()) {
-			idx = 0;
-		}
-		Player player = playerArr.get(idx);
-		setCurrentPlayer(player);
-		// TODO: Could rename game 'commands' to game 'events'?. Make this an event 'onNewPlayer'
-		IOHandler.output.println("Player " + (idx + 1) + "'s turn");
+	public static ArrayList<Player> getPlayerArr() {
+		return playerArr;
 	}
 
 	/**
@@ -98,10 +73,8 @@ public class GameController {
 	 */
 	private void setGameType() {
 		SingleOrMultiOutput setSingleplayer = new SingleOrMultiOutput();
-		setSingleplayer.init(new String[] {});
-		if (!singlePlayer) {
-			initPlayers();
-		} else {
+		setSingleplayer.init(new String[] { START_LOCATION });
+		if (singlePlayer) {
 			currentPlayer = new Player(START_LOCATION);
 		}
 	}

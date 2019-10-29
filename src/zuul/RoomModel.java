@@ -85,7 +85,7 @@ public class RoomModel {
 		JsonObject itemJSON = new JsonObject();
 		itemJSON.put("name", toAdd.getName());
 		itemJSON.put("weight", String.valueOf(toAdd.getWeight()));
-		if (!hasTakeableItems()) {
+		if (currentRoomJSON.get("takeableItems") == null) {
 			currentRoomJSON.put("takeableItems", new JsonArray());
 		}
 		((JsonArray) currentRoomJSON.get("takeableItems")).add(itemJSON);
@@ -107,21 +107,10 @@ public class RoomModel {
 	}
 
 	/**
-	 * Checks if the current room's JsonObject has a 'takeableItems' field.
-	 * 
-	 * @return boolean
-	 */
-	public boolean hasTakeableItems() {
-		return currentRoomJSON.get("takeableItems") != null;
-	}
-
-	// TODO: ^ and V do the same thing more or less?
-	
-	/**
 	 * @return JsonArray of takeableItems of current room or null.
 	 */
 	public JsonArray getTakeableItems() {
-		if (hasTakeableItems()) {
+		if (currentRoomJSON.get("takeableItems") != null) {
 			return (JsonArray) currentRoomJSON.get("takeableItems");
 		}
 		return null;

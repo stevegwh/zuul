@@ -1,4 +1,4 @@
-package command.gameCommand.commandView;
+package command.game.eventOutput;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 
