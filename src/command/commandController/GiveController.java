@@ -19,18 +19,9 @@ public class GiveController extends CommandController {
 			return "Invalid CommandController";
 		}
 		if (inputArray.length == 1) {
-			return "Give what?";
-		}
-		itemName = inputArray[1];
-		takeableItem = GameController.getCurrentPlayer().getInvModel().getItem(itemName);
-		boolean itemInInv = GameController.getCurrentPlayer().getInvModel().checkIfExists(itemName);
-		if (!itemInInv) {
-			return "You don't have the " + itemName;
-		}
-		if (inputArray.length <= 2) {
 			return "Give to who?";
 		}
-		String actorName = inputArray[2];
+		String actorName = inputArray[1];
 		actorName = ZuulTools.capitalize(actorName);
 		NPC npc = GameController.getNPCContoller().getActor(actorName);
 		if (npc == null) {
@@ -40,6 +31,15 @@ public class GiveController extends CommandController {
 		}
 		if (!npc.getCurrentLocation().equals(GameController.getCurrentPlayer().getLocation())) {
 			return actorName + " is not in the room";
+		}
+		if (inputArray.length <= 2) {
+			return "Give what?";
+		}
+		itemName = inputArray[2];
+		takeableItem = GameController.getCurrentPlayer().getInvModel().getItem(itemName);
+		boolean itemInInv = GameController.getCurrentPlayer().getInvModel().checkIfExists(itemName);
+		if (!itemInInv) {
+			return "You don't have the " + itemName;
 		}
 
 		return null;
