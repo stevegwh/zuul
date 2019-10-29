@@ -45,6 +45,7 @@ public class GameController {
 	 */
 	public static void quit() {
 		isRunning = false;
+		System.exit(0);
 	}
 
 	/**
@@ -67,6 +68,7 @@ public class GameController {
 	 * Instantiates n number of players for the game.
 	 */
 	private static void initPlayers() {
+		// TODO: Ask the user for a number of players
 		for (int i = 0; i < 2; i++) {
 			playerArr.add(new Player(START_LOCATION));
 		}
@@ -87,6 +89,7 @@ public class GameController {
 		}
 		Player player = playerArr.get(idx);
 		setCurrentPlayer(player);
+		// TODO: Could rename game 'commands' to game 'events'?. Make this an event 'onNewPlayer'
 		IOHandler.output.println("Player " + (idx + 1) + "'s turn");
 	}
 
@@ -104,10 +107,10 @@ public class GameController {
 	}
 
 	public void start() {
-		setGameType();
-		npcController.init();
 		GameStartOutput welcome = new GameStartOutput();
 		LookOutput look = new LookOutput();
+		setGameType();
+		npcController.init();
 		welcome.init(new String[] {});
 		while (isRunning) {
 			roomModel.setNewRoom(getCurrentPlayer().getLocation());

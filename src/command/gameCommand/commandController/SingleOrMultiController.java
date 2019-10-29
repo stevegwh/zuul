@@ -3,6 +3,12 @@ package command.gameCommand.commandController;
 import command.CommandController;
 import zuul.GameController;
 
+/**
+ * Validates user's choice and sets single or multi-player game.
+ * 
+ * @author Steve
+ *
+ */
 public class SingleOrMultiController extends CommandController {
 	protected String choice;
 	

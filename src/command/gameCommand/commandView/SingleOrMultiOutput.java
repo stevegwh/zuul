@@ -4,9 +4,13 @@ import IO.IOHandler;
 import command.ICommandOutput;
 import command.gameCommand.commandController.SingleOrMultiController;
 
+/**
+ * Asks the user to specify single or multi-player.
+ * 
+ * @author Steve
+ *
+ */
 public class SingleOrMultiOutput extends SingleOrMultiController implements ICommandOutput {
-
-
 	@Override
 	public void init(String[] inputArray) {
 		IOHandler.output.println("Please choose an option.");

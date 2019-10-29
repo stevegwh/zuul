@@ -49,9 +49,10 @@ public class RoomModel {
 	}
 
 	/**
-	 * @param direction North, South, East, West.
+	 * @param direction       North, South, East, West.
 	 * @param currentLocation the current location of the actor in question.
-	 * @return The key (name of the room) in the JsonObject that the exit points to.
+	 * @return The key (name of the room) in the roomData JsonObject that the exit
+	 *         points to.
 	 */
 	public String getExit(String direction, String currentLocation) {
 		JsonObject roomToQuery = getRoom(currentLocation);
@@ -67,10 +68,6 @@ public class RoomModel {
 		JsonArray arr = (JsonArray) currentRoomJSON.get("takeableItems");
 		return (JsonObject) arr.stream().filter(o -> ((JsonObject) o).get("name").equals(toCheck)).findFirst()
 				.orElse(null);
-	}
-
-	public String getLookDescription() {
-		return (String) currentRoomJSON.get("lookDescription");
 	}
 
 	public void removeTakeableItem(JsonObject toRemove) {
@@ -118,6 +115,8 @@ public class RoomModel {
 		return currentRoomJSON.get("takeableItems") != null;
 	}
 
+	// TODO: ^ and V do the same thing more or less?
+	
 	/**
 	 * @return JsonArray of takeableItems of current room or null.
 	 */

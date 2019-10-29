@@ -13,24 +13,6 @@ public class TakeController extends CommandController {
 	int weight;
 
 	@Override
-	public boolean execute(String[] inputArray) {
-		String name = (String) obj.get("name");
-		int weight = Integer.parseInt((String) obj.get("weight"));
-		boolean perishable = obj.containsKey("perishable");
-		TakeableItem item = null;
-		if (perishable) {
-			item = new TakeableItem(name, weight, true);
-		} else {
-			item = new TakeableItem(name, weight);
-		}
-		GameController.getCurrentPlayer().getInvModel().addItem(item);
-		GameController.getCurrentPlayer().getInvModel().setWeight(weight);
-		GameController.getRoomModel().removeTakeableItem(obj);
-		return true;
-
-	}
-
-	@Override
 	protected String validateUserInput(String[] inputArray) {
 		if (inputArray.length == 1) {
 			return "Take what?";
@@ -49,4 +31,23 @@ public class TakeController extends CommandController {
 		}
 		return null;
 	}
+
+	@Override
+	public boolean execute(String[] inputArray) {
+		String name = (String) obj.get("name");
+		int weight = Integer.parseInt((String) obj.get("weight"));
+		boolean perishable = obj.containsKey("perishable");
+		TakeableItem item = null;
+		if (perishable) {
+			item = new TakeableItem(name, weight, true);
+		} else {
+			item = new TakeableItem(name, weight);
+		}
+		GameController.getCurrentPlayer().getInvModel().addItem(item);
+		GameController.getCurrentPlayer().getInvModel().setWeight(weight);
+		GameController.getRoomModel().removeTakeableItem(obj);
+		return true;
+
+	}
+
 }
