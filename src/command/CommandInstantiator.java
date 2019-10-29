@@ -10,6 +10,14 @@ import zuulutils.ZuulTools;
 
 import java.io.File;
 
+/**
+ * Attempts to instantiate any command class with the name specified by the user
+ * in the commmand.commandView directory. Class also builds a list of the valid
+ * commands by first scanning the file names found in command.commandView.
+ * 
+ * @author Steve
+ *
+ */
 public class CommandInstantiator {
 	private ArrayList<String> commands = new ArrayList<>();
 	private String dir = "commandView";
@@ -71,8 +79,8 @@ public class CommandInstantiator {
 	}
 
 	/**
-	 * Scans the OutputLayer directory and stores all file names in the commands
-	 * ArrayList
+	 * Scans the command.commandView directory and stores all file names in the
+	 * commands ArrayList
 	 */
 	private void populateCommandArr() {
 		File file = new File("src/" + CommandInstantiator.class.getPackageName() + "/" + dir + "/");

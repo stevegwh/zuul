@@ -15,7 +15,7 @@ public class GameController {
 	private static NPCController npcController;
 	private static boolean isRunning = true;
 	private static Player currentPlayer;
-	private static ArrayList<Player> playerArr = new ArrayList<>();
+	private static ArrayList<Player> playerArr;
 	private final static String START_LOCATION = "entrance";
 
 	public static RoomModel getRoomModel() {
@@ -64,7 +64,19 @@ public class GameController {
 		return singlePlayer;
 	}
 
+	public static void initPlayerArr(ArrayList<Player> playerArr) {
+		if (GameController.playerArr == null) {
+			GameController.playerArr = playerArr;
+		} else {
+			System.err.println("playerArr has already been set");
+		}
+	}
+
 	public static ArrayList<Player> getPlayerArr() {
+		if(playerArr == null) {
+			System.err.println("playerArr has not been initalised yet.");
+			return null;
+		}
 		return playerArr;
 	}
 
