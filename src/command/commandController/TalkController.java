@@ -12,7 +12,7 @@ import npc.NPC;
  *
  */
 public class TalkController extends CommandController {
-	protected int COMMAND_LENGTH = 2;
+	protected final int COMMAND_LENGTH = 2;
 	protected NPC actor;
 	protected String toTalk;
 

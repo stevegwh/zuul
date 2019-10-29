@@ -4,8 +4,15 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
+/**
+ * Populates the npcs array by scanning the npcs directory and attempting to
+ * instantiate the files there.
+ * 
+ * @author Steve
+ *
+ */
 public class NPCFactory {
-	private HashMap<String, NPC> npcs = new HashMap<String, NPC>();
+	private HashMap<String, NPC> npcs = new HashMap<>();
 
 	/**
 	 * Attempts to create an instance of the class found in the NPC package.

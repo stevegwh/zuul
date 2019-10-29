@@ -6,6 +6,7 @@ import command.commandController.QuitController;
 import zuul.GameController;
 
 public class QuitOutput extends QuitController implements ICommandOutput {
+	@Override
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
 		if (error != null) {

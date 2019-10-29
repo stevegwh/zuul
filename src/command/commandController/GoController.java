@@ -16,7 +16,7 @@ public class GoController extends CommandController {
 	protected String direction;
 	protected String nextRoom;
 	protected int turnsLeft;
-	private int COMMAND_LENGTH = 2;
+	private final int COMMAND_LENGTH = 2;
 
 	private enum Directions {
 		NORTH, SOUTH, EAST, WEST

@@ -4,8 +4,8 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 
 // Important class that holds JSON jsonData
 public class JSONDataHandler {
-	private JsonObject jsonData;
-	private Parser parser;
+	private final JsonObject jsonData;
+	private final Parser parser;
 
 	public JsonObject getAllData() {
 		return jsonData;

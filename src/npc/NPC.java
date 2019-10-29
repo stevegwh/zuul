@@ -12,11 +12,20 @@ import IO.IOHandler;
 import command.game.eventOutput.AnnounceEntranceOutput;
 import jsonDataHandler.JSONDataHandler;
 
+/**
+ * Abstract class for the Non Playable Characters (NPCs) of the game.
+ * 
+ * @author Steve
+ *
+ */
 public abstract class NPC {
 	private JsonObject json;
 	protected String name;
 	protected String currentLocation;
 
+	/**
+	 * @return the choice the user has entered.
+	 */
 	private String getUserDialogChoice() {
 		String[] inputArray = IOHandler.input.getUserInput();
 		return inputArray[0];
@@ -24,6 +33,9 @@ public abstract class NPC {
 
 	public abstract boolean onGive(String takeableItem);
 
+	/**
+	 * If not in the same room as the player the NPC will attempt to move.
+	 */
 	public void update() {
 		if (!currentLocation.equals(GameController.getCurrentPlayer().getLocation())) {
 			move();
@@ -38,6 +50,9 @@ public abstract class NPC {
 		}
 	}
 
+	/**
+	 * Handles what to do when the active player attempts to talk to the NPC.
+	 */
 	public void onTalk() {
 		printDialog();
 		String userChoice = getUserDialogChoice();
@@ -50,6 +65,10 @@ public abstract class NPC {
 		IOHandler.output.printCharDialog(((String) dialogResponses.get(idx)));
 	}
 
+	/**
+	 * Scans the directions available to the NPC and chooses one.
+	 * @return The name of the room the NPC has chosen.
+	 */
 	public String getRandomRoom() {
 		ArrayList<String> exits = GameController.getRoomModel().getAllDirections(currentLocation);
 		Random generator = new Random();

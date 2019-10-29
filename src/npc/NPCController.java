@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Class in charge of managing the NPCs in the game.
+ * 
+ * @author Steve
+ *
+ */
 public class NPCController {
 	private HashMap<String, NPC> actors = new HashMap<>();
 	Timer timer = new Timer();
@@ -21,7 +27,7 @@ public class NPCController {
 	public NPC getActor(String actorName) {
 		return actors.get(actorName);
 	}
-	
+
 	public void init() {
 		NPCFactory npcFactory = new NPCFactory();
 		actors = npcFactory.getNPCCollection();

@@ -5,6 +5,7 @@ import command.ICommandOutput;
 import command.commandController.DropController;
 
 public class DropOutput extends DropController implements ICommandOutput {
+	@Override
 	public void init(String[] inputArray) {
 		String error = validateUserInput(inputArray);
 		if (error != null) {

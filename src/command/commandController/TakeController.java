@@ -16,7 +16,7 @@ import zuul.TakeableItem;
 public class TakeController extends CommandController {
 	protected String toTake;
 	protected JsonObject obj;
-	private int COMMAND_LENGTH = 2;
+	private final int COMMAND_LENGTH = 2;
 	int weight;
 
 	@Override

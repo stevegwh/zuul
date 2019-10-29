@@ -7,6 +7,7 @@ import zuulutils.ZuulTools;
 
 public class InventoryOutput extends InventoryController implements ICommandOutput {
 
+	@Override
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
 		if (error != null) {

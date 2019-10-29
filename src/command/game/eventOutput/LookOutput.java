@@ -16,6 +16,7 @@ import zuulutils.ZuulTools;
  */
 public class LookOutput extends LookController implements ICommandOutput {
 
+	@Override
 	public void init(String[] inputArray) {
 		if (super.execute(inputArray)) {
 			IOHandler.output.println("---------");

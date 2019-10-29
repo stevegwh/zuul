@@ -5,6 +5,7 @@ import command.ICommandOutput;
 import command.commandController.TakeController;
 
 public class TakeOutput extends TakeController implements ICommandOutput {
+	@Override
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
 		if (error != null) {

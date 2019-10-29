@@ -5,6 +5,7 @@ import command.ICommandOutput;
 import command.commandController.LookController;
 
 public class LookOutput extends LookController implements ICommandOutput {
+	@Override
 	public void init(String[] inputArray) {
 		String error = validateUserInput(inputArray);
 		if (error != null) {

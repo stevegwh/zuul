@@ -5,6 +5,7 @@ import command.ICommandOutput;
 import command.commandController.TalkController;
 
 public class TalkOutput extends TalkController implements ICommandOutput {
+	@Override
 	public void init(String[] inputArray) {
 		String error = validateUserInput(inputArray);
 		if (error != null) {

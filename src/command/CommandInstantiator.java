@@ -19,8 +19,8 @@ import java.io.File;
  *
  */
 public class CommandInstantiator {
-	private ArrayList<String> commands = new ArrayList<>();
-	private String dir = "commandView";
+	private final ArrayList<String> commands = new ArrayList<>();
+	private final String dir = "commandView";
 	private final String fileSuffix = "Output";
 
 	/**

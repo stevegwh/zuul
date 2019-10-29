@@ -15,7 +15,7 @@ public class SingleOrMultiController extends CommandController {
 
 	@Override
 	protected String validateUserInput(String[] choiceArr) {
-		choice = choiceArr[0].toString();
+		choice = choiceArr[0];
 		if (choice.equals("1") && choiceArr.length <= 1) {
 			choice = "1";
 			return null;

@@ -19,7 +19,7 @@ public class LookController extends CommandController {
 	protected JsonArray actors;
 	protected JsonArray items;
 	protected ArrayList<String> exits;
-	private int COMMAND_LENGTH = 1;
+	private final int COMMAND_LENGTH = 1;
 
 	@Override
 	public String validateUserInput(String[] inputArray) {

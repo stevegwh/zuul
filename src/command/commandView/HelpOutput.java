@@ -5,6 +5,7 @@ import command.ICommandOutput;
 import command.commandController.HelpController;
 
 public class HelpOutput extends HelpController implements ICommandOutput {
+	@Override
 	public void init(String[] inputArray) {
 		String error = super.validateUserInput(inputArray);
 		if (error != null) {
